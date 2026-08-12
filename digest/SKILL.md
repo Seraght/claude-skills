@@ -1,32 +1,27 @@
 ---
 name: digest
-description: นำเข้าเอกสารดิบจาก temp/ (PDF ฯลฯ) เข้า tree ที่ถูกต้องของคลัง second-brain ตามกฎลิขสิทธิ์และการตั้งชื่อ แล้วเขียน digest + ลงทะเบียน. Use when user says /digest, มีไฟล์ใหม่ใน temp/, or asks to import/digest a document (นำเข้าเอกสาร, ย่อยเอกสาร, PDF เข้าคลัง).
+description: Import raw documents (PDFs etc.) from a staging folder into a knowledge base — read the actual content, pass privacy and copyright gates, file to the right destination, write a digest, register it in the index. Use when the user says /digest (นำเข้าเอกสาร, ย่อยเอกสาร), when new files are waiting in the staging folder, or when asked to import a document into the repo.
 ---
 
-# digest — นำเข้าเอกสารจาก temp/ เข้าคลัง
+# digest — import raw documents into the knowledge base
 
-กติกาต้นทางฉบับเต็ม: [`.Subject/CLAUDE.md`](../../../.Subject/CLAUDE.md) §3.4 + root [`CLAUDE.md`](../../../CLAUDE.md) §5
-skill นี้เป็น checklist เรียงลำดับ — ห้ามข้ามขั้น
+This skill is an ordered checklist — do not skip steps. It carries the *process* only: everything project-specific (folder layout, naming rules, templates) is discovered from the host project at runtime, never assumed.
 
-## ขั้นตอน
+## Steps
 
-1. **สำรวจ** — `ls temp/` ดูว่ามีไฟล์อะไรรอ (โฟลเดอร์นี้ไม่ถูก track ใน git)
-2. **อ่านเนื้อหาจริงก่อนตัดสินใจ** — `pdftotext -raw` ก่อน ถ้าว่าง (PDF สแกน) render เป็นภาพด้วย
-   PyMuPDF แล้วอ่านด้วยสายตา **ห้ามเดาจากชื่อไฟล์**
-3. **เลือก tree ปลายทาง**
-   - งานสอน/วิชา/หลักสูตร → `.Subject/` (อ่าน [`.Subject/CLAUDE.md`](../../../.Subject/CLAUDE.md) ก่อนถ้ายังไม่ได้อ่านใน session นี้)
-   - เข้าข่ายงานวิจัย → **ถามผู้ใช้ก่อน** (ฝั่ง `.Research/` ยังไม่มีกฎนำเข้าเทียบเท่า §3.4)
-   - งานอำนวยการ/หน่วย IT → `.Admin/` (อ่าน [`.Admin/CLAUDE.md`](../../../.Admin/CLAUDE.md) §3.4 ก่อน)
-     ⛔ **สองด่านที่ต้องผ่านก่อนเสมอ:** (ก) เอกสารมีชื่อ/อีเมล/รหัสของนักศึกษาหรือบุคลากรรายบุคคลไหม
-     — มี = **หยุด แจ้งผู้ใช้ ห้าม digest** (§6) · (ข) เป็น**เอกสารตัวจริงของหน่วยงาน**ไหม
-     — ใช่ = ปลายทางคือ `G:\Shared drives\IT Department` **ไม่ใช่คลัง** ที่นี่รับเฉพาะ digest/สรุป
-4. **สแกนช่องว่างก่อนสร้างไฟล์ใหม่** — หา "🔴 ยังไม่เขียน" ใน README ของหมวดปลายทาง
-   เอกสารที่เพิ่งได้มามักตรงกับช่องว่างที่ตั้งรอไว้แล้ว
-5. **ตัดสินลิขสิทธิ์ก่อนย้ายไฟล์จริง** — ใช้ตารางใน §3.4: ประกาศราชการ/งานที่ผู้ใช้เขียนเอง = ย้ายเข้า `source/` ได้ ·
-   ตำรา/บทความบุคคลที่สาม = **ห้ามย้ายเข้าคลัง** digest แบบอ้างบรรณานุกรมเท่านั้น · ไม่แน่ใจ = ถามผู้ใช้
-6. **ตั้งชื่อใหม่ให้สื่อความหมาย** ตัวพิมพ์เล็กคั่น `-` + หน่วยงาน/ปี เช่น `moph-security-policy-2565.pdf`
-7. **ย้าย ไม่ใช่ copy** — ลบต้นฉบับออกจาก `temp/` เมื่อย้ายสำเร็จ
-8. **เขียน digest** ตาม `_templates/digest.md` ของ tree ปลายทาง แล้วอัปเดต README/INDEX ให้ชี้ไฟล์ใหม่
-   ถ้าปิดช่องว่าง 🔴 ต้องเปลี่ยนสถานะเป็น 🟢 **ในการแก้ไขเดียวกัน**
-9. **ตรวจก่อนจบ** — `powershell -ExecutionPolicy Bypass -File _scripts\check-status.ps1`
-   (ลิงก์จะถูกตรวจอัตโนมัติโดย pre-commit hook ตอน commit)
+1. **Discover the project's conventions** — read the host project's `CLAUDE.md` (or README) and inspect the existing structure: where imported sources live, where digests live, whether an index/registry and a digest template exist. Explicit import rules in the host project override the generic defaults below. If no staging folder is defined, ask the user which folder is the inbox.
+2. **Survey the staging area** — list the waiting files (commonly `temp/` or `inbox/`; typically untracked in git).
+3. **Read the actual content before any decision** — for PDFs try `pdftotext -raw` first; if the output is empty (scanned PDF), render pages to images and read them visually. Never judge a document by its filename.
+4. **Pass two gates before filing anything:**
+   - **Privacy** — does the document contain personal data about identifiable individuals (names, emails, ID numbers)? If yes: stop, notify the user, do not digest.
+   - **Original official records** — is this an original organizational record rather than reference material? Originals belong in the organization's system of record, not a knowledge base; file only a digest/summary here, and ask the user where the original should go.
+5. **Choose the destination** by what the content *is*, using the structure discovered in step 1 — e.g. a repo split by role might route teaching material, research, and admin work to different trees. If the content fits no discovered destination, or fits more than one, ask the user instead of guessing.
+6. **Check for waiting gaps** — before creating a new file, search the destination's README/index for placeholders or "not yet written" markers; a new document often fills a gap that already exists.
+7. **Decide copyright before moving the file:**
+   - Public/official publications and the user's own writing → the source file may be stored in the knowledge base.
+   - Third-party copyrighted material (textbooks, articles) → do not store the file; write a digest with a full citation instead.
+   - Unsure → ask the user.
+8. **Rename meaningfully** — lowercase, hyphen-separated, with issuing org and year (e.g. `who-ai-ethics-guidance-2024.pdf`), unless the project defines its own naming rule.
+9. **Move, don't copy** — remove the original from staging once filing succeeds.
+10. **Write the digest and register it** — follow the project's digest template if one exists; update the README/index to point at the new file. If the digest closes a gap found in step 6, update the gap's status in the same edit.
+11. **Verify before finishing** — if the project has a status/link check script, run it; otherwise verify manually: staging area empty (or leftovers reported to the user), every new file linked from an index, no broken links introduced.
