@@ -22,6 +22,6 @@ This skill is an ordered checklist — do not skip steps. It carries the *proces
    - Third-party copyrighted material (textbooks, articles) → do not store the file; write a digest with a full citation instead.
    - Unsure → ask the user.
 8. **Rename meaningfully** — lowercase, hyphen-separated, with issuing org and year (e.g. `who-ai-ethics-guidance-2024.pdf`), unless the project defines its own naming rule.
-9. **Move, don't copy** — remove the original from staging once filing succeeds.
+9. **Leave nothing behind in staging silently** — when the source file was stored (step 7), move it (don't copy): remove the original from staging once filing succeeds. When only a digest was written (file not stored), ask the user what to do with the original — delete it from staging, or hand it back for them to file elsewhere.
 10. **Write the digest and register it** — follow the project's digest template if one exists; update the README/index to point at the new file. If the digest closes a gap found in step 6, update the gap's status in the same edit.
 11. **Verify before finishing** — if the project has a status/link check script, run it; otherwise verify manually: staging area empty (or leftovers reported to the user), every new file linked from an index, no broken links introduced.
