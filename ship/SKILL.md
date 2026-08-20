@@ -1,26 +1,20 @@
 ---
 name: ship
-description: ปิดงานคลัง second-brain — จัดกลุ่ม commit ตามหัวเรื่อง, เขียนข้อความ commit ภาษาไทยผ่านไฟล์ (-F), regen MAP.md เมื่อจำเป็น, ตรวจสถานะ README. Use when user says /ship, ปิดงาน, commit งานค้าง, or asks to commit/save work in this repo.
+description: Close out pending work as clean, topic-grouped commits — group changes by subject, screen the diff for sensitive data and stray files, regenerate derived artifacts, write the message through a file, verify the tree is clean. Use when the user says /ship (ปิดงาน, commit งานค้าง), or asks to commit or save the work in progress.
 ---
 
-# ship — ปิดงานเป็น commit ที่สะอาด
+# ship — close out work as clean commits
 
-## ขั้นตอน
+This skill is an ordered checklist — do not skip steps. It carries the *process* only: the project's own message format, check scripts, and hooks are discovered at runtime.
 
-1. **สำรวจงานค้าง** — `git status --short` แล้วจัดกลุ่มไฟล์ตามหัวเรื่อง (วิชา/โครงการ/กติกา)
-   หนึ่ง commit = หนึ่งเรื่อง อย่ารวม `feat` เนื้อหากับ `docs` กติกาในก้อนเดียว
-2. **ไฟล์แปลกปลอม** — เจอไฟล์ที่ไม่รู้ที่มา (สำเนา conflict ของ Drive เช่น `ชื่อ (1).md`) ให้ถามผู้ใช้ ห้ามเงียบ ๆ add
-3. **แตะ `_shared/` หรือ `_domains/`?** → รัน `powershell -ExecutionPolicy Bypass -File _scripts\check-status.ps1`
-   สถานะ 🔴/🟡/🟢 ใน README ต้องตรงไฟล์จริงก่อน commit
-   **แตะ `.Admin/`?** → ตรวจ diff ด้วยตาอีกรอบว่าไม่มีชื่อ/อีเมล/รหัสของนักศึกษาหรือบุคลากรรายบุคคล
-   หลุดเข้ามา ([`.Admin/CLAUDE.md`](../../../.Admin/CLAUDE.md) §6) — commit แล้ว post-commit hook
-   เขียน bundle ทันที **ลบย้อนหลังไม่ได้จริง**
-4. **ไฟล์ใหญ่เปลี่ยน?** (สร้าง/ขยายไฟล์จน >30 KB) → regen สารบัญ:
-   `powershell -ExecutionPolicy Bypass -File _scripts\generate-map.ps1` แล้วรวม `MAP.md` เข้า commit ก้อนสุดท้าย
-5. **ข้อความ commit ภาษาไทย: เขียนลงไฟล์ใน scratchpad แล้ว `git commit -F <ไฟล์>`**
-   ห้ามใช้ `-m` กับ here-string (PowerShell 5.1 ตัด argument ผิดเมื่อมี `"`) — ดู root [`CLAUDE.md`](../../../CLAUDE.md) §4
-   รูปแบบ: บรรทัดแรก `feat:`/`fix:`/`docs:` + สรุปไทย · ตามด้วย bullet รายละเอียด
-6. **hooks จัดการที่เหลือเอง** — pre-commit ตรวจลิงก์ (เสีย = commit ไม่ผ่าน → แก้ลิงก์หรือขึ้นบัญชี
-   `_scripts/check-links-planned.txt`) · post-commit สำรอง bundle เบื้องหลังอัตโนมัติ
-7. **ตรวจจบ** — `git status` ต้องสะอาด ถ้ามีไฟล์ค้างสถานะ M ทั้งที่ไม่ได้แก้ (อาการ Drive stat หลอก
-   หลัง checkout ใหญ่) ให้ตรวจ `git hash-object` เทียบ HEAD แล้ว `git add -u` ล้าง — ดู root CLAUDE.md §4
+## Steps
+
+1. **Discover the project's commit conventions** — read `CLAUDE.md` / `CONTRIBUTING.md` for message format and language, and look for check scripts (`_scripts/`, `scripts/`, `package.json`) and git hooks. Project rules override the defaults below.
+2. **Survey and group** — run `git status --short` and group the changed files by subject. One commit = one subject: content changes and rule/documentation changes ship as separate commits.
+3. **Account for every file** — anything you cannot attribute to the work at hand goes to the user before staging: sync-service conflict copies (`name (1).md`), stray build output, editor scratch files.
+4. **Screen the diff before staging** — read the actual diff for personal data (names, emails, ID numbers) and secrets. Backup hooks and mirrors make history effectively permanent, so treat "commit now, remove later" as unavailable.
+5. **Run the checks that apply** — if the changes touch an area covered by a status or link script, run it and reconcile what it reports with the files as they actually are.
+6. **Regenerate derived artifacts** — if the project generates a map, index, or table of contents from content that this change invalidates, regenerate it and include it in the last commit of the batch.
+7. **Write the message through a file** — write it to a scratch file and use `git commit -F <file>`. Passing a multi-line or non-ASCII message inline gets mangled by the shell (PowerShell 5.1 splits arguments on embedded quotes). Follow the project's format; default to `type: summary` on line one plus detail bullets.
+8. **Let the hooks do their job** — when a hook rejects a commit, fix the cause it names (a broken link, a failing check) so the next attempt passes on merit.
+9. **Verify before finishing** — `git status` comes back clean. If files report as modified while their content is unchanged (a stat-cache artifact of sync-mounted drives), confirm with `git hash-object` against HEAD before clearing them with `git add -u`.

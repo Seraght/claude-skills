@@ -1,27 +1,18 @@
 ---
 name: update-portfolio
-description: อัปเดต PORTFOLIO.md (แผนผลงานขอ ผศ.) โดยนับผลงานสอนจาก .Subject/ และงานอำนวยการจาก .Admin/ ให้ครบ — ต้องสั่งจาก root ของคลัง. Use when user says /update-portfolio, อัปเดตพอร์ตโฟลิโอ, or asks to review/sync progress toward ผศ. across trees.
+description: Sync a roll-up document against the sources it summarizes — reconcile every section with its source tree, append to the decision log, refresh the dates, verify the cross-tree links. Use when the user says /update-portfolio (อัปเดตพอร์ตโฟลิโอ), or asks to review or sync a summary document that spans several parts of the repo.
 ---
 
-# update-portfolio — อัปเดตแผนผลงานขอ ผศ.
+# update-portfolio — sync a roll-up document with its sources
 
-กติกาต้นทางฉบับเต็ม: root [`CLAUDE.md`](../../../CLAUDE.md) §1, §3 — skill นี้คร่อม 3 tree
-**ต้องรันจาก root ของคลัง (`second-brain/`) ไม่ใช่จากใน `.Research/`** เพราะต้องอ่านทั้ง `.Subject/INDEX.md`
-และ `.Admin/` ไปพร้อมกัน เปิด session จาก tree เดียวจะไม่เห็นกติกาของอีกสองฝั่ง
+This skill is an ordered checklist — do not skip steps. A **roll-up document** is a single file whose content is a summary of state that lives elsewhere: it goes stale the moment a source changes, and its value is that a reader can trust it without opening the sources.
 
-## ขั้นตอน
+## Steps
 
-1. **อ่านสถานะปัจจุบัน** — [`.Research/PORTFOLIO.md`](../../../.Research/PORTFOLIO.md) ทั้งไฟล์
-   (ไฟล์นี้เป็นเอกสารยุทธศาสตร์ระดับบน ไม่อยู่ใน MAP.md — อ่านทั้งฉบับเสมอ ไม่ใช้ offset/limit)
-2. **เช็คฝั่งงานสอน** — เปิด [`.Subject/INDEX.md`](../../../.Subject/INDEX.md) คอลัมน์ "นับเป็นผลงาน (ผศ.)"
-   เทียบกับ §4 ของ PORTFOLIO.md ว่าตรงกันไหม
-3. **เช็คฝั่งงานอำนวยการ** — เปิด [`.Admin/_shared/sop/README.md`](../../../.Admin/_shared/sop/README.md)
-   ดูสถานะ 🔴/🟡/🟢 ของ SOP/คู่มือ เทียบกับตาราง §5 ทาง ก. ของ PORTFOLIO.md และเช็คว่ามีโครงการ IT ไหน
-   บันทึก "โจทย์วิจัยที่งอกได้" ใหม่หรือยัง (ทาง ข. — [`.Admin/CLAUDE.md`](../../../.Admin/CLAUDE.md) กฎ 7)
-4. **เช็คฝั่งงานวิจัย** — สถานะโครงการช่องที่ 1/2 ใน §2 ยังตรงกับ `PROJECT.md`/`DECISIONS.md`
-   ของแต่ละโครงการที่ผูกอยู่หรือไม่
-5. **ถ้ามีอะไรเปลี่ยน** — แก้ตาราง/checklist ที่เกี่ยวข้อง แล้วเพิ่ม 1 แถวใหม่ใน §3
-   "ประวัติการตัดสินใจที่คร่อมโครงการ" ระบุวันที่ + สิ่งที่เปลี่ยน + ผล (ห้ามลบแถวเก่า — เป็นบันทึกประวัติ)
-6. **อัปเดต frontmatter** — `verified:` และ `updated:` เป็นวันที่วันนี้
-7. **ตรวจก่อนจบ** — `powershell -ExecutionPolicy Bypass -File _scripts\check-links.ps1`
-   (ไฟล์นี้ลิงก์ข้าม 3 tree เสี่ยงลิงก์เสียมากกว่าไฟล์อื่นในคลัง)
+1. **Work from the root that can see every source** — open the session at the repository root, not inside one of the trees being summarized. A session rooted in a single tree cannot read the other trees' rules, and will reconcile against a partial picture without noticing.
+2. **Identify the roll-up and its sources** — read the host project's `CLAUDE.md` for which document rolls up what; the document's own frontmatter and section links usually name the sources feeding each section.
+3. **Read the roll-up in full** — read the whole file, not a sampled range. A summary document's sections constrain each other, and editing one against a partial read produces contradictions inside the same file.
+4. **Reconcile section by section** — for each section, open the source it summarizes (that tree's index, status file, or project records) and compare claim by claim. Every section accounted for; where the source and the roll-up disagree, the source wins unless the user says otherwise.
+5. **Apply the changes and log the decision** — update the affected tables and checklists, then append one row to the document's decision history: date, what changed, and the effect. History rows are append-only — superseded entries stay as the record of what was believed when.
+6. **Refresh the frontmatter dates** — set the verified and updated fields to today.
+7. **Verify before finishing** — if the project has a link check script, run it; otherwise check the links by hand. Cross-tree links break more often than any others in the repo, and this document holds more of them than any other.

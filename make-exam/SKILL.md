@@ -1,28 +1,21 @@
 ---
 name: make-exam
-description: ออกข้อสอบสำหรับวิชาในคลัง second-brain — สร้าง blueprint ผูก CLO/Bloom, item bank, เฉลย, rubric ตามลำดับที่กำหนด. Use when user says /make-exam, ออกข้อสอบ, or asks to write midterm/final/practical/quiz items for a course.
+description: Build an exam set in dependency order — blueprint mapped to learning outcomes and teaching hours, then items, answer key, and rubric. Use when the user says /make-exam (ออกข้อสอบ), or asks to write midterm, final, practical, or quiz items for a course.
 ---
 
-# make-exam — ออกข้อสอบ
+# make-exam — build an exam set
 
-กติกาต้นทางฉบับเต็ม: [`.Subject/CLAUDE.md`](../../../.Subject/CLAUDE.md) §3.3 — skill นี้เป็น checklist เรียงลำดับ ห้ามข้ามขั้น
-หลักการอ้างอิงหลัก: [`_shared/assessment/`](../../../.Subject/_shared/assessment/)
-(blooms-taxonomy, test-blueprint, item-writing, rubric-design, practical-exam, item-analysis)
+This skill is an ordered checklist — do not skip steps, and do not start a document before the one it depends on is finished. Each artifact is derived from the previous one: items that precede a blueprint end up weighted by what was easy to write. The assessment principles behind each step are in [ASSESSMENT-REFERENCE.md](./ASSESSMENT-REFERENCE.md) — read it before step 5.
 
-## ขั้นตอน
+## Steps
 
-1. **ระบุชุดข้อสอบ** — สร้าง/เปิด `assessment/<ปีการศึกษา พ.ศ.>/<midterm|final|practical|quiz-XX>/`
-2. **อ่าน syllabus** — `digest/00-course-syllabus.md` ของวิชานั้น ดึง CLO, สัดส่วนคะแนน, จำนวนชั่วโมงสอนแต่ละบท
-3. **ค้นคว้าเฉพาะชุดนี้ถ้าจำเป็น** → เขียนลง `00-research.md` (ห้ามค้นซ้ำของที่มีอยู่แล้วใน `_shared/assessment/` — กฎ 1)
-4. **เขียน `01-blueprint.md`** จาก [`_templates/blueprint.md`](../../../.Subject/_templates/blueprint.md) —
-   ทุกข้อต้อง map กับ **CLO** และให้น้ำหนักข้อสอบ**สอดคล้องจำนวนชั่วโมงสอน**ของแต่ละบทตาม syllabus จริง (ห้ามเดา)
-5. **เขียน `02-items.md`** จาก [`_templates/item-bank.md`](../../../.Subject/_templates/item-bank.md) —
-   **ทุกข้อต้องระบุ CLO + ระดับ Bloom กำกับ** อ้าง [`blooms-taxonomy.md`](../../../.Subject/_shared/assessment/blooms-taxonomy.md)
-   และ [`item-writing.md`](../../../.Subject/_shared/assessment/item-writing.md)
-6. **เขียน `04-answer-key.md`** — เฉลยทุกข้อ พร้อมเหตุผลของตัวลวง (distractor) ถ้าเป็นข้อสอบปรนัย
-7. **เขียน `05-rubric.md`** จาก [`_templates/rubric.md`](../../../.Subject/_templates/rubric.md) เฉพาะข้อที่เป็นอัตนัย/ปฏิบัติ
-   อ้าง [`rubric-design.md`](../../../.Subject/_shared/assessment/rubric-design.md) — ถ้าเป็นสอบปฏิบัติให้อ้าง
-   [`practical-exam.md`](../../../.Subject/_shared/assessment/practical-exam.md) เพิ่ม
-8. **ถ้าแยกเล่มข้อสอบจาก item bank** → เขียน `03-paper.md` เพิ่ม
-9. **ตรวจก่อนจบ** — รวมน้ำหนักคะแนนใน blueprint ต้องตรงกับสัดส่วนใน syllabus แล้วรัน
-   `powershell -ExecutionPolicy Bypass -File _scripts\check-links.ps1`
+1. **Discover the project's conventions** — read the host project's `CLAUDE.md` and inspect an existing exam set: folder layout, file naming, available templates, and whether the project carries its own assessment reference. A project's own assessment rules override [ASSESSMENT-REFERENCE.md](./ASSESSMENT-REFERENCE.md); its templates override the document shapes below.
+2. **Open the exam set folder** — one folder per exam, named by the project's rule (default `assessment/<year>/<midterm|final|practical|quiz-NN>/`).
+3. **Read the course definition** — the syllabus or its digest: learning outcomes, grade weighting, and teaching hours per topic. These are the facts the blueprint is built from; take them from the document rather than estimating, and ask the user if the document is missing any of them.
+4. **Research only what is missing** — if the exam needs subject knowledge neither the course documents nor the assessment reference supply, gather it and record it in `00-research.md` with sources.
+5. **Write the blueprint** (`01-blueprint.md`) — every cell mapped to a learning outcome, marks per topic tracking that topic's teaching hours, totals reconciling with the course's grade weighting.
+6. **Write the items** (`02-items.md`) — each item tagged with its learning outcome and cognitive level, filling the blueprint cell by cell. The blueprint is the specification: the finished bank matches it exactly.
+7. **Write the answer key** (`04-answer-key.md`) — every item, with the rationale for each distractor on selected-response items.
+8. **Write the rubric** (`05-rubric.md`) — for every constructed-response and practical item, with observable criteria whose weights sum to the item's marks.
+9. **Write the paper** (`03-paper.md`) — only when the project separates the examinee-facing paper from the item bank.
+10. **Verify before finishing** — if the project has a link or status check script, run it; then confirm: blueprint marks total to the course's grade weighting, every item traces to a learning outcome, every item appears in the answer key, and every constructed-response item has rubric criteria.
