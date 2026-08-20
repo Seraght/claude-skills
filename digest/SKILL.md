@@ -11,7 +11,7 @@ This skill is an ordered checklist — do not skip steps. It carries the *proces
 
 1. **Discover the project's conventions** — read the host project's `CLAUDE.md` (or README) and inspect the existing structure: where imported sources live, where digests live, whether an index/registry and a digest template exist. Explicit import rules in the host project override the generic defaults below. If no staging folder is defined, ask the user which folder is the inbox.
 2. **Survey the staging area** — list the waiting files (commonly `temp/` or `inbox/`; typically untracked in git).
-3. **Read the actual content before any decision** — for PDFs try `pdftotext -raw` first; if the output is empty (scanned PDF), render pages to images and read them visually. Never judge a document by its filename.
+3. **Read the actual content before any decision** — judge the document by what is inside it, never by its filename. Read it directly with your own file-reading capability, which handles scanned pages as well as digital text. For a long document, a text-extraction tool that happens to be installed (`pdftotext -raw`) is cheaper to skim first — treat it as a shortcut, not a requirement, and fall back to reading directly when it is absent or returns nothing.
 4. **Pass two gates before filing anything:**
    - **Privacy** — does the document contain personal data about identifiable individuals (names, emails, ID numbers)? If yes: stop, notify the user, do not digest.
    - **Original official records** — is this an original organizational record rather than reference material? Originals belong in the organization's system of record, not a knowledge base; file only a digest/summary here, and ask the user where the original should go.
