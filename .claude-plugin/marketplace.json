@@ -1,0 +1,22 @@
+{
+  "name": "seraght",
+  "owner": {
+    "name": "seraght",
+    "url": "https://github.com/seraght"
+  },
+  "description": "Process checklists for repeatable knowledge work, as installable Claude Code plugins.",
+  "plugins": [
+    {
+      "name": "knowledge-keeper",
+      "source": "./",
+      "description": "Ordered process checklists for repeatable knowledge work — portable across projects, discovered at runtime.",
+      "category": "productivity",
+      "keywords": [
+        "knowledge-base",
+        "documentation",
+        "teaching",
+        "checklists"
+      ]
+    }
+  ]
+}

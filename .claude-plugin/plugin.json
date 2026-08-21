@@ -1,0 +1,18 @@
+{
+  "name": "knowledge-keeper",
+  "version": "0.1.0",
+  "description": "Ordered process checklists for repeatable knowledge work — portable across projects, discovered at runtime. Scaffold or audit a knowledge base, import documents, open subjects, sync roll-ups, build exams.",
+  "author": {
+    "name": "seraght",
+    "url": "https://github.com/seraght"
+  },
+  "repository": "https://github.com/seraght/claude-skills",
+  "keywords": [
+    "knowledge-base",
+    "second-brain",
+    "documentation",
+    "teaching",
+    "assessment",
+    "checklists"
+  ]
+}
