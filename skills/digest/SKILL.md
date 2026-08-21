@@ -1,6 +1,6 @@
 ---
 name: digest
-description: Import raw documents (PDFs etc.) from a staging folder into a knowledge base — read the actual content, pass privacy and copyright gates, file to the right destination, write a digest, register it in the index. Use when the user says /digest (นำเข้าเอกสาร, ย่อยเอกสาร), when new files are waiting in the staging folder, or when asked to import a document into the repo.
+description: Import raw documents (PDFs etc.) from a staging folder into a knowledge base — read the actual content, pass privacy and copyright gates, file to the right destination, write a digest, register it in the index. Use when the user asks to import a document into the knowledge base (นำเข้าเอกสาร, ย่อยเอกสาร), when new files are waiting in the staging folder, or when asked to import a document into the repo.
 ---
 
 # digest — import raw documents into the knowledge base
@@ -9,7 +9,7 @@ This skill is an ordered checklist — do not skip steps. It carries the *proces
 
 ## Steps
 
-1. **Discover the project's conventions** — read the host project's `CLAUDE.md` (or README) and inspect the existing structure: where imported sources live, where digests live, whether an index/registry and a digest template exist. Explicit import rules in the host project override the generic defaults below. If no staging folder is defined, ask the user which folder is the inbox.
+1. **Discover the project's conventions** — read the host project's agent instructions file (`AGENTS.md`, `CLAUDE.md`, or its README) and inspect the existing structure: where imported sources live, where digests live, whether an index/registry and a digest template exist. Explicit import rules in the host project override the generic defaults below. If no staging folder is defined, ask the user which folder is the inbox.
 2. **Survey the staging area** — list the waiting files (commonly `temp/` or `inbox/`; typically untracked in git).
 3. **Read the actual content before any decision** — judge the document by what is inside it, never by its filename. Read it directly with your own file-reading capability, which handles scanned pages as well as digital text. For a long document, a text-extraction tool that happens to be installed (`pdftotext -raw`) is cheaper to skim first — treat it as a shortcut, not a requirement, and fall back to reading directly when it is absent or returns nothing.
 4. **Pass two gates before filing anything:**

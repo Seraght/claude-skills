@@ -1,6 +1,6 @@
 ---
 name: make-exam
-description: Build an exam set in dependency order — blueprint mapped to learning outcomes and teaching hours, then items, answer key, and rubric. Use when the user says /make-exam (ออกข้อสอบ), or asks to write midterm, final, practical, or quiz items for a course.
+description: Build an exam set in dependency order — blueprint mapped to learning outcomes and teaching hours, then items, answer key, and rubric. Use when the user asks to build an exam (ออกข้อสอบ), or asks to write midterm, final, practical, or quiz items for a course.
 ---
 
 # make-exam — build an exam set
@@ -9,7 +9,7 @@ This skill is an ordered checklist — do not skip steps, and do not start a doc
 
 ## Steps
 
-1. **Discover the project's conventions** — read the host project's `CLAUDE.md` and inspect an existing exam set: folder layout, file naming, available templates, and whether the project carries its own assessment reference. A project's own assessment rules override [ASSESSMENT-REFERENCE.md](./ASSESSMENT-REFERENCE.md); its templates override the document shapes below.
+1. **Discover the project's conventions** — read the host project's agent instructions file (`AGENTS.md`, or `CLAUDE.md`) and inspect an existing exam set: folder layout, file naming, available templates, and whether the project carries its own assessment reference. A project's own assessment rules override [ASSESSMENT-REFERENCE.md](./ASSESSMENT-REFERENCE.md); its templates override the document shapes below.
 2. **Open the exam set folder** — one folder per exam, named by the project's rule (default `assessment/<year>/<midterm|final|practical|quiz-NN>/`).
 3. **Read the course definition** — the syllabus or its digest: learning outcomes, grade weighting, and teaching hours per topic. These are the facts the blueprint is built from; take them from the document rather than estimating, and ask the user if the document is missing any of them.
 4. **Research only what is missing** — if the exam needs subject knowledge neither the course documents nor the assessment reference supply, gather it and record it in `00-research.md` with sources.

@@ -1,6 +1,6 @@
 ---
 name: new-subject
-description: Open a new subject area in a knowledge base — create the folder skeleton, file the defining source document, digest it into a structured summary, write the subject overview from template, register it in the index. Use when the user says /new-subject (เปิดวิชาใหม่), or supplies the defining document for a subject that is not in the index yet.
+description: Open a new subject area in a knowledge base — create the folder skeleton, file the defining source document, digest it into a structured summary, write the subject overview from template, register it in the index. Use when the user opens a new subject area (เปิดวิชาใหม่), or supplies the defining document for a subject that is not in the index yet.
 ---
 
 # new-subject — open a new subject area
@@ -9,7 +9,7 @@ This skill is an ordered checklist — do not skip steps. It carries the *proces
 
 ## Steps
 
-1. **Discover the project's conventions** — read the host project's `CLAUDE.md` and inspect an existing subject: the folder skeleton it uses, its naming rule, which templates exist, and where the index lives. An existing subject is the specification; match it rather than inventing a shape.
+1. **Discover the project's conventions** — read the host project's agent instructions file (`AGENTS.md`, or `CLAUDE.md`) and inspect an existing subject: the folder skeleton it uses, its naming rule, which templates exist, and where the index lives. An existing subject is the specification; match it rather than inventing a shape.
 2. **Check the index first** — if the subject is already registered, stop and ask the user whether they meant to extend it instead of creating a duplicate.
 3. **Create the skeleton** — one folder per subject, named by the project's rule (default `<id>-<english-slug>`, no spaces), with the same subfolders the existing subjects use.
 4. **File the defining source document unmodified** — the original goes in the source folder and stays as received; all later work happens in derived files.
