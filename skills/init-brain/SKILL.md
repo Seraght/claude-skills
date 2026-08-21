@@ -15,6 +15,9 @@ This skill is an ordered checklist — do not skip steps. It is the setup-time c
 
 2. **Interview the variable parts only** — the anatomy carries opinionated defaults; ask only what varies per vault, present the default alongside each question, and let the user override any of them:
    - Which roles/areas of work need their own tree? (e.g. teaching / research / admin)
+   - Where each kind of file lands *inside* a tree — are imported source files and their digests
+     separate folders (default: `sources/` and `digests/` per subject) or filed together? The other
+     skills cannot file anything without this answer, so do not leave it to be inferred later.
    - Vault language — the language of the generated `AGENTS.md`, indexes, and templates.
    - Copyright policy — what may be stored as source files vs digest-only with citation.
    - Privacy red lines — what personal data must never enter the vault.
@@ -23,7 +26,7 @@ This skill is an ordered checklist — do not skip steps. It is the setup-time c
    - Shell for the check script (PowerShell or bash).
    - Git? If yes, offer a pre-commit hook that runs the check script.
 3. **Scaffold every component** — walk [BRAIN-ANATOMY.md](./BRAIN-ANATOMY.md) top to bottom and create each component's scaffold with the interview answers filled in. Record any component the user declines as declined in the generated `AGENTS.md`.
-4. **Verify before finishing** — run the generated check script on the fresh vault, then confirm the vault is *discoverable*: every operating rule an agent needs (destinations, gates, naming, markers, cadence) is written in `AGENTS.md`, and every folder is reachable from an index. The bar: the `digest` skill's discovery step could run here without asking the user anything the interview already answered.
+4. **Verify before finishing** — run the generated check script on the fresh vault, then confirm the vault is *discoverable*: every operating rule an agent needs (destinations, gates, naming, markers, cadence) is written in `AGENTS.md`, and every folder is reachable from an index. The bar: the `digest` skill's discovery step could run here without asking the user anything the interview already answered — walk that step literally, question by question, and treat any question the constitution cannot answer as an unfinished scaffold rather than a detail to settle on first use.
 
 ## Audit: score → report → fix on approval
 

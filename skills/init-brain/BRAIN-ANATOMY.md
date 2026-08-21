@@ -10,13 +10,15 @@ Eleven components of a healthy, agent-operated knowledge base, grouped by the fo
 
 **2. Role/area trees** — a clear home for each kind of work the user does, so filing is a decision with a right answer.
 - Scaffold: one top-level tree per role from the interview (e.g. teaching / research / admin).
-- Audit: does every kind of work the user does have an unambiguous destination?
+- Scaffold: the destination rule *inside* a tree as well — which folder an imported source file lands in, and which folder its digest lands in (default: `sources/` and `digests/` per subject) — written into the constitution as a rule, not merely implied by whichever folders happen to exist. A tree whose internal layout is only visible by example forces every later skill to guess or ask.
+- Audit: does every kind of work have an unambiguous destination — and could an agent tell from the constitution alone where a new source file and its digest belong?
 
 ## Findability
 
 **3. Indexes at every level** — every file reachable from an index, so both human and agent navigate without scanning the whole vault.
 - Scaffold: an `INDEX.md` at the root of each tree, a `README.md` per section, each seeded with the tree's initial structure.
-- Audit: sample files across trees — is each one linked from an index?
+- Scaffold: the registration rule in the constitution — which index a newly filed document is registered in, and that registering is part of filing rather than a later tidy-up. Skills that file documents carry a "register it in the index" step; without the rule written down, each one has to ask.
+- Audit: sample files across trees — is each one linked from an index? Does the constitution say where a new document gets registered?
 
 **4. Gap markers** — indexes distinguish *exists* from *planned-but-unwritten*, turning the vault from storage into a worklist.
 - Scaffold: a marker convention (e.g. 🔴 not written / 🟢 done) documented in the constitution and used in the seeded indexes.
