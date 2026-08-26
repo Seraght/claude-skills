@@ -19,6 +19,13 @@ This skill is an ordered checklist — do not skip steps. It is the setup-time c
      separate folders (default: `sources/` and `digests/` per subject) or filed together? The other
      skills cannot file anything without this answer, so do not leave it to be inferred later.
    - Vault language — the language of the generated `AGENTS.md`, indexes, and templates.
+   - Assessment — does this vault hold exam papers? If not, skip this and record nothing. If it
+     does, where they hang and how their files are staged (default `<subject>/assessment/<year>/<exam>/`
+     with the item bank at `<subject>/assessment/bank/`, and files numbered by lifecycle stage:
+     `0x` authoring, `1x` review before use, `2x` after administration), and that per-person data —
+     names, identifiers, individual scores — stays out of the vault while item-level statistics come in.
+     Record the answer in `AGENTS.md` alongside the other destinations, since the assessment skills
+     read it there rather than asking again.
    - Copyright policy — what may be stored as source files vs digest-only with citation.
    - Privacy red lines — what personal data must never enter the vault.
    - Staging folder name (default `temp/`, untracked).
