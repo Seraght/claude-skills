@@ -24,6 +24,7 @@
 | skill | ทำอะไร |
 |---|---|
 | [`make-exam/`](skills/make-exam/) | ออกข้อสอบตามลำดับที่ห้ามสลับ — blueprint → items → answer key → rubric |
+| [`critique-mcq/`](skills/critique-mcq/) | วิพากษ์ข้อสอบปรนัยก่อนนำไปใช้ — วัดตัวเลือกก่อน แล้วรายงานทั้งรายข้อและทั้งฉบับ พร้อมฉบับแก้ รออนุมัติก่อนแตะไฟล์ |
 
 เริ่มจากศูนย์ให้ใช้ `init-brain` ก่อน — มันสร้าง `AGENTS.md`, index, templates และสคริปต์ตรวจ
 ซึ่งเป็น "สิ่งที่ skill ตัวอื่นไปอ่านตอนรัน"
@@ -70,7 +71,7 @@ skill จะถามหาข้อมูลที่จำเป็นระ�
    เพื่อให้ agent เรียก skill ถูกตัวเมื่อผู้ใช้พิมพ์ไทย — และ trigger เขียนเป็นภาษาธรรมชาติล้วน
    ไม่อ้างชื่อคำสั่ง `/xxx` เพราะ agent บางตัวไม่มีระบบคำสั่งแบบนั้น
 5. **Progressive disclosure** — ความรู้อ้างอิงที่ไม่ใช่ทุกครั้งต้องใช้ แยกเป็นไฟล์ข้างเคียงแล้วชี้จาก SKILL.md
-   (`init-brain/BRAIN-ANATOMY.md`, `make-exam/ASSESSMENT-REFERENCE.md`) — ตัว checklist หลักจะได้ไม่บวม
+   (`init-brain/BRAIN-ANATOMY.md`, `make-exam/ASSESSMENT-REFERENCE.md`, `critique-mcq/MCQ-CRITIQUE-REFERENCE.md`) — ตัว checklist หลักจะได้ไม่บวม
 6. **เครื่องมือภายนอกคือตัวเร่ง ไม่ใช่เงื่อนไขจำเป็น** — ทุกขั้นระบุ *เป้าหมาย* แล้วให้ทางที่ agent ทำได้
    ด้วยความสามารถติดตัวเป็นค่าตั้งต้น มี tool ในเครื่องค่อยใช้เพื่อความเร็ว คนที่ไม่ได้สาย IT
    จึงเริ่มใช้ได้โดยไม่ต้องติดตั้งอะไรก่อน ([ADR 0002](docs/adr/0002-external-tools-are-accelerators-not-prerequisites.md))
