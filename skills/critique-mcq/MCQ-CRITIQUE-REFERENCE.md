@@ -110,6 +110,7 @@ Defects that are invisible one item at a time, and that selecting and reordering
 - **The key matches the option it points at.** Verify against the final option order, item by item, rather than trusting that the key was updated when options were reordered. Where the options carry no visible labels — as with an automatically numbered list in a word processor — position is the only anchor there is. **Block.**
 - **The blueprint reconciles against the items actually selected.** Marks per topic and the level distribution are recomputed for the assembled paper. A blueprint balanced over a larger pool says nothing about the subset drawn from it.
 - **No item answers another.** A stem that supplies a fact, a definition, or a worked value that another item asks for gives that item away. This is not the same as a hinged item: nothing here depends on answering correctly, only on having read.
+- **No option set is reused between items.** Options copied from a neighbouring item and not recomputed give a set that cannot contain the right answer, and the defect then reads as a typo in the stem rather than as what it is. The giveaway is two items offering exactly the same options. Numeric sets are where copying hides best, since nothing looks out of place. *Fix:* compute the option set for the item at hand.
 - **No duplicated coverage.** Two items testing the same point at the same level spend two items' worth of marks on one thing, and usually mean some other cell went short.
 - **Key positions spread.** Across the paper, keys do not cluster in one position or lean on the middle. *Fix:* re-scramble option order — then re-verify the key against the new order.
 - **The paper is answerable in the time allowed.** Item count and reading load against the scheduled duration.
@@ -147,6 +148,8 @@ Whatever shape the report takes, it answers the questions the institution's own 
 
 - Per item: the cognitive level, whether the item is usable as written, and on what point it needs improvement.
 - For the paper: the tally of items by cognitive level, the number of items requiring revision, and whether the paper follows its test blueprint — with the reason where it does not.
+
+It also carries the measurement table and a finding count for every pass, zeros included. A report whose numbers were never counted reads exactly like one whose numbers were, until someone counts them; publishing the table is what makes the difference visible without re-doing the work.
 
 Leave the verdict column for a human to fill where the paperwork is signed by people. A form that arrives already ticked gets agreed with rather than read.
 
