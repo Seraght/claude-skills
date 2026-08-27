@@ -1,7 +1,7 @@
 {
   "name": "knowledge-keeper",
-  "version": "0.4.0",
-  "description": "Ordered process checklists for repeatable knowledge work — portable across projects, discovered at runtime. Scaffold or audit a knowledge base, import documents, open subjects, sync roll-ups, build exams, critique multiple-choice items.",
+  "version": "0.5.0",
+  "description": "Ordered process checklists for repeatable knowledge work — portable across projects, discovered at runtime. Scaffold a knowledge base or audit an existing one, import documents, open subjects, sync roll-ups, build exams, critique multiple-choice items.",
   "author": {
     "name": "seraght",
     "url": "https://github.com/seraght"
