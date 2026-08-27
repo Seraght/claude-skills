@@ -20,11 +20,8 @@ The component reference is the `brain-anatomy` skill — read it before step 2.
      skills cannot file anything without this answer, so settle it here rather than at first use.
    - Vault language — the language of the generated `AGENTS.md`, indexes, and templates.
    - Assessment — does this vault hold exam papers? If not, skip this and record nothing. If it
-     does, where they hang and how their files are staged (default `<subject>/assessment/<year>/<exam>/`
-     with the item bank at `<subject>/assessment/bank/`, and files numbered by lifecycle stage:
-     `0x` authoring, `1x` review before use, `2x` after administration), and that per-person data —
-     names, identifiers, individual scores — stays out of the vault while item-level statistics come in.
-     Record the answer in `AGENTS.md` alongside the other destinations, since the assessment skills
+     does, present the default from the `assessment-layout` skill and let the user override it, then
+     record the answer in `AGENTS.md` alongside the other destinations, since the assessment skills
      read it there rather than asking again.
    - Copyright policy — what may be stored as source files vs digest-only with citation.
    - Privacy red lines — what personal data must never enter the vault.
