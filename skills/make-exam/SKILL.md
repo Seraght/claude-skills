@@ -1,11 +1,11 @@
 ---
 name: make-exam
-description: Build an exam set in dependency order — blueprint mapped to learning outcomes and teaching hours, then items, answer key, and rubric. Use when the user asks to build an exam (ออกข้อสอบ), or asks to write midterm, final, practical, or quiz items for a course.
+description: Build an exam set in dependency order — blueprint, items, answer key, rubric. Use when the user asks to build an exam (ออกข้อสอบ), or to write midterm, final, practical, or quiz items.
 ---
 
 # make-exam — build an exam set
 
-This skill is an ordered checklist — do not skip steps, and do not start a document before the one it depends on is finished. Each artifact is derived from the previous one: items that precede a blueprint end up weighted by what was easy to write. The assessment principles behind each step are in [ASSESSMENT-REFERENCE.md](./ASSESSMENT-REFERENCE.md) — read it before step 5.
+This skill is an ordered checklist: each step opens when the one before it has produced its result. Each artifact is derived from the one before it: items that precede a blueprint end up weighted by what was easy to write. The assessment principles behind each step are in [ASSESSMENT-REFERENCE.md](./ASSESSMENT-REFERENCE.md) — read it before step 5.
 
 ## Steps
 

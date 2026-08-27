@@ -1,11 +1,11 @@
 ---
 name: new-subject
-description: Open a new subject area in a knowledge base — create the folder skeleton, file the defining source document, digest it into a structured summary, write the subject overview from template, register it in the index. Use when the user opens a new subject area (เปิดวิชาใหม่), or supplies the defining document for a subject that is not in the index yet.
+description: Open a new subject area in a knowledge base — skeleton, defining document, digest, overview, index row. Use when the user opens a new subject (เปิดวิชาใหม่), or supplies the defining document for one not yet registered.
 ---
 
 # new-subject — open a new subject area
 
-This skill is an ordered checklist — do not skip steps. It carries the *process* only: the skeleton shape, templates, and naming rules are discovered from the host project at runtime.
+This skill is an ordered checklist: each step opens when the one before it has produced its result. It carries the *process* only — the skeleton shape, templates, and naming rules are discovered from the host project at runtime.
 
 ## Steps
 

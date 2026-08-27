@@ -1,11 +1,12 @@
 ---
 name: update-portfolio
-description: Sync a roll-up document against the sources it summarizes — reconcile every section with its source tree, append to the decision log, refresh the dates, verify the cross-tree links. Use when the user asks to sync a roll-up document (อัปเดตพอร์ตโฟลิโอ), or asks to review or sync a summary document that spans several parts of the repo.
+description: Sync a roll-up document against the sources it summarizes, and log the decision.
+disable-model-invocation: true
 ---
 
 # update-portfolio — sync a roll-up document with its sources
 
-This skill is an ordered checklist — do not skip steps. A **roll-up document** is a single file whose content is a summary of state that lives elsewhere: it goes stale the moment a source changes, and its value is that a reader can trust it without opening the sources.
+This skill is an ordered checklist: each step opens when the one before it has produced its result. A **roll-up document** is a single file whose content is a summary of state that lives elsewhere: it goes stale the moment a source changes, and its value is that a reader can trust it without opening the sources.
 
 ## Steps
 

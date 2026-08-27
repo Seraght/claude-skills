@@ -1,15 +1,15 @@
 ---
 name: digest
-description: Import raw documents (PDFs etc.) from a staging folder into a knowledge base — read the actual content, pass privacy and copyright gates, file to the right destination, write a digest, register it in the index. Use when the user asks to import a document into the knowledge base (นำเข้าเอกสาร, ย่อยเอกสาร), when new files are waiting in the staging folder, or when asked to import a document into the repo.
+description: Import a raw document from staging into a knowledge base — privacy and copyright gates, filing, digest, index entry. Use when the user asks to import a document (นำเข้าเอกสาร, ย่อยเอกสาร), or files are waiting in staging.
 ---
 
 # digest — import raw documents into the knowledge base
 
-This skill is an ordered checklist — do not skip steps. It carries the *process* only: everything project-specific (folder layout, naming rules, templates) is discovered from the host project at runtime, never assumed.
+This skill is an ordered checklist: each step opens when the one before it has produced its result. It carries the *process* only — everything project-specific (folder layout, naming rules, templates) is discovered from the host project at runtime.
 
 ## Steps
 
-1. **Discover the project's conventions** — read the host project's agent instructions file (`AGENTS.md`, `CLAUDE.md`, or its README) and inspect the existing structure: where imported sources live, where digests live, whether an index/registry and a digest template exist. Explicit import rules in the host project override the generic defaults below. If no staging folder is defined, ask the user which folder is the inbox.
+1. **Discover the project's conventions** — read the host project's agent instructions file (`AGENTS.md`, or `CLAUDE.md`) and inspect the existing structure: where imported sources live, where digests live, whether an index/registry and a digest template exist. Explicit import rules in the host project override the generic defaults below. If no staging folder is defined, ask the user which folder is the inbox.
 2. **Survey the staging area** — list the waiting files (commonly `temp/` or `inbox/`; typically untracked in git).
 3. **Read the actual content before any decision** — judge the document by what is inside it, never by its filename. Reading a scanned or image-heavy source puts its pages into the working session, which then carries them for everything that follows; on a long document that can cost more than the rest of the import put together. Take the cheapest path that actually works, in this order:
    - **Read it in an isolated worker if your agent has one** — a sub-agent or equivalent reads the document and returns the summary, so the pages never enter this session at all. Ask it for what steps 4-10 need: subject matter, whether personal data appears, whether it is an original record, copyright status, key content.
