@@ -1,6 +1,13 @@
-# Second-Brain Anatomy
+---
+name: brain-anatomy
+description: The eleven components of an agent-operated knowledge base, each with its scaffolding default and its audit question. Use when scaffolding or auditing a vault, or when another skill needs the component anatomy.
+---
 
-Eleven components of a healthy, agent-operated knowledge base, grouped by the four jobs the vault must do: **capture fast, find again, stay trustworthy, don't rot**. Greenfield mode scaffolds each component; audit mode scores each one. A component the user explicitly declines is recorded as declined in the vault's constitution — never silently skipped.
+# Knowledge Base Anatomy
+
+Eleven components of a healthy, agent-operated knowledge base, grouped by the four jobs the vault must do: **capture fast, find again, stay trustworthy, don't rot**. The `init-brain` skill scaffolds each component; `audit-brain` scores each one. This file is reference only — it carries no steps of its own.
+
+A component the user explicitly declines is recorded as declined in the vault's constitution — never silently skipped.
 
 ## Capture
 

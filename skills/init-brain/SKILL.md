@@ -1,23 +1,23 @@
 ---
 name: init-brain
-description: Scaffold a new second-brain knowledge base, or audit an existing one against an 11-component anatomy — interview the user, then generate the folder skeleton, AGENTS.md constitution, indexes, templates, and check script that the other skills in this set discover at runtime. Use when the user wants to start a new knowledge base (สร้าง second brain, เปิดคลังใหม่), or asks to health-check an existing vault (ตรวจสุขภาพคลัง).
+description: Interview, then scaffold a new knowledge base — folder trees, AGENTS.md, indexes, templates, check script.
+disable-model-invocation: true
 ---
 
-# init-brain — scaffold or audit a second-brain
+# init-brain — scaffold a knowledge base
 
-This skill is an ordered checklist — do not skip steps. It is the setup-time counterpart of the other skills in this set: they *discover* a vault's conventions at runtime; this skill *creates* (or health-checks) the conventions they discover. The component reference is [BRAIN-ANATOMY.md](./BRAIN-ANATOMY.md) — read it before proceeding past step 1.
+This skill is an ordered checklist: each step opens when the one before it has produced its result. It is the setup-time counterpart of the other skills in this set — they *discover* a vault's conventions at runtime, and this skill *creates* the conventions they discover. Scoring a vault that already has content is `audit-brain`, not this skill.
+
+The component reference is the `brain-anatomy` skill — read it before step 2.
 
 ## Steps
 
-1. **Choose the mode** — inspect the target directory. Effectively empty (no agent instructions file — `AGENTS.md` or `CLAUDE.md` — and no content trees) → **Greenfield**. Existing content → **Audit**. Confirm the chosen mode with the user before proceeding.
-
-## Greenfield: interview → scaffold → verify
-
+1. **Confirm the target is a greenfield** — inspect the target directory. Effectively empty (no agent instructions file — `AGENTS.md` or `CLAUDE.md` — and no content trees) is what this skill builds on. Existing content belongs to `audit-brain`; say so and stop. Confirm with the user before proceeding.
 2. **Interview the variable parts only** — the anatomy carries opinionated defaults; ask only what varies per vault, present the default alongside each question, and let the user override any of them:
    - Which roles/areas of work need their own tree? (e.g. teaching / research / admin)
    - Where each kind of file lands *inside* a tree — are imported source files and their digests
      separate folders (default: `sources/` and `digests/` per subject) or filed together? The other
-     skills cannot file anything without this answer, so do not leave it to be inferred later.
+     skills cannot file anything without this answer, so settle it here rather than at first use.
    - Vault language — the language of the generated `AGENTS.md`, indexes, and templates.
    - Assessment — does this vault hold exam papers? If not, skip this and record nothing. If it
      does, where they hang and how their files are staged (default `<subject>/assessment/<year>/<exam>/`
@@ -32,11 +32,5 @@ This skill is an ordered checklist — do not skip steps. It is the setup-time c
    - Naming convention (default lowercase, hyphen-separated, with issuing org and year).
    - Shell for the check script (PowerShell or bash).
    - Git? If yes, offer a pre-commit hook that runs the check script.
-3. **Scaffold every component** — walk [BRAIN-ANATOMY.md](./BRAIN-ANATOMY.md) top to bottom and create each component's scaffold with the interview answers filled in. Record any component the user declines as declined in the generated `AGENTS.md`.
+3. **Scaffold every component** — walk the `brain-anatomy` skill top to bottom and create each component's scaffold with the interview answers filled in. Record any component the user declines as declined in the generated `AGENTS.md`.
 4. **Verify before finishing** — run the generated check script on the fresh vault, then confirm the vault is *discoverable*: every operating rule an agent needs (destinations, gates, naming, markers, cadence) is written in `AGENTS.md`, and every folder is reachable from an index. The bar: the `digest` skill's discovery step could run here without asking the user anything the interview already answered — walk that step literally, question by question, and treat any question the constitution cannot answer as an unfinished scaffold rather than a detail to settle on first use.
-
-## Audit: score → report → fix on approval
-
-5. **Score all 11 components** — walk [BRAIN-ANATOMY.md](./BRAIN-ANATOMY.md) against the existing vault and mark each component **present / partial / missing**, citing a file path (or its absence) as evidence. Every component accounted for — no skips.
-6. **Record the scorecard, then report before touching anything** — write the scorecard to a dated file in the vault (default `docs/brain-audit-<YYYY-MM-DD>.md`; follow the vault's own docs convention if it has one), then present it with a concrete proposal per gap and wait: change nothing else until the user picks which fixes to apply.
-7. **Apply approved fixes and verify** — implement only what was approved, then run the vault's check script (or, if it has none, the discoverability check from step 4) over the changed parts. Close the loop in the scorecard file: mark each gap as fixed or declined, so the next audit starts from what was already decided rather than re-proposing it.
