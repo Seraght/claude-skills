@@ -34,7 +34,8 @@ Working equivalents for Thai:
 
 A critique that over-reports is as useless as one that under-reports: the author spends a day on phantom defects and then stops believing the tool.
 
-- **Every finding quotes the span it is about**, from the stem or from a named option, and states the fix. No quote, no finding.
+- **Every finding quotes the span it is about**, from the stem or from a named option **as the rendered paper shows it**, and states the fix. No quote, no finding. Text pulled from a word-processor file is not the paper: what it drops — equations, figures, formatting-carried marks — comes back as a confident report that content is missing, complete with a plausible technical explanation for a defect that does not exist.
+- **A measured criterion is reported in full.** Where a check is numeric, list every item that meets it, or give the count and list the worst; naming three of twenty and stopping turns a measurement back into an impression.
 - **One rewrite, one finding.** Where a single edit removes several flaws, report it once and name the flaws it resolves.
 - **Rank by severity, not by count.** A bank with three real blocks is in worse shape than one with thirty notes.
 - **Judge the item against its own outcome.** A Remember-level item is not flawed for being Remember-level unless the blueprint cell it fills calls for something higher.
@@ -112,7 +113,7 @@ Defects that are invisible one item at a time, and that selecting and reordering
 - **No item answers another.** A stem that supplies a fact, a definition, or a worked value that another item asks for gives that item away. This is not the same as a hinged item: nothing here depends on answering correctly, only on having read.
 - **No option set is reused between items.** Options copied from a neighbouring item and not recomputed give a set that cannot contain the right answer, and the defect then reads as a typo in the stem rather than as what it is. The giveaway is two items offering exactly the same options. Numeric sets are where copying hides best, since nothing looks out of place. *Fix:* compute the option set for the item at hand.
 - **No duplicated coverage.** Two items testing the same point at the same level spend two items' worth of marks on one thing, and usually mean some other cell went short.
-- **Key positions spread.** Across the paper, keys do not cluster in one position or lean on the middle. *Fix:* re-scramble option order — then re-verify the key against the new order.
+- **Key positions spread, and do not run.** Two separate checks: the distribution across positions, and the longest run of consecutive items keyed to the same position. A paper can be perfectly balanced overall and still hand out four or five in a row, which is the pattern an examinee notices while sitting the exam. *Fix:* re-scramble option order — then re-verify every key against the new order.
 - **The paper is answerable in the time allowed.** Item count and reading load against the scheduled duration.
 - **Format is consistent across the paper.** Option count, labelling, and instructions do not vary between sections without a stated reason.
 
