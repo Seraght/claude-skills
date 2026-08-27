@@ -145,12 +145,18 @@ Re-run the measurements on any item that was rewritten.
 
 ## Reporting
 
+The report is written in this order:
+
+1. **Three counts** — by severity, by provenance, and **by pass, including the passes that found nothing**, so a pass that never ran cannot hide behind a missing heading.
+2. **The measurement table**, exactly as it was built before judging.
+3. **Each item in severity order** — the quoted evidence, the flaw named, and a proposed rewrite for every Block and Revise. Items that pass are listed as passing, so the author can see the paper was covered.
+
 Whatever shape the report takes, it answers the questions the institution's own critique paperwork asks, so its fields can be transcribed rather than re-derived:
 
 - Per item: the cognitive level, whether the item is usable as written, and on what point it needs improvement.
 - For the paper: the tally of items by cognitive level, the number of items requiring revision, and whether the paper follows its test blueprint — with the reason where it does not.
 
-It also carries the measurement table and a finding count for every pass, zeros included. A report whose numbers were never counted reads exactly like one whose numbers were, until someone counts them; publishing the table is what makes the difference visible without re-doing the work.
+A report whose numbers were never counted reads exactly like one whose numbers were, until someone counts them; publishing the table is what makes the difference visible without re-doing the work.
 
 Leave the verdict column for a human to fill where the paperwork is signed by people. A form that arrives already ticked gets agreed with rather than read.
 
