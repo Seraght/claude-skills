@@ -17,4 +17,4 @@ This skill is an ordered checklist: each step opens when the one before it has p
 6. **Write the subject overview file** from the project's template.
 7. **Register one row in the index.**
 8. **Place grouping-level records at the grouping level** — if this subject belongs to a grouping that carries its own records (a program, a client, a domain) and that grouping is not registered yet, create it at the shared level, not inside the subject. One grouping may span many subjects and may have several revisions of its own.
-9. **Verify before finishing** — if the project has status or link check scripts, run them; otherwise verify manually: the skeleton matches the existing subjects, the index row resolves to the new folder, and every link in the new files points at a file that exists.
+9. **Verify before finishing** — run the project's check script where one exists, then confirm: the skeleton matches the existing subjects, the index row resolves to the new folder, and every link in the new files points at a file that exists.
