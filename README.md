@@ -24,6 +24,7 @@
 
 | skill | ทำอะไร |
 |---|---|
+| [`design-course/`](skills/design-course/) | ออกแบบรายวิชาย้อนจากผลลัพธ์ — ตรวจว่าวิชาติดหนี้หลักสูตรข้อไหน → เขียน CLO → ตัดสินวิธีวัดของแต่ละข้อ → จึงค่อยวางตารางสอน |
 | [`make-exam/`](skills/make-exam/) | ออกข้อสอบตามลำดับที่ห้ามสลับ — ตรวจผลลัพธ์การเรียนรู้ก่อน → blueprint → items → วัดข้อบกพร่องเป็นตัวเลข → answer key → rubric → ส่งต่อให้วิพากษ์ |
 | [`critique-mcq/`](skills/critique-mcq/) | วิพากษ์ข้อสอบปรนัยก่อนนำไปใช้ — วัดตัวเลือกก่อน แล้วรายงานทั้งรายข้อและทั้งฉบับ พร้อมฉบับแก้ รออนุมัติก่อนแตะไฟล์ |
 
@@ -35,6 +36,7 @@
 | [`brain-anatomy/`](skills/brain-anatomy/) | นิยาม 11 องค์ประกอบของคลัง | `init-brain`, `audit-brain` |
 | [`assessment-layout/`](skills/assessment-layout/) | ที่อยู่ของชุดสอบ ความหมายของเลขหน้าไฟล์ และรูปร่างของ blueprint | `make-exam`, `critique-mcq` |
 | [`item-defects/`](skills/item-defects/) | ข้อบกพร่องของข้อสอบ แยกไฟล์ตามชนิดข้อสอบ พร้อมวิธีแก้ของแต่ละข้อ | `make-exam`, `critique-mcq` |
+| [`learning-outcomes/`](skills/learning-outcomes/) | อะไรทำให้ผลลัพธ์การเรียนรู้วัดได้ และตรวจ alignment สองทิศทางอย่างไร | `design-course`, `make-exam` |
 
 เริ่มจากศูนย์ให้พิมพ์เรียก `init-brain` ก่อน — มันสร้าง `AGENTS.md`, index, templates และสคริปต์ตรวจ
 ซึ่งเป็น "สิ่งที่ skill ตัวอื่นไปอ่านตอนรัน"
@@ -65,7 +67,9 @@
 
 ข้อยกเว้นคือ skill ที่อ่าน reference skill ต้องพาตัวที่มันอ่านไปด้วย —
 `init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy`
-ส่วน `make-exam` กับ `critique-mcq` ต้องไปพร้อม `assessment-layout` และ `item-defects`
+`make-exam` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `learning-outcomes`
+`critique-mcq` ต้องไปพร้อม `assessment-layout` และ `item-defects`
+ส่วน `design-course` ต้องไปพร้อม `learning-outcomes`
 
 ถ้าโปรเจกต์ปลายทางยังไม่มีไฟล์กติกา (`AGENTS.md` / `CLAUDE.md`) หรือยังไม่มีโครงสร้างคลัง
 skill จะถามหาข้อมูลที่จำเป็นระหว่างทาง —
