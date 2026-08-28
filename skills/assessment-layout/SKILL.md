@@ -42,7 +42,7 @@ Rows are topics. Columns are cognitive levels. Each cell holds three things, not
 | Topic 2 | — | 1 item · 5 marks · short answer | 1 item · 10 marks · essay | |
 
 - **Item count and marks** — what the cell is worth, and how many items carry it.
-- **Item format** — selected-response, matching, constructed-response, practical. It belongs in the cell because a format chosen later is chosen by what is quickest to write, and a high-level cell filled with the wrong format leaves its outcome unassessed while the totals still reconcile.
+- **Item format** — selected-response, matching, constructed-response, practical. It belongs in the cell because a format chosen later is chosen by what is quickest to write, and a high-level cell filled with the wrong format leaves its outcome unassessed while the totals still reconcile. **One declaration covering the whole paper does not satisfy this**, even where every cell turns out to use the same format: the check is made cell by cell against the level that cell claims, and a paper-level line gives it nothing to check.
 
 Every cell names the learning outcome it serves, and every outcome the course states appears in at least one cell. Where the exam schedules time per task rather than per paper — a practical, an open-book paper — the cell carries its time budget too, since minutes per mark is what decides which tasks examinees abandon.
 
