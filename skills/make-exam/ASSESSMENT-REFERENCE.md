@@ -2,25 +2,7 @@
 
 General assessment principles the `make-exam` skill applies. When the host project carries its own assessment reference, that one governs and this file fills the gaps it leaves.
 
-This file is how to *write* an assessment. What a defective item looks like is not here — that is the `item-defects` skill, which the writing steps measure against, and which the critique skills measure against too.
-
-## Outcomes come first
-
-Assessment is the last of three things to be designed, not the first. The outcome states what the learner must be able to do; the teaching gives them the chance to do it; the assessment finds out whether they can. All three carry the same verb at the same level, and the paper is valid only to the degree they line up — Biggs's constructive alignment, and the premise of outcome-based education generally.
-
-```
-Learning outcome  ──►  Teaching and learning  ──►  Assessment
-   (what it says)        (what happens in class)     (what the paper asks)
-```
-
-Which makes the outcome an input to be checked, never a given:
-
-- **One verb per outcome.** An outcome reading "create X **and** evaluate Y" is two outcomes, at two levels, and no single item can serve it. The exam that follows will be two exams stapled together, and it will read that way. Split it before building the blueprint.
-- **The verb must name something observable.** "Understand", "know", and "appreciate" name a state, not a performance — there is no item that confirms them. Ask what the learner would *do* to show it, and put that verb in the outcome instead.
-- **The verb is a claim the paper has to honour.** An outcome saying "analyze" that is assessed by recalling a definition is a failed alignment, and the fix is to raise the assessment or to correct the outcome — never to read the verb loosely.
-- **An outcome no teaching hour serves cannot be assessed fairly**, and an outcome with teaching hours but no marks is unassessed. Both are findings to raise before writing items, not after.
-
-Where the outcome is wrong, say so and stop. Building a defensible paper on a malformed outcome is not possible, and the paper is where the problem becomes expensive.
+This file is how to *write* an assessment. Two things are deliberately not here: what a defective item looks like, which is the `item-defects` skill, and what makes a learning outcome assessable in the first place, which is the `learning-outcomes` skill. An assessment is built on outcomes that have already passed those checks.
 
 ## Cognitive levels (Bloom's revised taxonomy)
 
