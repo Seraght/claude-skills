@@ -63,19 +63,12 @@ Every item gets a key. For selected-response items, record why each distractor i
 
 ## Rubrics
 
-For constructed-response and practical items.
+For constructed-response items.
 
 - **Analytic** (separate criteria, each scored) for diagnostic feedback and multi-marker consistency; **holistic** (one overall judgement) for speed on short responses. Analytic is the default when more than one person marks.
 - **Criteria are observable.** Each level descriptor names what is present or absent in the work, not how good it felt.
 - **Levels are distinguishable.** Adjacent levels differ by something a marker can point at; typically 3–5 levels.
 - **Criterion weights sum to the item's marks**, and reflect what the outcome actually values.
-
-## Practical exams
-
-- Assess the performance, not a written account of it: score what is observed while the examinee works.
-- Define the station's conditions — equipment, time limit, permitted references, safety constraints — as part of the item, since they change what the score means.
-- Use a checklist for procedural steps with a right order, and a rubric for judgement-based aspects; most practical stations need both.
-- Where safety or a critical error voids the attempt, state that rule in the rubric rather than leaving it to marker discretion.
 
 ## Item analysis (after administration)
 

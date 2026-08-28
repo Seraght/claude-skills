@@ -19,6 +19,7 @@ The flaw taxonomy every assessment skill in this set judges an item against. The
 | [MCQ-DEFECTS.md](./MCQ-DEFECTS.md) | Selected-response items with a single best answer |
 | [CONSTRUCTED-RESPONSE-DEFECTS.md](./CONSTRUCTED-RESPONSE-DEFECTS.md) | Essay, short-answer, and problem items, together with their rubrics |
 | [MATCHING-DEFECTS.md](./MATCHING-DEFECTS.md) | Matching sets |
+| [PRACTICAL-DEFECTS.md](./PRACTICAL-DEFECTS.md) | Practical and performance tasks, with their conditions, scoring instruments, and markers |
 
 An item is judged against **COMMON-DEFECTS.md and the file for its own format** — never one alone. A format with no file here is reported as not reviewed rather than judged against a taxonomy written for another format.
 
