@@ -23,8 +23,11 @@ The component reference is the `brain-anatomy` skill — read it before step 2.
      does, present the default from the `assessment-layout` skill and let the user override it, then
      record the answer in `AGENTS.md` alongside the other destinations, since the assessment skills
      read it there rather than asking again.
-   - Copyright policy — what may be stored as source files vs digest-only with citation.
-   - Privacy red lines — what personal data must never enter the vault.
+   - Copyright policy — what may be stored as source files, what is digest-only with citation, and
+     whether openly licensed work (Creative Commons, open access) may be stored with its licence recorded.
+   - Privacy red lines — which personal data must never enter the vault. Take concrete categories
+     (student names, ID numbers, individual scores, patient records), since a rule written as "no names"
+     reads as a ban on every document that has an author.
    - Staging folder name (default `temp/`, untracked).
    - Naming convention (default lowercase, hyphen-separated, with issuing org and year).
    - Shell for the check script (PowerShell or bash).

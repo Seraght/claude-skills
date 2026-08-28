@@ -43,8 +43,8 @@ A component the user explicitly declines is recorded as declined in the vault's 
 - Audit: is it still a rules file, or has it become a manual? The constitution is loaded before the user types anything and re-sent on every turn afterwards, so length here is a tax on every session in the vault, including the ones that never touch what the long section describes. Flag any section that walks through a task step by step: procedure belongs in a skill, or in a side file the agent opens when it is doing that task. What stays is what an agent must know *before* it can act — destinations, naming, gates, markers, cadence.
 
 **7. Provenance gates** — copyright and privacy policy written down, so what enters the vault is defensible.
-- Scaffold: a policy section in the constitution from the interview: what may be stored as source files vs digest-only with citation; what personal data must never enter.
-- Audit: do written gates exist for both copyright and PII?
+- Scaffold: a policy section in the constitution from the interview: what may be stored as source files, what is digest-only with citation, and how a licence that permits redistribution is handled; which personal data must never enter, named concretely enough that a published work's byline does not read as a breach.
+- Audit: do written gates exist for both copyright and personal data? Does the copyright gate say what happens to openly licensed material, and does the privacy gate name the data it is about rather than any occurrence of a name?
 
 **8. Templates** — repeated document types produce uniform output.
 - Scaffold: `_templates/` with at least a digest template; more as the interview reveals repeated outputs.

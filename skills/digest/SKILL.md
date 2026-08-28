@@ -16,14 +16,15 @@ This skill is an ordered checklist: each step opens when the one before it has p
    - **Otherwise skim extracted text first** if a text-extraction tool happens to be installed (`pdftotext -raw`), and read pages directly only where extraction comes back empty — which is what scanned documents do.
    - **Otherwise read the document directly** with your own file-reading capability, which handles scanned pages as well as digital text. This path always works; it is simply the expensive one, so it is the fallback rather than the default.
 4. **Pass two gates before filing anything:**
-   - **Privacy** — does the document contain personal data about identifiable individuals (names, emails, ID numbers)? If yes: stop, notify the user, do not digest.
+   - **Privacy** — does the document hold personal data *as its content*: records about identifiable people who did not publish them — students, patients, clients, research participants, staff — such as names on a roster, ID numbers, individual scores, contact details, or case notes? If yes: stop, notify the user, do not digest. The people a published work names as its own authors, editors, or cited sources are its byline, not its content; a paper is not blocked for carrying an author list, an affiliation, or a corresponding-author email. Where a document holds both, the gate fires on the personal data it holds, whatever its byline says.
    - **Original official records** — is this an original organizational record rather than reference material? Originals belong in the organization's system of record, not a knowledge base; file only a digest/summary here, and ask the user where the original should go.
 5. **Choose the destination** by what the content *is*, using the structure discovered in step 1 — e.g. a repo split by role might route teaching material, research, and admin work to different trees. If the content fits no discovered destination, or fits more than one, ask the user instead of guessing.
 6. **Check for waiting gaps** — before creating a new file, search the destination's README/index for placeholders or "not yet written" markers; a new document often fills a gap that already exists.
 7. **Decide copyright before moving the file:**
-   - Public/official publications and the user's own writing → the source file may be stored in the knowledge base.
-   - Third-party copyrighted material (textbooks, articles) → do not store the file; write a digest with a full citation instead.
-   - Unsure → ask the user.
+   - The user's own writing, public and official publications → the source file may be stored.
+   - Someone else's work carrying a licence that permits redistribution — Creative Commons, an open-access statement, a public-domain dedication, an open-source licence → the source file may be stored, and the licence is recorded beside it, so a later reader can tell why it was allowed to stay.
+   - Everything else a third party holds rights over — textbooks, paywalled articles, purchased material → write a digest with a full citation; the source file is not stored.
+   - Unsure, or a licence you cannot read off the document → ask the user.
 8. **Rename meaningfully** — lowercase, hyphen-separated, with issuing org and year (e.g. `who-ai-ethics-guidance-2024.pdf`), unless the project defines its own naming rule.
 9. **Leave nothing behind in staging silently** — when the source file was stored (step 7), move it (don't copy): remove the original from staging once filing succeeds. When only a digest was written (file not stored), ask the user what to do with the original — delete it from staging, or hand it back for them to file elsewhere.
 10. **Write the digest and register it** — follow the project's digest template if one exists; update the README/index to point at the new file. If the digest closes a gap found in step 6, update the gap's status in the same edit.
