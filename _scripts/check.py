@@ -21,6 +21,12 @@ DOCS = sorted(glob.glob(os.path.join(ROOT, 'skills', '*', '*.md')))
 # because a skill must run when its folder is copied alone (ADR 0005).
 # Each entry: label, a regex matching the *step* that must carry the text
 # (a mention elsewhere is not a carrier), and the canonical wording.
+RUBRIC_CORE = (
+    '- **Analytic** (separate criteria, each scored) for diagnostic feedback and multi-marker consistency; **holistic** (one overall judgement) for speed on short responses. Analytic is the default when more than one person marks.' + chr(10) +
+    '- **Criteria are observable.** Each level descriptor names what is present or absent in the work, not how good it felt.' + chr(10) +
+    '- **Levels are distinguishable.** Adjacent levels differ by something a marker can point at; typically 3–5 levels.' + chr(10) +
+    "- **Criterion weights sum to the item's marks**, and reflect what the outcome actually values.")
+
 IDENTICAL = [
     ("discovery clause",
      r"^\d+\. \*\*Discover the project's conventions\*\*",
@@ -28,6 +34,9 @@ IDENTICAL = [
     ("conditional verify",
      r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*",
      "un the project's check script where one exists, then confirm:"),
+    ("rubric core",
+     r"^## Rubrics$",
+     RUBRIC_CORE),
 ]
 
 # Wordings that lost an argument. Each is a real regression, not a style note.
@@ -83,11 +92,11 @@ for path in SKILLS:
 
 print("\ntext held identical\n")
 for label, carries, canonical in IDENTICAL:
-    carriers = [p for p in SKILLS
+    carriers = [p for p in DOCS
                 if re.search(carries, io.open(p, encoding='utf-8').read(), re.M)]
     check(len(carriers) > 1, "%s: carried by more than one skill (%d)" % (label, len(carriers)))
     for p in carriers:
-        name = os.path.basename(os.path.dirname(p))
+        name = os.path.relpath(p, ROOT)
         check(canonical in io.open(p, encoding='utf-8').read(),
               "%s: %s is the canonical wording" % (name, label))
 
