@@ -2,6 +2,26 @@
 
 General assessment principles the `make-exam` skill applies. When the host project carries its own assessment reference, that one governs and this file fills the gaps it leaves.
 
+This file is how to *write* an assessment. What a defective item looks like is not here — that is the `item-defects` skill, which the writing steps measure against, and which the critique skills measure against too.
+
+## Outcomes come first
+
+Assessment is the last of three things to be designed, not the first. The outcome states what the learner must be able to do; the teaching gives them the chance to do it; the assessment finds out whether they can. All three carry the same verb at the same level, and the paper is valid only to the degree they line up — Biggs's constructive alignment, and the premise of outcome-based education generally.
+
+```
+Learning outcome  ──►  Teaching and learning  ──►  Assessment
+   (what it says)        (what happens in class)     (what the paper asks)
+```
+
+Which makes the outcome an input to be checked, never a given:
+
+- **One verb per outcome.** An outcome reading "create X **and** evaluate Y" is two outcomes, at two levels, and no single item can serve it. The exam that follows will be two exams stapled together, and it will read that way. Split it before building the blueprint.
+- **The verb must name something observable.** "Understand", "know", and "appreciate" name a state, not a performance — there is no item that confirms them. Ask what the learner would *do* to show it, and put that verb in the outcome instead.
+- **The verb is a claim the paper has to honour.** An outcome saying "analyze" that is assessed by recalling a definition is a failed alignment, and the fix is to raise the assessment or to correct the outcome — never to read the verb loosely.
+- **An outcome no teaching hour serves cannot be assessed fairly**, and an outcome with teaching hours but no marks is unassessed. Both are findings to raise before writing items, not after.
+
+Where the outcome is wrong, say so and stop. Building a defensible paper on a malformed outcome is not possible, and the paper is where the problem becomes expensive.
+
 ## Cognitive levels (Bloom's revised taxonomy)
 
 Remember → Understand → Apply → Analyze → Evaluate → Create.
@@ -10,11 +30,13 @@ Tag every item with the level it actually demands, judged by what the examinee m
 
 ## Blueprint
 
-The blueprint is a table fixed *before* any item is written: rows are topics, columns are cognitive levels, cells hold item counts and marks.
+The blueprint is fixed *before* any item is written. Its shape — what the axes are and what a cell holds — is in the `assessment-layout` skill; what follows is how the numbers in it are decided.
 
 - **Weight by instructional time.** A topic's share of the marks tracks its share of the teaching hours, taken from the actual course document — never estimated.
 - **Map every cell to a learning outcome.** An outcome with no items is unassessed; items serving no outcome are cut.
 - **Match level to outcome.** The blueprint's level distribution reflects the levels the outcomes state.
+- **Fix the item format in the cell, not at the desk.** A format decided while writing is decided by what is quickest to write, which is always the selected-response item — and a Create-level cell filled with multiple-choice items leaves its outcome unassessed while the blueprint still totals correctly. Choose the format when the cell is drawn, and choose one the cell's level can actually be reached by: matching and short selected-response items serve Remember and Understand; Apply and Analyze need a novel situation to work on; Evaluate and Create need a constructed response, a product, or a performance with a rubric.
+- **Budget time with the marks.** Minutes per mark are part of the cell, not an afterthought. Where a high-level cell costs far more time per mark than a low-level one, examinees short of time abandon the highest-level work on the paper — so either the marks rise to match the time or the task shrinks.
 - Total marks reconcile with the grade weighting in the course document before item writing starts, and reconcile again against the items the assembled paper actually contains — selecting from a larger pool rebalances nothing on its own.
 
 ## Item writing
@@ -34,20 +56,24 @@ Write a selected-response item in this order: stem, then distractors, then the k
 - **Elaboration belongs to the stem.** If the key needs a condition, a definition, or a parenthesis to be true, that qualifier is part of the question — move it into the stem, where it applies to all four options. A qualifier only one option carries marks that option.
 - **Prefer observed wrong answers to invented ones.** Errors from previous administrations, from marked coursework, or from class discussion are misconceptions that already exist; invented distractors tend to be wrong in ways nobody actually is.
 
-## Cue audit
+## Constructed-response items
 
-Run over the finished item bank before the answer key is written. The test: cover the stem and the key, read the options alone, and ask which one a test-wise examinee would choose knowing nothing about the subject. If the options predict the key, the item is measuring test-wiseness rather than the outcome, and is rewritten — the audit's product is a revised bank, not a list of annotations.
+Essay, short-answer, and problem items. The prompt and its rubric are one instrument — write them together, and never ship the prompt without the rubric.
 
-Check every item for:
+- **State the scope in the prompt** — expected length, the form the answer takes, and how many points or aspects a complete answer covers. Left unstated, examinees spend their marks guessing how much is wanted, and the scores separate the confident from the careful.
+- **Ask for the course's own concepts.** A prompt a literate adult could answer acceptably without taking the course is measuring general articulacy.
+- **Keep the structure in the rubric, not in the prompt.** A prompt that lists the three parts of the answer hands over the marks for organising it.
+- **Give every examinee the same items.** Choice between prompts — three out of five — produces scores that are not comparable, because nothing equates prompts of different difficulty.
+- **Write the marking rules with the item**: what earns nothing, what a partially correct method earns, and whether mechanics are scored. For anything outside a language course, they are not.
 
-- **Length.** Option lengths sit in one band — roughly, the longest is no more than a quarter longer than the shortest. Measure in characters excluding spaces; a word count means nothing in a language that does not separate words, such as Thai. A key that will not fit is trimmed, or its excess moved into the stem; padding the distractors to match is the last resort, since padding makes them implausible.
-- **Polarity.** All options run in the same direction. If the key names a drawback, a cost, or a failure, every distractor names one too; a lone negative among positives is picked without reading the stem, and so is a lone positive among negatives.
-- **Category and grain.** All options are the same kind of thing at the same level of detail — four causes, or four procedures, or four quantities. An option that is the odd one out on any dimension, including tense, scope, specificity, and part of speech, is picked for that reason.
-- **Surface features.** Parentheses, worked examples, hedges ("usually", "in most cases"), and technical vocabulary appear in every option or in none.
-- **Stem echo.** A word or root repeated from the stem in one option only points at that option.
-- **Absolutes.** "Always", "never", "all", "only" read as false on sight; keep them out of the options entirely rather than confining them to distractors.
-- **Overlap.** No option contains or subsumes another. Drop "all of the above" and "none of the above" — both are answerable from partial knowledge.
-- **Key position across the paper.** Keys spread roughly evenly across the option positions. Runs of the same position, and a distribution leaning on the middle options, are patterns examinees find; scramble the option order rather than rewriting the items.
+## Matching sets
+
+- **One homogeneous class per set**, in both the premises and the responses. Two kinds of thing in one list lets the examinee sort by kind rather than by knowledge.
+- **Never an equal count matched once each** — the last pairing is then free. Supply more responses than premises, or allow a response to be used more than once, and say in the directions which it is.
+- **Order the responses** alphabetically, numerically, or chronologically, and keep the whole set on one page.
+- **Keep the set short.** Search cost grows with the two lists multiplied, and a long set measures scanning speed.
+- **Score one mark per pairing** and say so with the item. A matching set is one item made of many marks whose parts are not independent — all-or-nothing scoring makes a single lapse cost the whole set.
+- **Use it for the levels it reaches.** Matching tests recognition of an association; a cell above Understand is not filled by a matching set whatever the directions say.
 
 ## Answer key
 

@@ -26,11 +26,27 @@ The leading number is the **lifecycle stage**, not a position in a sequence:
 
 | Stage | Meaning | Default files |
 |---|---|---|
-| `0x` | Authoring — before the paper exists | `00-research.md`, `01-blueprint.md`, `02-items.md`, `03-paper.md`, `04-answer-key.md`, `05-rubric.md` |
+| `0x` | Authoring — before the paper exists | `00-research.md`, `01-blueprint.md`, `02-items.md`, `03-paper.md`, `04-answer-key.md`, `05-rubric.md`, `06-measurements.md` |
 | `1x` | Review — after the paper is assembled, before it is used | `10-critique.md` |
 | `2x` | After administration | item statistics, post-hoc analysis |
 
 Numbers are left unused inside each stage, so an artifact can be inserted without renumbering across stages. A missing stage reads as a stage that did not happen, rather than as a gap to be filled by the next number in the folder — which is why a review artifact takes the next free `1x` and never the number after the last authoring file.
+
+## What a blueprint holds
+
+Rows are topics. Columns are cognitive levels. Each cell holds three things, not two:
+
+| | Remember | Understand | Apply | … |
+|---|---|---|---|---|
+| Topic 1 | 4 items · 4 marks · MCQ | 2 items · 4 marks · MCQ | — | |
+| Topic 2 | — | 1 item · 5 marks · short answer | 1 item · 10 marks · essay | |
+
+- **Item count and marks** — what the cell is worth, and how many items carry it.
+- **Item format** — selected-response, matching, constructed-response, practical. It belongs in the cell because a format chosen later is chosen by what is quickest to write, and a high-level cell filled with the wrong format leaves its outcome unassessed while the totals still reconcile.
+
+Every cell names the learning outcome it serves, and every outcome the course states appears in at least one cell. Where the exam schedules time per task rather than per paper — a practical, an open-book paper — the cell carries its time budget too, since minutes per mark is what decides which tasks examinees abandon.
+
+**The vault's own blueprint form wins.** Where an institution fixes the shape — a mandated form with its own columns — that shape governs, and the three things above are recorded wherever it has room for them.
 
 ## What binds to what
 
