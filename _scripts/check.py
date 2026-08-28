@@ -65,6 +65,18 @@ DEFECT_LITERALS = [r"Clang", r"Convergence\.", r"K-type", r"Self-containment"]
 # to author outcomes as well as one to assess against them.
 OUTCOME_LITERALS = [r"[Cc]onstructive alignment", r"Mager", r"Unobservable\.", r"Inflated\."]
 
+# Instructions that are wrong on their own. Each pair is one field test: the first
+# phrase turned up without the second, and the run went wrong in exactly the way
+# the second prevents.
+PAIRED = [
+    ("length of every option", "excluding spaces",
+     "a step that orders a count carries the counting rule with it; leaving the rule in "
+     "the reference produced a measurement table counted in characters including spaces"),
+    ("binding review runs", "unticked item",
+     "a handoff that exists only as a sentence in the session leaves no evidence, which "
+     "is the failure ADR 0008 is about; it is written into the exam set instead"),
+]
+
 DESCRIPTION_BUDGET = 40
 
 fails = []
@@ -105,6 +117,15 @@ for pattern, why in BANNED:
     hits = [os.path.relpath(p, ROOT) for p in DOCS
             if re.search(pattern, io.open(p, encoding='utf-8').read())]
     check(not hits, "absent: %s — %s%s" % (pattern, why, (" [in %s]" % ", ".join(hits)) if hits else ""))
+
+print("\ninstructions that need their companion\n")
+for trigger, needs, why in PAIRED:
+    for path in DOCS:
+        body = io.open(path, encoding='utf-8').read()
+        if trigger in body:
+            check(needs in body, "%s says %r, so it must also say %r%s"
+                  % (os.path.relpath(path, ROOT), trigger, needs,
+                     "" if needs in body else " -- " + " ".join(why.split())))
 
 print("\nshape lives in one place\n")
 for pattern in LAYOUT_LITERALS:
