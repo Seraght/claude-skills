@@ -51,6 +51,11 @@ LAYOUT_LITERALS = [r"<subject>/assessment", r"assessment/<year>", r"assessment/b
 # what the item-writing skill was held to.
 DEFECT_LITERALS = [r"Clang", r"Convergence\.", r"K-type", r"Self-containment"]
 
+# What an outcome must be belongs to the learning-outcomes skill and nowhere
+# else (ADR 0010). It reached its second consumer the moment a skill was written
+# to author outcomes as well as one to assess against them.
+OUTCOME_LITERALS = [r"[Cc]onstructive alignment", r"Mager", r"Unobservable\.", r"Inflated\."]
+
 DESCRIPTION_BUDGET = 40
 
 fails = []
@@ -103,6 +108,11 @@ for pattern in DEFECT_LITERALS:
                    if os.path.basename(os.path.dirname(p)) != 'item-defects'
                    and re.search(pattern, io.open(p, encoding='utf-8').read())})
     check(not hits, "%s appears only in item-defects%s" % (pattern, (" [also in %s]" % ", ".join(hits)) if hits else ""))
+for pattern in OUTCOME_LITERALS:
+    hits = sorted({os.path.basename(os.path.dirname(p)) for p in DOCS
+                   if os.path.basename(os.path.dirname(p)) != 'learning-outcomes'
+                   and re.search(pattern, io.open(p, encoding='utf-8').read())})
+    check(not hits, "%s appears only in learning-outcomes%s" % (pattern, (" [also in %s]" % ", ".join(hits)) if hits else ""))
 
 print("\nskills reached by name exist\n")
 for path in DOCS:
