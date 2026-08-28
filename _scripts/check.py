@@ -12,6 +12,10 @@ import io, os, re, sys, glob
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKILLS = sorted(glob.glob(os.path.join(ROOT, 'skills', '*', 'SKILL.md')))
 NAMES = {os.path.basename(os.path.dirname(p)) for p in SKILLS}
+# Every markdown file a skill folder carries, not only its SKILL.md: the drift
+# ADR 0008 is written from lived in a sibling reference file, where the rules
+# below were not looking.
+DOCS = sorted(glob.glob(os.path.join(ROOT, 'skills', '*', '*.md')))
 
 # Text held identical across skills rather than shared from one place,
 # because a skill must run when its folder is copied alone (ADR 0005).
@@ -34,10 +38,18 @@ BANNED = [
      "a check script does not replace the checklist (ADR 0005)"),
     (r"`AGENTS\.md`, `CLAUDE\.md`, or its README",
      "a README is not a constitution (ADR 0005)"),
+    (r"ask which one a|ask yourself",
+     "a check that leaves no artifact cannot be shown to have run (ADR 0008)"),
 ]
 
 # Structure that belongs to the assessment-layout skill and nowhere else (ADR 0007).
-LAYOUT_LITERALS = [r"<subject>/assessment", r"assessment/<year>", r"assessment/bank"]
+LAYOUT_LITERALS = [r"<subject>/assessment", r"assessment/<year>", r"assessment/bank",
+                   r"[Rr]ows are topics", r"[Cc]olumns are cognitive levels"]
+
+# The flaw taxonomy belongs to the item-defects skill and nowhere else (ADR 0008).
+# It had drifted into two copies at two levels of detail, and the weaker copy is
+# what the item-writing skill was held to.
+DEFECT_LITERALS = [r"Clang", r"Convergence\.", r"K-type", r"Self-containment"]
 
 DESCRIPTION_BUDGET = 40
 
@@ -76,20 +88,25 @@ for label, carries, canonical in IDENTICAL:
 
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:
-    hits = [os.path.relpath(p, ROOT) for p in SKILLS
+    hits = [os.path.relpath(p, ROOT) for p in DOCS
             if re.search(pattern, io.open(p, encoding='utf-8').read())]
     check(not hits, "absent: %s — %s%s" % (pattern, why, (" [in %s]" % ", ".join(hits)) if hits else ""))
 
 print("\nshape lives in one place\n")
 for pattern in LAYOUT_LITERALS:
-    hits = [os.path.basename(os.path.dirname(p)) for p in SKILLS
-            if os.path.basename(os.path.dirname(p)) != 'assessment-layout'
-            and re.search(pattern, io.open(p, encoding='utf-8').read())]
+    hits = sorted({os.path.basename(os.path.dirname(p)) for p in DOCS
+                   if os.path.basename(os.path.dirname(p)) != 'assessment-layout'
+                   and re.search(pattern, io.open(p, encoding='utf-8').read())})
     check(not hits, "%s appears only in assessment-layout%s" % (pattern, (" [also in %s]" % ", ".join(hits)) if hits else ""))
+for pattern in DEFECT_LITERALS:
+    hits = sorted({os.path.basename(os.path.dirname(p)) for p in DOCS
+                   if os.path.basename(os.path.dirname(p)) != 'item-defects'
+                   and re.search(pattern, io.open(p, encoding='utf-8').read())})
+    check(not hits, "%s appears only in item-defects%s" % (pattern, (" [also in %s]" % ", ".join(hits)) if hits else ""))
 
 print("\nskills reached by name exist\n")
-for path in SKILLS:
-    name = os.path.basename(os.path.dirname(path))
+for path in DOCS:
+    name = os.path.relpath(path, ROOT)
     for ref in set(re.findall(r"`([a-z][a-z0-9-]+)` skill", io.open(path, encoding='utf-8').read())):
         check(ref in NAMES, "%s reaches `%s`, which is a skill in this set" % (name, ref))
 
