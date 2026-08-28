@@ -26,6 +26,7 @@
 |---|---|
 | [`design-course/`](skills/design-course/) | ออกแบบรายวิชาย้อนจากผลลัพธ์ — ตรวจว่าวิชาติดหนี้หลักสูตรข้อไหน → เขียน CLO → ตัดสินวิธีวัดของแต่ละข้อ → จึงค่อยวางตารางสอน |
 | [`make-exam/`](skills/make-exam/) | ออกข้อสอบตามลำดับที่ห้ามสลับ — ตรวจผลลัพธ์การเรียนรู้ก่อน → blueprint → items → วัดข้อบกพร่องเป็นตัวเลข → answer key → rubric → ส่งต่อให้วิพากษ์ |
+| [`make-practical/`](skills/make-practical/) | ออกข้อสอบปฏิบัติ — ตาราง alignment ของภารกิจ → ภารกิจพร้อมเงื่อนไข → checklist หรือ rating scale → เกณฑ์ผ่าน → คู่มือผู้ตรวจ |
 | [`critique-mcq/`](skills/critique-mcq/) | วิพากษ์ข้อสอบปรนัยก่อนนำไปใช้ — วัดตัวเลือกก่อน แล้วรายงานทั้งรายข้อและทั้งฉบับ พร้อมฉบับแก้ รออนุมัติก่อนแตะไฟล์ |
 
 อีกสามโฟลเดอร์ไม่ใช่ checklist แต่เป็น **reference skill** — ไม่มีขั้นตอนของตัวเอง มีไว้ให้ตัวอื่นเรียกด้วยชื่อ
@@ -67,7 +68,7 @@
 
 ข้อยกเว้นคือ skill ที่อ่าน reference skill ต้องพาตัวที่มันอ่านไปด้วย —
 `init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy`
-`make-exam` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `learning-outcomes`
+`make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `learning-outcomes`
 `critique-mcq` ต้องไปพร้อม `assessment-layout` และ `item-defects`
 ส่วน `design-course` ต้องไปพร้อม `learning-outcomes`
 
