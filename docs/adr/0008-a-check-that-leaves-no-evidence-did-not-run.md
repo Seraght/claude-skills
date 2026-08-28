@@ -1,0 +1,26 @@
+# A check that leaves no evidence did not run
+
+`make-exam` step 7 audited every item for cues before the answer key was written, and it was written as an act of attention: *read each item's options with the stem and the correct option covered, and **ask** which one a test-wise examinee would pick*. Nothing came out of it. No table, no count, no file — so a run that skipped the step and a run that performed it produced identical exam sets, and the only person who could tell them apart was the agent whose attention was in question.
+
+Papers came back with the flaws the step exists to catch: a key a quarter longer than every distractor, the only option carrying a parenthesis, the only negative among three positives. Every one of those is named in the rules the skill already carried — *Length*, *Polarity*, *Surface features* — and the step that was supposed to apply them had no way to show it had.
+
+`critique-mcq` had already met this exact failure and already fixed it. Its first live run skipped the measurement step; the fix was to require the measurement table and a per-pass count, zeros included, in the published report, so that *a pass that never ran is visible rather than merely discouraged*. That fix was never carried back to `make-exam`, which is how one skill ended up defending the risk and its sibling merely disapproving of it.
+
+**A check now produces an artifact or it does not count as a check.** `make-exam` step 7 builds the measurement table, writes it into the exam set as `06-measurements.md`, and reports a count for every group including the groups that found nothing. Counting replaces reading: on this task an LLM applying a rubric by impression detects the longest-key flaw at F1 0.18–0.44 where a script that counts characters reaches 0.80–1.00, and the same model reports two and a half times as many flaws as expert raters using the same rubric. Impression both misses and invents.
+
+The flaw taxonomy the check reads against was living in two places at two levels of detail — eight bullets inside `make-exam`'s private reference, forty-five inside `critique-mcq`'s — so the skill *writing* items was held to a weaker standard than the skill *reviewing* them. Under [ADR 0007](0007-shape-is-shared-process-is-copied.md) that is shape with two consumers, and it moves to one home: the `item-defects` skill, split by what each defect applies to rather than by which skill reads it — `COMMON-DEFECTS.md` for every format, and one file each for selected-response, constructed-response, and matching items.
+
+## Considered Options
+
+- **Split the writing steps from the checking steps into two skills**, so the agent cannot see the key it just wrote while it audits — rejected for the reason [ADR 0006](0006-how-a-skill-is-reached-and-when-it-is-split.md) already gave: two files in one session is not a context boundary, and the later steps stay visible regardless. Worse here than there, since a checklist may not call another checklist, so nothing would make the audit run at all.
+- **Require a fresh agent for the audit** — a real context boundary, and the one variant [ADR 0006](0006-how-a-skill-is-reached-and-when-it-is-split.md) did not consider. Rejected as a *requirement*: dispatching a sub-agent is a capability some agents have and others do not, and [ADR 0002](0002-external-tools-are-accelerators-not-prerequisites.md) bars building a step on one. The fallback would have to be the measurement table anyway — so the table is the floor, and the separate context is bought instead at step 12, where the review stage already sits.
+- **Copy the forty-five-bullet taxonomy into both skills** and hold it identical — rejected on the same grounds [ADR 0006](0006-how-a-skill-is-reached-and-when-it-is-split.md) rejected copying the eleven-component anatomy: past a certain size, copies stop being identical, and this one had already proved it by drifting to a fifth of its length.
+- **Leave step 7 as it was and rely on `critique-mcq`** to catch what it missed — rejected: `make-exam` never told anyone that review existed. It ran to step 11, declared itself verified, and stopped.
+
+## Consequences
+
+- Nine skills where there were eight. `item-defects` is a reference skill, reached by name, holding no steps.
+- `make-exam` gains step 12: the exam set is handed on for review at the `1x` stage rather than treated as cleared. The separate context that a split would have bought is where it always was, and now it is signposted.
+- Constructed-response and matching items get a defect taxonomy and authoring guidance for the first time — one bullet and none respectively, before this.
+- **Self-containment** is a named defect: an item appealing to context that exists only outside the paper ("จากที่เรียน", "ตามที่อาจารย์สอน") measures attendance. Block where the answer is not on the paper at all, Revise where the phrase is decorative. It is deliberately not called *context-dependent*, which names a legitimate format.
+- `_scripts/check.py` gains three rules, and its existing rules now read every markdown file under `skills/` rather than only each `SKILL.md` — the drift this ADR is written from lived in a sibling reference file, where none of those rules were looking.
