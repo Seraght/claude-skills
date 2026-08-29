@@ -28,7 +28,9 @@ The leading number is the **lifecycle stage**, not a position in a sequence:
 |---|---|---|
 | `0x` | Authoring — before the paper exists | `00-research.md`, `01-blueprint.md`, `02-items.md`, `03-paper.md`, `04-answer-key.md`, `05-rubric.md`, `06-measurements.md` |
 | `1x` | Review — after the paper is assembled, before it is used | `10-critique.md`, `11-critique-independent.md` |
-| `2x` | After administration | item statistics, post-hoc analysis |
+| `2x` | After administration | `20-item-analysis.md` |
+
+Every stage has a skill that fills it: `make-exam` or `make-practical` for `0x`, `critique-mcq` for `1x`, `analyze-results` for `2x`. A stage the layout declares and nothing performs is a gap that reads as a completed step.
 
 The review stage carries two files rather than one. The second is an independent pass that measures the paper again from scratch rather than reading the first pass's table, because a critique built on a measurement it inherited certifies that measurement rather than checking it. Numbers are left unused inside each stage, so an artifact can be inserted without renumbering across stages. A missing stage reads as a stage that did not happen, rather than as a gap to be filled by the next number in the folder — which is why a review artifact takes the next free `1x` and never the number after the last authoring file.
 

@@ -28,6 +28,7 @@
 | [`make-exam/`](skills/make-exam/) | ออกข้อสอบตามลำดับที่ห้ามสลับ — ตรวจผลลัพธ์การเรียนรู้ก่อน → blueprint → items → วัดข้อบกพร่องเป็นตัวเลข → answer key → rubric → ส่งต่อให้วิพากษ์ |
 | [`make-practical/`](skills/make-practical/) | ออกข้อสอบปฏิบัติ — ตาราง alignment ของภารกิจ → ภารกิจพร้อมเงื่อนไข → checklist หรือ rating scale → เกณฑ์ผ่าน → คู่มือผู้ตรวจ |
 | [`critique-mcq/`](skills/critique-mcq/) | วิพากษ์ข้อสอบปรนัยก่อนนำไปใช้ — วัดตัวเลือกก่อน แล้วรายงานทั้งรายข้อและทั้งฉบับ พร้อมฉบับแก้ รออนุมัติก่อนแตะไฟล์ |
+| [`analyze-results/`](skills/analyze-results/) | วิเคราะห์ข้อสอบหลังสอบ — ผ่านด่านข้อมูลส่วนบุคคล → ความยาก → อำนาจจำแนก → ตัวลวง → ความเชื่อมั่น → ตีความตามขนาดกลุ่ม → เก็บสถิติเข้าคลังข้อสอบ |
 
 อีกสามโฟลเดอร์ไม่ใช่ checklist แต่เป็น **reference skill** — ไม่มีขั้นตอนของตัวเอง มีไว้ให้ตัวอื่นเรียกด้วยชื่อ
 เพื่อให้ความรู้ก้อนเดียวกันอยู่บ้านเดียว ไม่ต้องมีสำเนาที่ค่อย ๆ เพี้ยนออกจากกัน
@@ -36,7 +37,7 @@
 |---|---|---|
 | [`brain-anatomy/`](skills/brain-anatomy/) | นิยาม 11 องค์ประกอบของคลัง | `init-brain`, `audit-brain` |
 | [`assessment-layout/`](skills/assessment-layout/) | ที่อยู่ของชุดสอบ ความหมายของเลขหน้าไฟล์ และรูปร่างของ blueprint | `make-exam`, `critique-mcq` |
-| [`item-defects/`](skills/item-defects/) | ข้อบกพร่องของข้อสอบ แยกไฟล์ตามชนิดข้อสอบ พร้อมวิธีแก้ของแต่ละข้อ | `make-exam`, `critique-mcq` |
+| [`item-defects/`](skills/item-defects/) | ข้อบกพร่องของข้อสอบ แยกไฟล์ตามชนิดข้อสอบ พร้อมวิธีแก้ของแต่ละข้อ | `make-exam`, `critique-mcq`, `analyze-results` |
 | [`learning-outcomes/`](skills/learning-outcomes/) | อะไรทำให้ผลลัพธ์การเรียนรู้วัดได้ และตรวจ alignment สองทิศทางอย่างไร | `design-course`, `make-exam` |
 
 เริ่มจากศูนย์ให้พิมพ์เรียก `init-brain` ก่อน — มันสร้าง `AGENTS.md`, index, templates และสคริปต์ตรวจ
@@ -69,7 +70,7 @@
 ข้อยกเว้นคือ skill ที่อ่าน reference skill ต้องพาตัวที่มันอ่านไปด้วย —
 `init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy`
 `make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `learning-outcomes`
-`critique-mcq` ต้องไปพร้อม `assessment-layout` และ `item-defects`
+`critique-mcq` กับ `analyze-results` ต้องไปพร้อม `assessment-layout` และ `item-defects`
 ส่วน `design-course` ต้องไปพร้อม `learning-outcomes`
 
 ถ้าโปรเจกต์ปลายทางยังไม่มีไฟล์กติกา (`AGENTS.md` / `CLAUDE.md`) หรือยังไม่มีโครงสร้างคลัง
