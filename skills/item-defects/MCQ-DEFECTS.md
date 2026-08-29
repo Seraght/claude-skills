@@ -24,7 +24,7 @@ Flaws that make the item hard for reasons unrelated to what it is meant to measu
 
 - **Long or complex options.** Reading load shifts the item toward measuring reading speed. *Fix:* move text common to all options into the stem; shorten what remains.
 - **Nonparallel options.** Each option is built differently, so the set has to be parsed one at a time. *Fix:* edit all options to one grammatical shape, usually by rewording the lead-in first.
-- **Negatively structured stem.** Examinees miss the negation even in bold, and the item measures attention. *Fix:* rewrite positively; where the content genuinely calls for exclusion, build a scenario from the correct statements instead.
+- **Negatively structured stem.** Examinees miss the negation even in bold, and the item measures attention. *Fix:* rewrite positively; where the content genuinely calls for exclusion, build a scenario from the correct statements instead. Negation inside an *option* is the same flaw one level down, and against a negated lead-in it produces a double negative nobody parses under exam conditions. *Fix:* state each option as what is true.
 - **Vague terms.** Frequency words in the options — different readers assign them different probabilities, so the item has no single defensible answer. *Fix:* state the condition precisely or drop the frequency word.
 - **Inconsistent or overlapping numeric data.** Overlapping ranges, or units and precision that vary across options, produce more than one correct answer. *Fix:* make the ranges disjoint and the format uniform; ask for a minimum or maximum where a boundary is at stake.
 - **Tricky or padded stems.** Window dressing, teaching statements, or detail included only to mislead. *Fix:* keep what is needed to answer the item or to make a distractor attractive; cut the rest.
@@ -36,11 +36,25 @@ Flaws that make the item hard for reasons unrelated to what it is meant to measu
 - **Implausible distractors.** An option no informed examinee would ever choose does no work; at administration it shows up as a non-functioning distractor, one selected by fewer than 5% of examinees. Three working options discriminate better than five with two dead ones. *Fix:* replace it with a named misconception, or drop it where the paper's rules allow a shorter option set.
 - **Hinged items.** Answering this item requires having answered another one correctly, so one lapse is scored twice. *Fix:* make the items independent.
 - **True-false series.** The options are unrelated statements to be judged one by one rather than compared. *Fix:* rebuild as one best-answer item, or split into separate items.
+- **Vocabulary above the examinee's level.** The item is hard because of the words it is written in rather than the content it asks about. This is the flaw the group is named for and the one most often mistaken for rigour: difficulty of language is not difficulty of subject. *Fix:* use the term the course teaches, or move the unfamiliar term into the stem where every option meets it equally.
+- **Options in no order.** Numeric options that do not ascend, or a set with an order the content already has, presented scrambled. The examinee sorts before choosing, and on a numeric set the sorting is where the arithmetic slips. *Fix:* order numeric options from low to high, and any other set by the order its content carries.
+- **Unproofread item.** A misspelling, a broken sentence, a mismatched bracket, a stray duplicate word. Each is a quotable span, and one that lands in a single option makes that option read as the odd one out — a cue flaw arriving by accident. *Fix:* correct them, then re-check the key against the corrected wording where a typo changed what the item asks.
 
 ## Number of options
 
 Three well-made options — a key and two working distractors — measure as well as four or five in the research record, and forcing a fixed count is what produces filler distractors and collectively exhaustive sets. Where the host project or the institution fixes the number, that rule governs, and the flaw to report is the filler distractor itself rather than the count.
 
+
+## Scenario items
+
+An item above Remember usually needs a situation rather than a definition, and the situation is where several of the flaws above arrive at once. Four parts in order: the **context** — who is doing what, and where; the **data** the decision rests on; the **event** that makes a decision necessary; and a **closed lead-in**. A sentence serving none of the four is window dressing and comes out.
+
+Two failures belong to this format and to no other:
+
+- **The scenario answers itself.** The situation names the key, or supplies the reasoning that makes it the only possibility, so the options are decoration. This is not the same as an item that gives away a *different* item. *Fix:* cut the naming sentence; where cutting it empties the scenario, the item was testing recognition of a phrase rather than the outcome.
+- **A real person, employer, or institution is named.** What the examinee knows or believes about a real workplace comes into the answer with it, and the paper publishes a judgement about a real party in a document that gets photocopied. *Fix:* make the setting fictional.
+
+Where one scenario serves several items, each item still has to be answerable on its own — otherwise the set is hinged, whatever the shared context suggests.
 
 ## Repairs that create new defects
 

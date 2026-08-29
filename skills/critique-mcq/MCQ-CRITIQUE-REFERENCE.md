@@ -21,6 +21,18 @@ This ordering is not ceremony. On this exact task, an LLM applying the same rubr
 
 Where the language does not separate words, a word count is not a measurement and several checks need a different marker than their English form. The markers are in the `item-defects` skill, with the taxonomy they belong to.
 
+## Content validity by panel
+
+Every measurement above is made by reading the paper. Whether an item measures the outcome it is tagged with is a judgement the paper cannot settle about itself, and the instrument for it is a panel of people. The agent prepares the form and computes the index. It is not the panel, and a form that comes back already filled in has measured nothing.
+
+**IOC — item-objective congruence** (Rovinelli & Hambleton, 1977) answers *does this item measure the outcome it claims*. Three to five subject experts rate each item against its stated outcome: **+1** it clearly does, **0** unsure, **−1** it clearly does not. Then `IOC = ΣR ÷ N`, where `R` is each rater's score and `N` the number of raters, giving a value between −1 and +1. At or above the threshold the item stands; below it the item is reworded and re-rated; below zero it is rewritten or cut.
+
+**The threshold is a choice, and it has to be declared before the ratings come in.** 0.50 is the convention in Thai academic practice and is not a figure Rovinelli and Hambleton set; parts of the literature use 0.75. Either is defensible, and a paper scored against both has no defensible cut anywhere — so the report states which one it used and applies it to every item.
+
+**CVR — content validity ratio** (Lawshe, 1975) answers a different question, *is this item essential*, and belongs to competency instruments and questionnaires more than to a course achievement paper. Raters mark each item essential / useful but not essential / not necessary, and `CVR = (ne − N/2) ÷ (N/2)`, where `ne` counts the *essential* ratings. Its critical values depend on the number of raters and must come from a source someone has checked: the table reproduced across the secondary literature is internally inconsistent, and Ayre & Scally (2014) recomputed it from the binomial distribution. Below five raters the method does not carry.
+
+Where one teacher writes the paper alone, IOC with three colleagues is still worth running. Fewer than three computes a number, and the number carries no weight.
+
 ## Findings discipline
 
 A critique that over-reports is as useless as one that under-reports: the author spends a day on phantom defects and then stops believing the tool.
@@ -71,16 +83,9 @@ Leave the verdict column for a human to fill where the paperwork is signed by pe
 
 ## Cognitive level scales
 
-Institutions record levels on their own scale, and the report is written on theirs, not on this file's. Map by meaning, never by position — the original and revised taxonomies swap their top two levels:
+Institutions record levels on their own scale, and the report is written on theirs, not on this file's. **The scale belongs to the host project**: read it from the vault's constitution or its shared reference, and where the vault carries none, ask. A scale printed here would be one institution's, shipped to every other and applied without anyone noticing it had been.
 
-| Institution's scale (Thai) | Revised Bloom |
-|---|---|
-| รู้-จำ | Remember |
-| เข้าใจ | Understand |
-| นำไปใช้ | Apply |
-| วิเคราะห์ | Analyze |
-| ประเมินค่า | Evaluate |
-| สังเคราะห์ | Create |
+Map by meaning, never by position. Two scales with the same number of levels can still disagree at the top — the original and the revised Bloom taxonomies swap their last two — so a level matched by rank rather than by what the examinee has to do lands one place out, in the direction that flatters the paper.
 
 Where the institution's form offers fewer columns than the levels its own summary sheet lists, say so and ask which column the item belongs in. Silently folding an unlisted level into a neighbouring one makes the tally on the two sheets disagree.
 
@@ -90,3 +95,4 @@ Where the institution's form offers fewer columns than the levels its own summar
 - Haladyna, Downing & Rodriguez (2002), "A Review of Multiple-Choice Item-Writing Guidelines for Classroom Assessment", *Applied Measurement in Education* 15(3), 309–334 — the 31-guideline taxonomy.
 - Moore, Nguyen, Chen & Stamper (2023), "Assessing the Quality of Multiple-Choice Questions Using GPT-4 and Rule-Based Methods" — the 19-item Item-Writing Flaws rubric, and the comparison of rule-based and LLM application of it.
 - Rodriguez (2005) on the optimal number of options; Downing (2005) and Tarrant & Ware (2008) on what flawed items do to scores.
+- Rovinelli & Hambleton (1977) on item-objective congruence; Lawshe (1975) on the content validity ratio, with Ayre & Scally (2014) for critical values recomputed from the binomial distribution.

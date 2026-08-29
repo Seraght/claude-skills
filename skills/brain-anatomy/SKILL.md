@@ -58,7 +58,8 @@ A component the user explicitly declines is recorded as declined in the vault's 
 
 **10. Shared knowledge layer** — reusable general knowledge lives once, separate from instance data, so updating it is a one-place edit.
 - Scaffold: a `_shared/` folder with a README stating what belongs there (general reference) and what does not (instance-specific data).
-- Audit: is the same general reference duplicated across instances?
+- Scaffold: inside it, a slot for the facts that are true of this institution and nowhere else — the scales its forms use, the standards its programmes answer to, the paperwork it requires — seeded with a gap marker where the user cannot fill it yet. A skill that needs one of these facts and does not find it either asks on every run or supplies a default from wherever it was written, which is one institution's practice arriving somewhere it was never true.
+- Audit: is the same general reference duplicated across instances? And can an agent find this institution's own scales and required paperwork, or would it have to ask?
 
 **11. Review & archive cadence** — dead items leave the active trees, so what remains is alive; the vault is revisited on a rhythm, not only when something breaks.
 - Scaffold: an `archive/` convention per tree and a review cadence (what to check, how often) recorded in the constitution.

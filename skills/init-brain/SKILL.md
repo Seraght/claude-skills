@@ -22,7 +22,13 @@ The component reference is the `brain-anatomy` skill — read it before step 2.
    - Assessment — does this vault hold exam papers? If not, skip this and record nothing. If it
      does, present the default from the `assessment-layout` skill and let the user override it, then
      record the answer in `AGENTS.md` alongside the other destinations, since the assessment skills
-     read it there rather than asking again.
+     read it there rather than asking again. Ask for the institution's own assessment vocabulary in
+     the same breath — the cognitive-level scale its forms are printed with, and the paperwork a paper
+     has to produce before it may be used. A report is written on the institution's scale, so a vault
+     that does not carry one makes every run ask again, or worse, borrow a scale from somewhere else.
+     Where the user does not have it to hand, **scaffold the slot with a gap marker** rather than
+     leaving nothing: an unfilled slot is a question waiting to be answered, an absent one is a
+     question nobody knows to ask.
    - Copyright policy — what may be stored as source files, what is digest-only with citation, and
      whether openly licensed work (Creative Commons, open access) may be stored with its licence recorded.
    - Privacy red lines — which personal data must never enter the vault. Take concrete categories

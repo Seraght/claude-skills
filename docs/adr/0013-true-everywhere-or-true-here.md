@@ -1,0 +1,31 @@
+# True everywhere, or true here
+
+[ADR 0001](0001-generalize-skills-for-portability.md) stripped one vault's rules out of the skills and said the generic case travels while the local case stays behind. Nothing ever checked which was which, and over eleven ADRs the boundary drifted in both directions at once.
+
+Measured against the vault this set was extracted from: the vault held 288 KB of assessment knowledge in eight files, none of it referenced by a single exam set, and the skills held one institution's cognitive-level scale as a printed table. The knowledge that had failed to travel was not local at all — item-objective congruence, the content validity ratio, item difficulty and discrimination, KR-20, the standard error of measurement, the way all of those degrade with sixty examinees. Rovinelli and Hambleton are not a Thai convention; Kuder and Richardson are from 1937. What had travelled instead was a six-level scale belonging to one college, shipped inside the plugin to everyone who installed it.
+
+The mechanism that hid this is worth naming, because it will recur. `make-exam` step 4 researches "only what is missing"; the vault's own constitution says to scan its shared knowledge *before researching*. The agent judged nothing was missing, so it never researched, so the rule that would have opened the vault's files never fired. Both instructions were correct and the pair had a hole in it.
+
+**The criterion is not what has been researched. It is whether the thing is true everywhere or true here.** True everywhere travels inside the skill, because a machine with no vault must still get it. True here stays in the host project, because it is wrong the moment it moves. Applying it moved things in both directions.
+
+**What the plugin gains.** Six of Haladyna's thirty-one guidelines had no counterpart in the defect taxonomy, and five of the six sit in his formatting and style groups — the groups the NBME material the taxonomy was built from does not emphasise. That is a seam between two sources, not a judgement anyone made. Vocabulary above the examinee's level, options in no order, and unproofread items become defects; negation is extended from the stem to the options, and the trivia check is extended to the item that is too broad to have an answer. The four-part scenario formula arrives with the two failures that belong to it alone — the scenario that answers itself, and the one that names a real employer. Content validity by panel arrives in `critique-mcq`, since a panel is a review activity and the agent's part in it is to prepare the form and compute the index rather than to be the panel. The blueprint gains the two numbers it had been asserting without: marks proportional to teaching hours, and items proportional to minutes.
+
+**What the plugin loses.** The six-level scale goes home. In its place the reference says where to find the scale — the host project — and what to do when there is none, which is ask.
+
+**What `init-brain` gains.** A vault with no slot for its institution's scale is a vault where the next critique borrows one. The interview now asks for it alongside the assessment layout, and scaffolds the slot with a gap marker when the user cannot answer yet: an unfilled slot is a question waiting, an absent one is a question nobody knows to ask.
+
+## Considered Options
+
+- **Have the skills read the host project's shared knowledge instead** — rejected as the primary fix, though the discovery wording still improves. It repairs one machine and one vault, and the question that prompted this was what happens on a machine that has neither.
+- **Copy the vault's files across whole** — rejected. `item-analysis.md` is 61 KB and `rubric-design.md` 62 KB, against the 964 words [ADR 0006](0006-how-a-skill-is-reached-and-when-it-is-split.md) already judged too large to hold identical. What travels is the rule that decides something: the formula, the threshold, the diagnostic table. The teaching around it stays where it is and is better there.
+- **A `content-validity` reference skill** shared between the authoring and review skills — rejected under [ADR 0007](0007-shape-is-shared-process-is-copied.md)'s own timing rule. IOC and KR-20 are not one shape used by two skills; they are different instruments, used at different points in the cycle, read by different people. One home would be half-read by both and would pay a permanently loaded description for it.
+- **Keep the scale and mark it "example only"** as [ADR 0001](0001-generalize-skills-for-portability.md) permits — rejected. The label does not stop an agent mapping a level against the only table in front of it, and the failure is silent: a report on the wrong scale reads exactly like a report on the right one.
+- **Reproduce Lawshe's critical-value table** — rejected on the source's own evidence. The version reproduced across the secondary literature is internally inconsistent, and the vault's note flags that its N=9 row contradicts the trend. The formula travels; the table is named as something to take from a checked source.
+
+## Consequences
+
+- `_scripts/check.py` bans one institution's markers from every skill file, and the marks-per-hour formula joins the literals that live only in `assessment-layout`.
+- `MCQ-DEFECTS.md` gains three defects and a scenario section; `COMMON-DEFECTS.md` extends two entries. The taxonomy now covers all thirty-one guidelines except the one about humour, which has no measurement and no fix and is therefore not a defect by this set's own definition.
+- `critique-mcq` gains a section whose instrument is a panel of people rather than the agent, and states that a form arriving already filled in has measured nothing.
+- The thresholds that travel carry their own provenance, because both are conventions rather than findings: IOC 0.50 is Thai academic practice and not a number its authors set, and the five-point band on marks-per-hour has no published threshold behind it. A rule that hides that it is a convention is one nobody can argue with later.
+- The vault keeps its eight files. What changes there is that the operative rules now have a second home that travels, so an exam set built on a machine with no vault is built on the same numbers.

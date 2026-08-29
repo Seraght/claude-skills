@@ -61,11 +61,15 @@ BANNED = [
      "the reporting rule bound only the checks that were already working (ADR 0012)"),
     (r"ตรวจแล้ว ไม่พบ|checked, none found",
      "the output shape a verdict takes; never model it in an instruction (ADR 0012)"),
+    (r"วทก|KMPHT|รู้-จำ",
+     "one institution's scale or paperwork is true where it was written and nowhere else; "
+     "it belongs to the host project (ADR 0013)"),
 ]
 
 # Structure that belongs to the assessment-layout skill and nowhere else (ADR 0007).
 LAYOUT_LITERALS = [r"<subject>/assessment", r"assessment/<year>", r"assessment/bank",
-                   r"[Rr]ows are topics", r"[Cc]olumns are cognitive levels"]
+                   r"[Rr]ows are topics", r"[Cc]olumns are cognitive levels",
+                   r"teaching hours ÷"]
 
 # The flaw taxonomy belongs to the item-defects skill and nowhere else (ADR 0008).
 # It had drifted into two copies at two levels of detail, and the weaker copy is

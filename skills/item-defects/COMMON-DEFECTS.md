@@ -16,7 +16,7 @@ Surface flaws are the visible half. An item can pass every check above and still
 - **Blueprint fit.** The item fills the cell it was written for, and that cell exists. An item serving no cell is cut, not filed.
 - **Actual cognitive level.** Judge by what the examinee must do, not by the verb in the stem: an "analyze" item whose answer appeared verbatim in the notes tests Remember. Recall items dominate real papers — in one study 91% of the control-group items tested factual recall — so an item claiming a higher level earns the check rather than the benefit of the doubt.
 - **Novel material.** Language paraphrased from the slides tests recognition of the slides. A higher-level item needs a situation the examinee has not already seen resolved.
-- **Content worth asking.** Not trivia, not opinion, not a trick. If nobody would be worse off for not knowing it, the item is spending marks a real outcome needs.
+- **Content worth asking.** Not trivia, not opinion, not a trick. If nobody would be worse off for not knowing it, the item is spending marks a real outcome needs. The same applies at the other end: an item pitched so broadly that several reasonable readings all fit measures nothing either, and it is the harder of the two to see, because a broad item looks generous.
 - **Distractor accountability.** Every distractor names a misconception a real examinee holds. A distractor whose misconception cannot be stated is filler, and filler is why option sets get padded.
 
 ## Group D — the paper as a whole
@@ -30,5 +30,5 @@ Defects that are invisible one item at a time, and that selecting and reordering
 - **No duplicated coverage.** Two items testing the same point at the same level spend two items' worth of marks on one thing, and usually mean some other cell went short.
 - **Key positions spread, and do not run.** Two separate checks: the distribution across positions, and the longest run of consecutive items keyed to the same position. A paper can be perfectly balanced overall and still hand out four or five in a row, which is the pattern an examinee notices while sitting the exam. *Fix:* re-scramble option order — then re-verify every key against the new order.
 - **The paper is answerable in the time allowed.** Item count and reading load against the scheduled duration.
-- **Format is consistent across the paper.** Option count, labelling, and instructions do not vary between sections without a stated reason.
+- **Format is consistent across the paper.** Option count, labelling, and instructions do not vary between sections without a stated reason. Options are set out one per line rather than run together across the page: a horizontal set reads as prose, and it is where answer sheets get mis-marked.
 

@@ -46,6 +46,29 @@ Rows are topics. Columns are cognitive levels. Each cell holds three things, not
 
 Every cell names the learning outcome it serves, and every outcome the course states appears in at least one cell. Where the exam schedules time per task rather than per paper — a practical, an open-book paper — the cell carries its time budget too, since minutes per mark is what decides which tasks examinees abandon.
 
+### What decides a row's marks
+
+A topic's share of the marks tracks its share of the teaching hours, because a paper spending two marks on the six hours it taught is not a sample of the course:
+
+    topic's share of marks (%) = topic's teaching hours ÷ hours the paper covers × 100
+
+Departing from that share is ordinary and has to be written down. Raise it where the topic is core to the ones built on it, where it carries an outcome nothing else assesses, or where getting it wrong is a safety or ethics failure. Lower it where the topic is an overview, where a report or a practical already assesses it, or where most of its hours were practice assessed elsewhere. **Past about five percentage points either way, the blueprint states its reason** in its own design notes: the band exists so that a departure is a decision on the record rather than an accident nobody can date. The proportional principle is the standards literature's; the five-point band is a working rule with no published threshold behind it.
+
+### How many items fit
+
+An item count is decided by the time available, not by a round number. Working figures, scaled from the 1.5 minutes per item that large-scale health-science testing allows:
+
+| Item | Time |
+|---|---|
+| Short selected-response — Remember or Understand, stem of two lines or less | 45–60 s |
+| Scenario-based selected-response — Apply and above | 90–120 s |
+| One matching set of five pairs | 2–3 min |
+| Restricted-response written item | 5–10 min |
+| Extended-response written item | 20–30 min |
+| Reading the instructions and checking back | add 10% of the total |
+
+A paper that does not fit its own duration measures reading speed, and it does so hardest on the examinees the outcome was written for. These are working figures for classroom papers rather than researched values; a cohort new to the format needs more.
+
 **The vault's own blueprint form wins.** Where an institution fixes the shape — a mandated form with its own columns — that shape governs, and the three things above are recorded wherever it has room for them.
 
 ## What binds to what
