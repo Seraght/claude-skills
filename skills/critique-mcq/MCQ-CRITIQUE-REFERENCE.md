@@ -6,12 +6,12 @@ When the host project carries its own assessment reference or item-writing rules
 
 ## Measure before judging
 
-Build this table for each item *before* forming any judgement, and write the findings from the table rather than from an impression of the item:
+Build this table for each item *before* forming any judgement, and write the findings from the table rather than from an impression of the item. **One item, one row** — a row spanning a range of items is a summary, not a measurement, and a summary is where a wrong value hides:
 
 - **Length of every option**, and which one is the key. Count characters excluding spaces by default; count words only in a language that separates them.
 - **Terms appearing in more than one option**, with counts — the input to the convergence check.
-- **Words or roots shared between the stem and the key only.**
-- **Presence of**: absolute terms, vague frequency terms, "none of the above" and "all of the above", negation in the lead-in, numeric ranges, options that are complete sentences.
+- **Words or roots shared between the stem and the key only** — the matched span itself, which option carries it, and in how many options it appears. Where the language does not separate words this is a substring match, not a word match, and needs no tokenizer.
+- **The matched span for each of**: absolute terms, vague frequency terms, "none of the above" and "all of the above", negation in the lead-in, numeric ranges, options that are complete sentences. Record the terms searched for and what was found against each, per item. "None found", with no list of what was searched, is a verdict rather than a measurement.
 - **Whether the options form a collectively exhaustive set** on some dimension.
 - **Whether the lead-in is closed** — can the item be answered with the options covered?
 - **Which option the key points at, and what is actually in that position.**
@@ -26,7 +26,7 @@ Where the language does not separate words, a word count is not a measurement an
 A critique that over-reports is as useless as one that under-reports: the author spends a day on phantom defects and then stops believing the tool.
 
 - **Every finding quotes the span it is about**, from the stem or from a named option **as the rendered paper shows it**, and states the fix. No quote, no finding. Text pulled from a word-processor file is not the paper: what it drops — equations, figures, formatting-carried marks — comes back as a confident report that content is missing, complete with a plausible technical explanation for a defect that does not exist.
-- **A measured criterion is reported in full.** Where a check is numeric, list every item that meets it, or give the count and list the worst; naming three of twenty and stopping turns a measurement back into an impression.
+- **A measured criterion is reported in full**, whether it produced a number or a yes or no. List every item that meets it, or give the count and list the worst; naming three of twenty and stopping turns a measurement back into an impression, and a criterion answered with a tick has not been reported at all.
 - **One rewrite, one finding.** Where a single edit removes several flaws, report it once and name the flaws it resolves.
 - **Rank by severity, not by count.** A bank with three real blocks is in worse shape than one with thirty notes.
 - **Judge the item against its own outcome.** A Remember-level item is not flawed for being Remember-level unless the blueprint cell it fills calls for something higher.
@@ -57,7 +57,7 @@ Report which group each item falls in. The counts alone tell the author where th
 The report is written in this order:
 
 1. **Three counts** — by severity, by provenance, and **by pass, including the passes that found nothing**, so a pass that never ran cannot hide behind a missing heading.
-2. **The measurement table**, exactly as it was built before judging.
+2. **The measurement table**, exactly as it was built before judging, and built by this pass. A table cited from an earlier artifact carries that artifact's errors forward: it is evidence about the run that produced it, never about this one.
 3. **Each item in severity order** — the quoted evidence, the flaw named, and a proposed rewrite for every Block and Revise. Items that pass are listed as passing, so the author can see the paper was covered.
 
 Whatever shape the report takes, it answers the questions the institution's own critique paperwork asks, so its fields can be transcribed rather than re-derived:

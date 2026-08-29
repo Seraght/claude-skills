@@ -9,6 +9,12 @@ recorded in docs/adr/ that constrains the skill files gets a rule here.
 """
 import io, os, re, sys, glob
 
+# Rules below quote Thai, and this repo's audience runs on Windows consoles
+# that default to a legacy codepage. Without this the script dies printing its
+# own rule name rather than reporting a result.
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKILLS = sorted(glob.glob(os.path.join(ROOT, 'skills', '*', 'SKILL.md')))
 NAMES = {os.path.basename(os.path.dirname(p)) for p in SKILLS}
@@ -49,6 +55,12 @@ BANNED = [
      "a README is not a constitution (ADR 0005)"),
     (r"ask which one a|ask yourself",
      "a check that leaves no artifact cannot be shown to have run (ADR 0008)"),
+    (r"\*\*Presence of\*\*",
+     "asking for presence invites a yes/no; a check answers with the span it compared (ADR 0012)"),
+    (r"[Ww]here a check is numeric",
+     "the reporting rule bound only the checks that were already working (ADR 0012)"),
+    (r"ตรวจแล้ว ไม่พบ|checked, none found",
+     "the output shape a verdict takes; never model it in an instruction (ADR 0012)"),
 ]
 
 # Structure that belongs to the assessment-layout skill and nowhere else (ADR 0007).
@@ -72,6 +84,9 @@ PAIRED = [
     ("length of every option", "excluding spaces",
      "a step that orders a count carries the counting rule with it; leaving the rule in "
      "the reference produced a measurement table counted in characters including spaces"),
+    ("matched span", "One item, one row",
+     "the span rule without the row rule still permits one row spanning the whole paper, "
+     "which is where the field case hid a wrong value for fifteen items at once"),
     ("binding review runs", "unticked item",
      "a handoff that exists only as a sentence in the session leaves no evidence, which "
      "is the failure ADR 0008 is about; it is written into the exam set instead"),

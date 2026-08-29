@@ -9,6 +9,8 @@ The flaw taxonomy every assessment skill in this set judges an item against. The
 
 **Measure, then judge.** Every defect here is read off a count, not off an impression of the item. On this exact task, an LLM applying a rubric by reading alone detected the longest-key flaw at F1 0.18–0.44, while a script that counted characters reached 0.80–1.00; the same LLM reported 4.2 flaws per item where expert raters using the identical rubric found 1.6. Judgement by impression both misses what counting finds and invents what is not there — so a pass that produced no table did not run.
 
+**A verdict is not a measurement.** Where a check answers yes or no rather than producing a number, the cell holds **the matched span** — the string found, which option carries it, and in how many options it appears — never a tick, and never the words "none found". A cell that can hold a tick can hold a wrong tick, and nothing downstream can tell one from the other. **One item, one row:** a row spanning a range of items is a summary, and a summary is where a wrong value hides.
+
 **The host project governs.** Where a project or an institution fixes an item rule — a required number of options, a mandated response form, a fixed critique taxonomy — an item is not flawed for following it, and the project's own rules override every file here.
 
 ## Which file to read

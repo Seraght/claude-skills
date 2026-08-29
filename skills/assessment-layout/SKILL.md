@@ -27,10 +27,10 @@ The leading number is the **lifecycle stage**, not a position in a sequence:
 | Stage | Meaning | Default files |
 |---|---|---|
 | `0x` | Authoring — before the paper exists | `00-research.md`, `01-blueprint.md`, `02-items.md`, `03-paper.md`, `04-answer-key.md`, `05-rubric.md`, `06-measurements.md` |
-| `1x` | Review — after the paper is assembled, before it is used | `10-critique.md` |
+| `1x` | Review — after the paper is assembled, before it is used | `10-critique.md`, `11-critique-independent.md` |
 | `2x` | After administration | item statistics, post-hoc analysis |
 
-Numbers are left unused inside each stage, so an artifact can be inserted without renumbering across stages. A missing stage reads as a stage that did not happen, rather than as a gap to be filled by the next number in the folder — which is why a review artifact takes the next free `1x` and never the number after the last authoring file.
+The review stage carries two files rather than one. The second is an independent pass that measures the paper again from scratch rather than reading the first pass's table, because a critique built on a measurement it inherited certifies that measurement rather than checking it. Numbers are left unused inside each stage, so an artifact can be inserted without renumbering across stages. A missing stage reads as a stage that did not happen, rather than as a gap to be filled by the next number in the folder — which is why a review artifact takes the next free `1x` and never the number after the last authoring file.
 
 ## What a blueprint holds
 
