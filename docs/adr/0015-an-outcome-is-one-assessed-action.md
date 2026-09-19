@@ -24,4 +24,5 @@ Three mechanisms produced this, and each has its own fix.
 - `learning-outcomes` gains two sections, *The level the programme assigns* and *The check table*, and its set checklist gains the level comparison.
 - `design-course` step 4 is done only when the table is written into the outcomes file. Step 9 confirms that it is there.
 - Outcomes that passed before can now fail. The version moves to 0.10.0, not a patch.
-- The affective and psychomotor columns in the table defer to the host project's taxonomy. The skill does not yet carry one. That waits on primary-source research in the host vault.
+- The affective and psychomotor columns in the table defer to the host project's taxonomy, and the skill carries no verb table for either. Primary-source research in the host vault found none: Simpson's psychomotor taxonomy gives no verbs, and neither does the condensed affective handbook. Later per-level verb lists would arrive as a self-set rule dressed as a standard.
+- 0.10.1: the first real run showed that the deletion test, as first worded, also flags degree. "Effectively" and "drawing on verifiable sources" each own a rubric row. The test now applies only to phrases naming something the learner does. A phrase describing the quality of what the main verb produces is degree, and its row belongs to that verb.
