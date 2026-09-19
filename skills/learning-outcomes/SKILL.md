@@ -9,6 +9,8 @@ What an outcome has to be before anything can be built on it, and the two direct
 
 **The host project governs.** A programme, an institution, or a country imposes its own outcome framework and its own forms; where one exists it governs, and this file fills the gaps it leaves. What follows is not a standard — it is what the standards have in common.
 
+That framework is found, not assumed: before checking, look for the project's own outcome standard — a verb list, a rule on how many verbs an outcome may carry, a rule relating verb level to the level the curriculum map assigns. Its knowledge index and the rule file of the area holding the course are where it usually sits. Name the files that governed in the heading of the check table, or state that the project has none. A check run against this file alone, in a project with stricter rules, reads exactly like one that ran against both.
+
 ## Constructive alignment
 
 Three things are designed together, and the middle one is what makes the other two true:
@@ -39,7 +41,7 @@ Mager's original demand is the one that still does the work: use *doing words* �
 
 Each is a defect with a fix, and each is cheap now and expensive after the paper is written.
 
-- **Compound.** Two verbs in one outcome — "create X **and** evaluate Y", "analyse A **and** identify B" — usually at two different cognitive levels. No single assessment serves it, so the assessment becomes two assessments sharing one outcome's marks, and it reads that way to anyone sitting it. *Fix:* split into two outcomes. The marks and the hours then divide by outcome instead of being argued about inside one.
+- **Compound.** More than one *assessed action* in one outcome — "create X **and** evaluate Y", "analyse A **and** identify B", "converse **and** present" — whether the actions sit at two cognitive levels or at one. No single assessment serves it, so the assessment becomes two assessments sharing one outcome's marks, and it reads that way to anyone sitting it. The **deletion test** decides what counts: delete the phrase from the outcome and look at the assessment. If a rubric criterion or a block of marks has to go with it, the phrase was an assessed action. If only the task setup changes — what is supplied, the channel, the constraint — it was a condition. "By researching the topic" names something the learner does rather than something supplied, so it stays a condition only while nothing scores it. One verb with several objects — "demonstrates responsibility, punctuality, and honesty in citing" — is one action, but the outcome must settle whether meeting some of the objects passes; left open, no marker can apply it. *Fix:* split into two outcomes, or fold the second action's marks into a quality criterion of the product the first one makes. The marks and the hours then divide by outcome instead of being argued about inside one.
 - **Unobservable.** *Understand*, *know*, *realise*, *appreciate* name a state, not a performance. There is no item that confirms them, so in practice something else gets assessed and the outcome is decorative. *Fix:* ask what the learner would **do** to show it, and make that the verb.
 - **Ambiguous.** A verb that sits at two levels depending on reading — *explain* (restating a cause is Understand; working out why is Analyze), *compare* (against criteria given is Understand; choosing the criteria is Analyze). *Fix:* the condition disambiguates it. "Compare against the criteria supplied" and "compare, choosing your own criteria" are different outcomes.
 - **Inflated.** The verb claims a level the course never teaches to and the paper never reaches. *Fix:* raise the teaching and the assessment, or lower the verb. Reading the verb loosely so the existing paper qualifies is the one move that is not available — that is how a course states an outcome it does not deliver, in writing, for as long as the syllabus stands.
@@ -55,6 +57,30 @@ An outcome is only as assessable as the formats available to it. Choosing the fo
 | Evaluate, Create | Constructed response, a product, a performance or practical station — each with a rubric |
 
 No selected-response item evidences Create, whatever its stem says. An outcome at that level with no constructed-response, product, or performance behind it is unassessed however the marks total.
+
+## The level the programme assigns
+
+A curriculum map gives each course a level of responsibility for each programme outcome — introduce, reinforce, master; a weight from one to three; or the programme's own scheme. An outcome's verb level is read against it. A verb at Evaluate or Create under a programme outcome the course only introduces claims more than the programme asked this course to reach, and a programme review reads it that way. Where the host project sets how map levels translate to verb levels, apply its translation; where it sets none, report each outcome's verb level beside its map level and ask.
+
+An outcome kept above its map level on purpose is an **intentional exception**, and it passes only with a record beside it: evidence that the teaching and the assessment both reach the verb's level, the cost of keeping it, the lower verb it would fall back to, and who confirmed it and when. Without the record it is an inflated outcome that happens to have been noticed.
+
+## The check table
+
+The check is a table with one row per outcome, written into the design wherever its outcomes are recorded. One outcome, one row. A check that leaves only a verdict cannot be told apart from one that never ran, and a prose paragraph of ticks is a verdict.
+
+| Column | What goes in it |
+|---|---|
+| Outcome | Its number |
+| Verb | The verb, quoted |
+| Domain and level | Cognitive level, or the affective or psychomotor level where the project has a taxonomy for it |
+| Deletion test | Each phrase tested, quoted, and what it turned out to be — condition or assessed action |
+| Objects | Where a verb has several, each one, and whether meeting some of them passes |
+| Verb failures | For each of the four, the span that fails it or the span that shows it does not |
+| Programme outcome | The programme outcome it serves, and the map level the course holds for it |
+| Level against map | The verb level beside the map level |
+| Result | **pass**, **fail**, or **exception** with the section holding its record |
+
+Every cell other than the result quotes the outcome or cites a line of the design. A result is only ever one of those three words.
 
 ## How many
 
@@ -72,8 +98,9 @@ The table that pairs each outcome with its teaching, its assessment, and its mar
 
 Run this over the whole set, not one outcome at a time — most of these are properties of the set:
 
-- Every outcome passes the four verb checks.
+- Every outcome has its row in the check table, and passes the four verb checks or is raised with the user.
 - Every outcome maps upward to at least one programme outcome, and every programme outcome the course is assigned is reached.
+- Every outcome's verb level is within its map level, or it is an intentional exception with its record.
 - Every outcome has teaching hours behind it, and every scheduled session serves an outcome or is marked as not assessed.
 - Every outcome has an assessment whose format can reach its level, and a share of the marks.
 - The marks sum to the course's total, and their distribution across levels matches what the outcomes claim.
