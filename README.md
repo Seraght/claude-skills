@@ -36,7 +36,7 @@
 | reference skill | เก็บอะไร | ใครอ่าน |
 |---|---|---|
 | [`brain-anatomy/`](skills/brain-anatomy/) | นิยาม 12 องค์ประกอบของคลัง | `init-brain`, `audit-brain` |
-| [`assessment-layout/`](skills/assessment-layout/) | ที่อยู่ของชุดสอบ ความหมายของเลขหน้าไฟล์ และรูปร่างของ blueprint | `make-exam`, `critique-mcq` |
+| [`assessment-layout/`](skills/assessment-layout/) | ที่อยู่ของชุดสอบ ความหมายของเลขหน้าไฟล์ รูปร่างของ blueprint และตารางอนุมัติข้อสอบ | `make-exam`, `critique-mcq` |
 | [`item-defects/`](skills/item-defects/) | ข้อบกพร่องของข้อสอบ แยกไฟล์ตามชนิดข้อสอบ พร้อมวิธีแก้ของแต่ละข้อ | `make-exam`, `critique-mcq`, `analyze-results` |
 | [`learning-outcomes/`](skills/learning-outcomes/) | อะไรทำให้ผลลัพธ์การเรียนรู้วัดได้ และตรวจ alignment สองทิศทางอย่างไร | `design-course`, `make-exam` |
 
@@ -45,7 +45,7 @@
 
 | primitive | ทำอะไร | ใครเรียก |
 |---|---|---|
-| [`grill-point/`](skills/grill-point/) | หยุดซักผู้ใช้ทีละรอบจนเข้าใจตรงกันก่อนเขียนเอกสารต้นทาง แล้วบันทึกการตัดสินใจที่ใช้ต่อได้เป็น decision record | `design-course`, `make-exam`, `make-practical`, `analyze-results`, `audit-brain` |
+| [`grill-point/`](skills/grill-point/) | หยุดซักผู้ใช้ทีละรอบจนเข้าใจตรงกันก่อนเขียนเอกสารต้นทาง แล้วบันทึกการตัดสินใจที่ใช้ต่อได้เป็น decision record และเก็บหน้าตาของรอบคำถาม | grill point เต็มรูปแบบ: `design-course`, `make-exam`, `make-practical`, `analyze-results`, `audit-brain` · หน้าตาของรอบคำถาม: ทุก checklist |
 
 เริ่มจากศูนย์ให้พิมพ์เรียก `init-brain` ก่อน — มันสร้าง `AGENTS.md`, index, templates และสคริปต์ตรวจ
 ซึ่งเป็น "สิ่งที่ skill ตัวอื่นไปอ่านตอนรัน"
@@ -77,9 +77,11 @@
 ข้อยกเว้นคือ skill ที่อ่าน reference skill ต้องพาตัวที่มันอ่านไปด้วย —
 `init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy` และ `grill-point` (องค์ประกอบที่ 12 ใช้รูปแบบ decision record ของมัน)
 `make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
-`critique-mcq` ต้องไปพร้อม `assessment-layout` และ `item-defects`
+`critique-mcq` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `grill-point`
 `analyze-results` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
-ส่วน `design-course` ต้องไปพร้อม `learning-outcomes` และ `grill-point`
+`design-course` ต้องไปพร้อม `learning-outcomes` และ `grill-point`
+ส่วน `digest`, `new-subject` และ `update-portfolio` ต้องไปพร้อม `grill-point` — ถ้าไม่พาไปก็ยังรันได้
+แต่รอบคำถามจะไม่มีหน้าตาที่กำหนดไว้ ([ADR 0019](docs/adr/0019-every-stop-takes-its-shape-from-one-place.md))
 
 ถ้าโปรเจกต์ปลายทางยังไม่มีไฟล์กติกา (`AGENTS.md` / `CLAUDE.md`) หรือยังไม่มีโครงสร้างคลัง
 skill จะถามหาข้อมูลที่จำเป็นระหว่างทาง —
@@ -120,7 +122,7 @@ skill จะถามหาข้อมูลที่จำเป็นระ�
    อ่านและเขียนร่วมกัน อยู่บ้านเดียวในรูป reference skill แล้วเรียกด้วยชื่อ
    จังหวะสร้างบ้านคือ **ตอนมี skill ตัวที่สอง** ที่ต้องรู้ shape เดียวกัน
    ([ADR 0007](docs/adr/0007-shape-is-shared-process-is-copied.md))
-   — หน้าตาของจุดที่หยุดถามผู้ใช้ก็เป็น shape: รอบคำถามอยู่ใน `grill-point` ตารางอนุมัติอยู่ใน `assessment-layout`
+   — หน้าตาของจุดที่หยุดถามผู้ใช้ก็เป็น shape และบ้านของมันเป็น primitive ได้ด้วย: รอบคำถามอยู่ใน `grill-point` ตารางอนุมัติอยู่ใน `assessment-layout`
    และทุก checklist ชี้ไปหาด้วยประโยคเดียวกัน หน้าตาที่ skill ไม่ให้ไว้คือหน้าตาที่ agent คิดใหม่เองทุกครั้ง
    ([ADR 0019](docs/adr/0019-every-stop-takes-its-shape-from-one-place.md))
 9. **ขั้นตรวจต้องทิ้งหลักฐานไว้** — ขั้นที่สั่งให้ "ดู" หรือ "ถามตัวเอง" แล้วไม่มีอะไรตกออกมา

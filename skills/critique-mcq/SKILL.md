@@ -7,7 +7,7 @@ description: Critique multiple-choice items before a paper is used — every fla
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. Every finding rests on a measurement that already exists. It produces a critique and proposed rewrites; it does not change anything until the author approves. The folder shape and what the file numbers mean are in the `assessment-layout` skill; the defect taxonomy is in the `item-defects` skill, and the measurements and the rules that keep a critique from over-reporting are in [MCQ-CRITIQUE-REFERENCE.md](./MCQ-CRITIQUE-REFERENCE.md) — read both before step 5.
 
-Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3; an approval of items is asked in the approval table the `assessment-layout` skill gives.
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3, except that an approval of items is asked in the approval table the `assessment-layout` skill gives.
 
 Scope: selected-response items with a single best answer. Constructed-response, practical, and matching items are listed as not reviewed rather than judged against this taxonomy.
 

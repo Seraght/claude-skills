@@ -7,7 +7,7 @@ description: Analyse a paper after it has been sat — difficulty, discriminatio
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. It covers the stage the `assessment-layout` skill numbers `2x` — the one that begins when the marking is done. Building the paper is `make-exam`; reviewing it before it is used is `critique-mcq`.
 
-Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3; an approval of items is asked in the approval table the `assessment-layout` skill gives.
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3.
 
 Scope: papers scored right or wrong per item. A practical examination scored on a rating scale needs marker agreement rather than item statistics, and is out of scope here.
 

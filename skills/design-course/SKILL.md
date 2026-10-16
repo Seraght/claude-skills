@@ -7,7 +7,7 @@ description: Design a course backwards from its outcomes — outcomes checked ag
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. The order is the point. A course designed forwards — topics first, then activities, then whatever the topics happen to allow the exam to ask — produces outcomes written afterwards to describe what was already built. They describe it accurately while claiming levels nothing reaches. Designing backwards from the outcomes is what makes the claim true.
 
-Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3; an approval of items is asked in the approval table the `assessment-layout` skill gives.
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3.
 
 What an outcome has to be, and the two directions alignment is checked in, are in the `learning-outcomes` skill — read it before step 4. This skill writes the design; `make-exam` builds assessments on it and re-checks the outcomes before it does.
 

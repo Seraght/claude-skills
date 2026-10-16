@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. It is the setup-time counterpart of the other skills in this set — they *discover* a vault's conventions at runtime, and this skill *creates* the conventions they discover. Scoring a vault that already has content is `audit-brain`, not this skill.
 
-Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3; an approval of items is asked in the approval table the `assessment-layout` skill gives.
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3.
 
 The component reference is the `brain-anatomy` skill — read it before step 2.
 
@@ -16,11 +16,14 @@ The component reference is the `brain-anatomy` skill — read it before step 2.
 
 1. **Confirm the target is a greenfield** — inspect the target directory. Effectively empty (no agent instructions file — `AGENTS.md` or `CLAUDE.md` — and no content trees) is what this skill builds on. Existing content belongs to `audit-brain`; say so and stop. Then show the user the plan for this run — its steps by number with a 🛑 on each one that stops for the user, then one line of what this step found and one of what it could not find, labelled in the user's language — and wait for the user's go-ahead, or take the dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; name each later step by its number as it starts.
 2. **Interview the variable parts only** — the anatomy carries opinionated defaults; ask only what varies per vault, in one round, with the default as each question's recommendation, and let the user override any of them:
-   - Which roles/areas of work need their own tree? (e.g. teaching / research / admin)
+   - Which roles/areas of work need their own tree? No default: a vault's roles are the user's own,
+     so offer two or three layouts with what each leads to — a tree per role (teaching / research /
+     admin), or one tree with the subjects at its top — the way `grill-point` turns "I don't know" into a choice.
    - Where each kind of file lands *inside* a tree — are imported source files and their digests
      separate folders (default: `sources/` and `digests/` per subject) or filed together? The other
      skills cannot file anything without this answer, so settle it here rather than at first use.
-   - Vault language — the language of the generated `AGENTS.md`, indexes, and templates.
+   - Vault language — the language of the generated `AGENTS.md`, indexes, and templates (default:
+     the language the user is writing in).
    - Assessment — does this vault hold exam papers? If not, skip this and record nothing. If it
      does, present the default from the `assessment-layout` skill and let the user override it, then
      record the answer in `AGENTS.md` alongside the other destinations, since the assessment skills
@@ -32,13 +35,15 @@ The component reference is the `brain-anatomy` skill — read it before step 2.
      leaving nothing: an unfilled slot is a question waiting to be answered, an absent one is a
      question nobody knows to ask.
    - Copyright policy — what may be stored as source files, what is digest-only with citation, and
-     whether openly licensed work (Creative Commons, open access) may be stored with its licence recorded.
+     whether openly licensed work (Creative Commons, open access) may be stored with its licence recorded
+     (default: digest-only with citation, and openly licensed work stored with its licence).
    - Privacy red lines — which personal data must never enter the vault. Take concrete categories
-     (student names, ID numbers, individual scores, patient records), since a rule written as "no names"
-     reads as a ban on every document that has an author.
+     (default: student names, ID numbers, individual scores, patient records), since a rule written as
+     "no names" reads as a ban on every document that has an author.
    - Staging folder name (default `temp/`, untracked).
    - Naming convention (default lowercase, hyphen-separated, with issuing org and year).
-   - Shell for the check script (PowerShell or bash).
-   - Git? If yes, offer a pre-commit hook that runs the check script.
+   - Shell for the check script, PowerShell or bash (default: the one this machine has).
+   - Git? If yes, offer a pre-commit hook that runs the check script (default: yes, with the hook,
+     where git is installed).
 3. **Scaffold every component** — walk the `brain-anatomy` skill top to bottom and create each component's scaffold with the interview answers filled in. Record any component the user declines as declined in the generated `AGENTS.md`.
 4. **Verify before finishing** — run the project's check script where one exists, then confirm: the vault is *discoverable* — every operating rule an agent needs (destinations, gates, naming, markers, cadence) is written in `AGENTS.md`, and every folder is reachable from an index. The bar: the `digest` skill's discovery step could run here without asking the user anything the interview already answered — walk that step literally, question by question, and treat any question the constitution cannot answer as an unfinished scaffold rather than a detail to settle on first use.

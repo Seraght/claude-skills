@@ -33,6 +33,9 @@ RUBRIC_CORE = (
     '- **Levels are distinguishable.** Adjacent levels differ by something a marker can point at; typically 3–5 levels.' + chr(10) +
     "- **Criterion weights sum to the item's marks**, and reflect what the outcome actually values.")
 
+STOP_CLAUSE = ("Whenever a step puts more than one decision to the user, it asks them in the round "
+               "shape the `grill-point` skill gives in its step 3")
+
 IDENTICAL = [
     ("discovery clause",
      r"^\d+\. \*\*Discover the project's conventions\*\*",
@@ -57,9 +60,13 @@ IDENTICAL = [
     # laid out like the ones the skill planned for (ADR 0019).
     ("stop shape clause",
      r"^This skill is an ordered checklist",
-     "Whenever a step puts more than one decision to the user, it asks them in the round "
-     "shape the `grill-point` skill gives in its step 3; an approval of items is asked in the "
-     "approval table the `assessment-layout` skill gives."),
+     STOP_CLAUSE),
+    # Only the checklists that approve items carry the exception, so a skill copied alone
+    # does not point at a reference it never uses (ADR 0019).
+    ("approval exception",
+     r"except that an approval of items",
+     ", except that an approval of items is asked in the approval table the "
+     "`assessment-layout` skill gives."),
     # A step that stops to grill the user names the primitive the same way everywhere, so
     # one search finds every grill point in the set (ADR 0016).
     ("grill clause",
@@ -161,6 +168,15 @@ for label, carries, canonical in IDENTICAL:
         anchors, copies = len(re.findall(carries, text, re.M)), text.count(canonical)
         check(copies >= anchors,
               "%s: %s is the canonical wording (%d of %d)" % (name, label, copies, anchors))
+
+# The stop-shape clause follows the opening paragraph rather than sitting anywhere: it
+# governs every step, the ones nobody planned as stops included (ADR 0019).
+for p in SKILLS:
+    text = io.open(p, encoding='utf-8').read()
+    if re.search(r"^This skill is an ordered checklist", text, re.M):
+        check(re.search(r"^This skill is an ordered checklist[^\n]*\n\n" + re.escape(STOP_CLAUSE),
+                        text, re.M) is not None,
+              "%s: stop shape clause follows the opening paragraph" % os.path.relpath(p, ROOT))
 
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:

@@ -7,7 +7,7 @@ description: Score an existing knowledge base against the twelve-component anato
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. It reports first and changes nothing until the user has decided. Scaffolding a vault from scratch is `init-brain`, not this skill.
 
-Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3; an approval of items is asked in the approval table the `assessment-layout` skill gives.
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3.
 
 The component reference is the `brain-anatomy` skill — read it before step 2.
 
@@ -20,6 +20,6 @@ The component reference is the `brain-anatomy` skill — read it before step 2.
    |---|---|---|---|---|
    | 3 | Indexes at every level | partial | `index.md` lists 3 of 5 subjects | |
 
-   *State* is present, partial, or missing; *Evidence* is the path, or the path that was looked for and is absent; *Outcome* stays empty until step 4 fills it.
+   *State* is present, partial, or missing; *Evidence* is the path, or the path that was looked for and is absent; *Outcome* stays empty until step 4 fills it. A component the earlier scorecard did not score opens its *Evidence* with "new since" and that scorecard's date, so the mark adds no column.
 3. **Record the scorecard, then settle the fixes with the user** — write the scorecard to a dated file in the vault (default `docs/brain-audit-<YYYY-MM-DD>.md`; follow the vault's own docs convention if it has one). **This step is a grill point**: run the `grill-point` skill, and build nothing on a decision the grill has not settled. Each gap is one decision, with a concrete proposal as its recommendation — how many trees, where a kind of file lands, what is archived — because those are choices only someone who works in the vault can judge. Change nothing in the vault until the grill has ended.
 4. **Apply the decided fixes and verify** — implement only what was decided, and run the project's check script where one exists, then confirm: the scorecard carries the line its grill wrote, every decided fix is present in the vault, and no link broken by it. Close the loop in the scorecard file: mark each gap's *Outcome* as fixed or declined, so the next audit starts from what was already decided rather than re-proposing it.

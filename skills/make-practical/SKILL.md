@@ -7,7 +7,7 @@ description: Build a practical exam set — alignment matrix, tasks with their c
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. It is the sibling of `make-exam`, not a mode of it — a practical is a different chain. There is no item bank of stems and options, no answer key of distractor rationales, and the scoring instrument is the centre of the design rather than a late step. What replaces them is conditions, markers, and a standard.
 
-Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3; an approval of items is asked in the approval table the `assessment-layout` skill gives.
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3.
 
 The folder shape and what the file numbers mean are in the `assessment-layout` skill; what makes an outcome assessable is in the `learning-outcomes` skill; what a defective task looks like is in the `item-defects` skill; how a practical is built is in [PRACTICAL-REFERENCE.md](./PRACTICAL-REFERENCE.md) — read it before step 5.
 

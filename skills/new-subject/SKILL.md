@@ -7,7 +7,7 @@ description: Open a new subject area in a knowledge base — skeleton, defining 
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. It carries the *process* only — the skeleton shape, templates, and naming rules are discovered from the host project at runtime.
 
-Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3; an approval of items is asked in the approval table the `assessment-layout` skill gives.
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3.
 
 ## Steps
 

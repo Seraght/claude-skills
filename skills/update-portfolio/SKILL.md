@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. A **roll-up document** is a single file whose content is a summary of state that lives elsewhere: it goes stale the moment a source changes, and its value is that a reader can trust it without opening the sources.
 
-Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3; an approval of items is asked in the approval table the `assessment-layout` skill gives.
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3.
 
 ## Steps
 

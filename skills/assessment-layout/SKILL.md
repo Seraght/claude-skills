@@ -5,9 +5,9 @@ description: Where a vault's exam sets, item bank, and review paperwork live, an
 
 # Assessment Layout
 
-The shape every assessment skill in this set reads and writes. It is reference only — it carries no steps of its own.
+The shape every assessment skill in this set reads and writes, and the table those skills put items to the user in. It is reference only — it carries no steps of its own.
 
-**The vault's `AGENTS.md` is the authority.** What follows is the skill default, used only where the vault says nothing. A vault that states its own layout overrides all of it, and an artifact is not misfiled for obeying the vault.
+**The vault's `AGENTS.md` is the authority.** What follows is the skill default, used only where the vault says nothing. A vault that states its own layout overrides the files and folders below, and an artifact is not misfiled for obeying the vault.
 
 ## Where things live
 
@@ -88,8 +88,8 @@ Where a step puts items to the user to approve — rewrites, a calibration batch
 | 12 | rewrite of option C | longest option 41 characters, key B | |
 
 - The two middle columns are the calling step's to fill: what it proposes for the item, and the numbers it was judged on. The headers are written in the user's language.
-- The user may answer row by row or the whole table at once. Each row carries the numbers it is judged on, so an answer to the table is still an answer about evidence on the page — unlike a grill round, where a "yes" answers only its own question.
-- A question the table raises that is not about one item — a notation for the whole paper, a slide that contradicts a key — is not a row. It is asked after the table, in the round shape the `grill-point` skill gives.
+- The user may answer row by row or the whole table at once. Each row carries what it is judged on, so an answer to the table is still an answer about evidence on the page — unlike a grill round, where a "yes" answers only its own question.
+- A question the table raises that is not about one item — a notation for the whole paper, a slide that contradicts a key — is not a row. It is asked after the table, in the round shape the `grill-point` skill gives. An answer to the whole table covers its rows only; the round after it is answered against each number, as that skill's step 3 says.
 - Where the items already sit in a file built as rows, such as the sketches file, that file is the table, and the conversation points to it rather than repeating it.
 
 ## What binds to what
