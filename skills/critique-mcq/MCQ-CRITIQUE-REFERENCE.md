@@ -8,7 +8,7 @@ When the host project carries its own assessment reference or item-writing rules
 
 Build this table for each item *before* forming any judgement, and write the findings from the table rather than from an impression of the item. **One item, one row** — a row spanning a range of items is a summary, not a measurement, and a summary is where a wrong value hides:
 
-- **Length of every option**, and which one is the key. Count characters excluding spaces by default; count words only in a language that separates them.
+- **Length of every option**, which one is the key, and which one is the longest — and, over the paper, the share of items whose key is the longest option. Count characters excluding spaces by default; count words only in a language that separates them.
 - **Terms appearing in more than one option**, with counts — the input to the convergence check.
 - **Words or roots shared between the stem and the key only** — the matched span itself, which option carries it, and in how many options it appears. Where the language does not separate words this is a substring match, not a word match, and needs no tokenizer.
 - **The matched span for each of**: absolute terms, vague frequency terms, "none of the above" and "all of the above", negation in the lead-in, numeric ranges, options that are complete sentences. Record the terms searched for and what was found against each, per item. "None found", with no list of what was searched, is a verdict rather than a measurement.
