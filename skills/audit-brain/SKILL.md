@@ -1,17 +1,17 @@
 ---
 name: audit-brain
-description: Score an existing knowledge base against the eleven-component anatomy, report the gaps, then apply only the fixes the user approves. Use when the user asks to health-check a vault (ตรวจสุขภาพคลัง).
+description: Score an existing knowledge base against the twelve-component anatomy, report the gaps, then apply only the fixes the user decides on. Use when the user asks to health-check a vault (ตรวจสุขภาพคลัง), or after updating the skills (หลังอัปเดต skill).
 ---
 
 # audit-brain — score an existing knowledge base
 
-This skill is an ordered checklist: each step opens when the one before it has produced its result. It reports first and changes nothing until the user approves. Scaffolding a vault from scratch is `init-brain`, not this skill.
+This skill is an ordered checklist: each step opens when the one before it has produced its result. It reports first and changes nothing until the user has decided. Scaffolding a vault from scratch is `init-brain`, not this skill.
 
 The component reference is the `brain-anatomy` skill — read it before step 2.
 
 ## Steps
 
-1. **Discover the project's conventions** — read the host project's agent instructions file (`AGENTS.md`, or `CLAUDE.md`) and inspect the vault's own shape: which trees exist, where the constitution lives, and the language the vault writes its documents in. A rule the vault states about itself governs the anatomy's default, and the scorecard is written in the vault's language.
-2. **Score all 11 components** — walk the `brain-anatomy` skill against the existing vault and mark each component **present / partial / missing**, citing a file path (or its absence) as evidence. Every component accounted for — no skips.
-3. **Record the scorecard, then report before touching anything** — write the scorecard to a dated file in the vault (default `docs/brain-audit-<YYYY-MM-DD>.md`; follow the vault's own docs convention if it has one), then present it with a concrete proposal per gap and wait: change nothing else until the user picks which fixes to apply.
-4. **Apply approved fixes and verify** — implement only what was approved, and run the project's check script where one exists, then confirm: every approved fix present in the vault, and no link broken by it. Close the loop in the scorecard file: mark each gap as fixed or declined, so the next audit starts from what was already decided rather than re-proposing it.
+1. **Discover the project's conventions** — read the host project's agent instructions file (`AGENTS.md`, or `CLAUDE.md`) and inspect the vault's own shape: which trees exist, where the constitution lives, and the language the vault writes its documents in. A rule the vault states about itself governs the anatomy's default, and the scorecard is written in the vault's language. Then show the user the plan for this run — its steps, the ones that stop for the user, and what this step found or could not find — and wait for the user's go-ahead, or take the dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; name each later step by its number as it starts.
+2. **Score all 12 components** — walk the `brain-anatomy` skill against the existing vault and mark each component **present / partial / missing**, citing a file path (or its absence) as evidence. Every component accounted for — no skips. Where an earlier scorecard exists, mark each component it did not score: those rows are what the skill set has added since the last audit, which makes the scorecard the vault's own record of what an update changed.
+3. **Record the scorecard, then settle the fixes with the user** — write the scorecard to a dated file in the vault (default `docs/brain-audit-<YYYY-MM-DD>.md`; follow the vault's own docs convention if it has one). **This step is a grill point**: run the `grill-point` skill, and build nothing on a decision the grill has not settled. Each gap is one decision, with a concrete proposal as its recommendation — how many trees, where a kind of file lands, what is archived — because those are choices only someone who works in the vault can judge. Change nothing in the vault until the grill has ended.
+4. **Apply the decided fixes and verify** — implement only what was decided, and run the project's check script where one exists, then confirm: the scorecard carries the line its grill wrote, every decided fix is present in the vault, and no link broken by it. Close the loop in the scorecard file: mark each gap as fixed or declined, so the next audit starts from what was already decided rather than re-proposing it.

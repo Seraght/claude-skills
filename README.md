@@ -12,8 +12,8 @@
 
 | skill | ทำอะไร |
 |---|---|
-| [`init-brain/`](skills/init-brain/) | สร้างคลังใหม่ — สัมภาษณ์เฉพาะส่วนที่ต่างกันในแต่ละคลัง แล้ว scaffold ทั้ง 11 องค์ประกอบ **(พิมพ์เรียกเองเท่านั้น)** |
-| [`audit-brain/`](skills/audit-brain/) | ตรวจสุขภาพคลังเดิมด้วยเกณฑ์ 11 องค์ประกอบ → ให้คะแนน → รายงาน → แก้เฉพาะที่อนุมัติ |
+| [`init-brain/`](skills/init-brain/) | สร้างคลังใหม่ — สัมภาษณ์เฉพาะส่วนที่ต่างกันในแต่ละคลัง แล้ว scaffold ทั้ง 12 องค์ประกอบ **(พิมพ์เรียกเองเท่านั้น)** |
+| [`audit-brain/`](skills/audit-brain/) | ตรวจสุขภาพคลังเดิมด้วยเกณฑ์ 12 องค์ประกอบ → ให้คะแนน → ซักผู้ใช้ทีละช่องว่าง → แก้เฉพาะที่ตัดสินแล้ว — ใช้เป็นทางอัปเดตคลังหลังอัปเดต skill ด้วย |
 | [`digest/`](skills/digest/) | นำเข้าเอกสารดิบจากโฟลเดอร์พักเข้าคลัง — อ่านเนื้อหาจริง, ผ่านด่านความเป็นส่วนตัว/ลิขสิทธิ์, เขียน digest, ลงทะเบียน |
 | [`new-subject/`](skills/new-subject/) | เปิดหัวข้อใหม่ในคลัง — skeleton, ย่อยเอกสารตั้งต้น, เขียนไฟล์ภาพรวม, ลงทะเบียนใน index |
 | [`update-portfolio/`](skills/update-portfolio/) | ซิงก์เอกสารสรุปที่คร่อมหลายแหล่ง — เทียบทีละหัวข้อกับต้นทาง + บันทึกประวัติการตัดสินใจ |
@@ -35,10 +35,17 @@
 
 | reference skill | เก็บอะไร | ใครอ่าน |
 |---|---|---|
-| [`brain-anatomy/`](skills/brain-anatomy/) | นิยาม 11 องค์ประกอบของคลัง | `init-brain`, `audit-brain` |
+| [`brain-anatomy/`](skills/brain-anatomy/) | นิยาม 12 องค์ประกอบของคลัง | `init-brain`, `audit-brain` |
 | [`assessment-layout/`](skills/assessment-layout/) | ที่อยู่ของชุดสอบ ความหมายของเลขหน้าไฟล์ และรูปร่างของ blueprint | `make-exam`, `critique-mcq` |
 | [`item-defects/`](skills/item-defects/) | ข้อบกพร่องของข้อสอบ แยกไฟล์ตามชนิดข้อสอบ พร้อมวิธีแก้ของแต่ละข้อ | `make-exam`, `critique-mcq`, `analyze-results` |
 | [`learning-outcomes/`](skills/learning-outcomes/) | อะไรทำให้ผลลัพธ์การเรียนรู้วัดได้ และตรวจ alignment สองทิศทางอย่างไร | `design-course`, `make-exam` |
+
+และอีกหนึ่งโฟลเดอร์เป็น **primitive** — มีลำดับขั้นของตัวเอง แต่ถูกเรียกจาก*กลาง*ขั้นของ checklist ตัวอื่น
+ทำงานจนจบแล้วคืนการควบคุมให้ขั้นนั้น ไม่มีขั้นสำรวจหรือขั้นตรวจปิดท้ายของตัวเอง
+
+| primitive | ทำอะไร | ใครเรียก |
+|---|---|---|
+| [`grill-point/`](skills/grill-point/) | หยุดซักผู้ใช้ทีละรอบจนเข้าใจตรงกันก่อนเขียนเอกสารต้นทาง แล้วบันทึกการตัดสินใจที่ใช้ต่อได้เป็น decision record | `design-course`, `make-exam`, `make-practical`, `analyze-results`, `audit-brain` |
 
 เริ่มจากศูนย์ให้พิมพ์เรียก `init-brain` ก่อน — มันสร้าง `AGENTS.md`, index, templates และสคริปต์ตรวจ
 ซึ่งเป็น "สิ่งที่ skill ตัวอื่นไปอ่านตอนรัน"
@@ -68,10 +75,11 @@
 `<โปรเจกต์>/.claude/skills/<ชื่อ>/` (หรือที่ที่ agent ของคุณอ่าน skill) แล้วใช้ได้เลย ไม่ต้องแก้ path
 
 ข้อยกเว้นคือ skill ที่อ่าน reference skill ต้องพาตัวที่มันอ่านไปด้วย —
-`init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy`
-`make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `learning-outcomes`
-`critique-mcq` กับ `analyze-results` ต้องไปพร้อม `assessment-layout` และ `item-defects`
-ส่วน `design-course` ต้องไปพร้อม `learning-outcomes`
+`init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy` และ `grill-point` (องค์ประกอบที่ 12 ใช้รูปแบบ decision record ของมัน)
+`make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
+`critique-mcq` ต้องไปพร้อม `assessment-layout` และ `item-defects`
+`analyze-results` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
+ส่วน `design-course` ต้องไปพร้อม `learning-outcomes` และ `grill-point`
 
 ถ้าโปรเจกต์ปลายทางยังไม่มีไฟล์กติกา (`AGENTS.md` / `CLAUDE.md`) หรือยังไม่มีโครงสร้างคลัง
 skill จะถามหาข้อมูลที่จำเป็นระหว่างทาง —
@@ -87,8 +95,11 @@ skill จะถามหาข้อมูลที่จำเป็นระ�
    ขั้นนี้เขียนซ้ำเหมือนกันทุกตัวอักษรในทุก skill โดยตั้งใจ เพื่อให้คัดลอกโฟลเดอร์เดียวก็ยังรันได้
    ([ADR 0005](docs/adr/0005-duplication-buys-portability.md))
 2. **skill = checklist เรียงลำดับ ไม่ใช่ที่เก็บกติกา** — และเป็น checklist ที่รันจบในตัว
-   เรียก skill อื่นได้เฉพาะเมื่อสิ่งที่เรียกเป็น **reference ล้วน** (เช่น `brain-anatomy`) ไม่ใช่ checklist อีกตัว
-   ที่จะพา checklist มาพันกัน ([ADR 0006](docs/adr/0006-how-a-skill-is-reached-and-when-it-is-split.md))
+   เรียก skill อื่นได้เฉพาะเมื่อสิ่งที่เรียกเป็น **reference ล้วน** (เช่น `brain-anatomy`) หรือเป็น **primitive**
+   (เช่น `grill-point`) ซึ่งไม่มีขั้นสำรวจและขั้นตรวจของตัวเอง ทำจบแล้วคืนการควบคุม — reference ชี้ไปหารูปแบบ
+   ที่อยู่ใน primitive ได้เช่นกัน — แต่ไม่ใช่ checklist อีกตัว
+   ที่จะพา checklist มาพันกัน ([ADR 0006](docs/adr/0006-how-a-skill-is-reached-and-when-it-is-split.md),
+   [ADR 0016](docs/adr/0016-agreement-is-not-understanding.md))
 3. **จบด้วยขั้นตรวจแบบมีเงื่อนไข** — โปรเจกต์มีสคริปต์ตรวจก็รัน ไม่มีก็ตรวจตาม checklist ที่ skill ระบุไว้
    ไม่ปล่อยให้ "รู้สึกว่าเสร็จ" เป็นเกณฑ์จบงาน
 4. **ภาษาอังกฤษเป็น default** ในเนื้อหา skill ส่วน trigger ภาษาไทยเก็บไว้ใน `description`
@@ -120,6 +131,12 @@ skill จะถามหาข้อมูลที่จำเป็นระ�
    *จริงแค่ที่นี่* (สเกลของสถาบัน ฟอร์มที่ต้องส่ง PLO ของหลักสูตร) อยู่ในคลัง เพราะมันผิดทันทีที่ย้ายที่
    เกณฑ์นี้ไม่ใช่ "ค้นไว้แล้วหรือยัง" — ของที่ค้นไว้แล้วอาจเป็นความรู้สากลที่ค้างอยู่ผิดที่
    ([ADR 0013](docs/adr/0013-true-everywhere-or-true-here.md))
+12. **ตกลงไม่เท่ากับเข้าใจ** — ทุก checklist แสดงแผนให้ผู้ใช้เห็นหลังขั้นสำรวจ แล้วรอให้เริ่ม
+   ขั้นที่เขียนเอกสารซึ่งงานอื่นสร้างต่อ หรือที่ต้องใช้ข้อเท็จจริงที่มีแต่ผู้ใช้รู้ เป็น **grill point**:
+   หยุดซักทีละรอบจนเข้าใจตรงกัน *แม้ทุกการตรวจจะผ่าน* เพราะการตัดสินใจเป็นของผู้ใช้ —
+   ต่างจาก gate ที่หยุดเมื่อไม่ผ่าน และต่างจากการรออนุมัติ ซึ่งใช้เมื่อสิ่งที่วางให้ดูประเมินได้ด้วยตัวมันเอง
+   คำตอบที่อยู่นานกว่าเอกสารฉบับนั้นถูกเก็บเป็น decision record ในคลัง
+   ([ADR 0016](docs/adr/0016-agreement-is-not-understanding.md), [ADR 0017](docs/adr/0017-the-vault-keeps-its-reasons.md))
 
 ## ที่มา
 

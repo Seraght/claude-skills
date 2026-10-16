@@ -1,11 +1,11 @@
 ---
 name: brain-anatomy
-description: The eleven components of an agent-operated knowledge base, each with its scaffolding default and its audit question. Use when scaffolding or auditing a vault, or when another skill needs the component anatomy.
+description: The twelve components of an agent-operated knowledge base, each with its scaffolding default and its audit question. Use when scaffolding or auditing a vault, or when another skill needs the component anatomy.
 ---
 
 # Knowledge Base Anatomy
 
-Eleven components of a healthy, agent-operated knowledge base, grouped by the four jobs the vault must do: **capture fast, find again, stay trustworthy, don't rot**. The `init-brain` skill scaffolds each component; `audit-brain` scores each one. This file is reference only — it carries no steps of its own.
+Twelve components of a healthy, agent-operated knowledge base, grouped by the four jobs the vault must do: **capture fast, find again, stay trustworthy, don't rot**. The `init-brain` skill scaffolds each component; `audit-brain` scores each one. This file is reference only — it carries no steps of its own.
 
 A component the user explicitly declines is recorded as declined in the vault's constitution — never silently skipped.
 
@@ -64,3 +64,7 @@ A component the user explicitly declines is recorded as declined in the vault's 
 **11. Review & archive cadence** — dead items leave the active trees, so what remains is alive; the vault is revisited on a rhythm, not only when something breaks.
 - Scaffold: an `archive/` convention per tree and a review cadence (what to check, how often) recorded in the constitution.
 - Audit: does an archive exist? Is anything visibly stale still sitting in active trees?
+
+**12. Decision records** — why the work in the vault is the way it is stays written down, so a later run reads the reason instead of asking again, or deciding the other way without knowing it had been settled. Numbered last rather than by its group so the numbers in earlier scorecards keep meaning what they meant.
+- Scaffold: the rule in the constitution naming where records live at each scope — the vault's and each subject's — with the shape and defaults from the `grill-point` skill. The folders themselves are created by the first record written into them.
+- Audit: pick a choice in the vault that looks deliberate — an assessment format, a level, a layout — and try to find why it was made. Is the reason recorded, and does a replaced decision show what replaced it?

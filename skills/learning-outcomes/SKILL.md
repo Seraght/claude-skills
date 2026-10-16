@@ -64,6 +64,16 @@ A curriculum map gives each course a level of responsibility for each programme 
 
 An outcome kept above its map level on purpose is an **intentional exception**, and it passes only with a record beside it: evidence that the teaching and the assessment both reach the verb's level, the cost of keeping it, the lower verb it would fall back to, and who confirmed it and when. Without the record it is an inflated outcome that happens to have been noticed.
 
+## When the learners cannot reach the outcome's level
+
+Alignment says what the assessment must reach; it does not say the learners can reach it. A recommendation resting on alignment alone — "the outcome says *analyze*, so the items are at Analyze" — answers whether the design fits the course, never whether this cohort can do it, and only the person teaching them can say that. Where the two conflict, offer the ways out in this order, each with its cost:
+
+1. **Keep the level, cut the difficulty that is not the outcome.** Level and difficulty are different properties: an Analyze item on a short stem and a familiar artifact can be within reach where the same level buried in a long narrative is not. Reading load, unfamiliar context, and option length make an item hard without making it measure more. *Cost:* it may still be out of reach.
+2. **Ladder the levels.** Most items at the levels beneath, building towards the outcome, and a minimum share at the outcome's own level, chosen by the user. *Cost:* the evidence that the outcome was reached is thinner.
+3. **Assess below the outcome, and record the gap.** *Cost:* the paper no longer evidences the outcome as written, which is the finding the next review of the outcomes needs.
+
+Whichever is chosen, an assessment that ends up below its outcome's level is written down as a decision record, in the shape the `grill-point` skill gives.
+
 ## The check table
 
 The check is a table with one row per outcome, written into the design wherever its outcomes are recorded. One outcome, one row. A check that leaves only a verdict cannot be told apart from one that never ran, and a prose paragraph of ticks is a verdict.

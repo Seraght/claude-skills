@@ -43,6 +43,19 @@ IDENTICAL = [
     ("rubric core",
      r"^## Rubrics$",
      RUBRIC_CORE),
+    # The user sees the run before it starts, and which steps will stop for them (ADR 0016).
+    ("plan clause",
+     r"^\d+\. \*\*(Discover the project's conventions|Identify the roll-up and its sources|"
+     r"Confirm the target is a greenfield)\*\*",
+     "Then show the user the plan for this run — its steps, the ones that stop for the user, "
+     "and what this step found or could not find — and wait for the user's go-ahead, or take the "
+     "dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; "
+     "name each later step by its number as it starts."),
+    # A step that stops to grill the user names the primitive the same way everywhere, so
+    # one search finds every grill point in the set (ADR 0016).
+    ("grill clause",
+     r"\*\*This step is a grill point\*\*",
+     "**This step is a grill point**: run the `grill-point` skill, and build nothing on a decision the grill has not settled."),
 ]
 
 # Wordings that lost an argument. Each is a real regression, not a style note.
@@ -133,8 +146,12 @@ for label, carries, canonical in IDENTICAL:
     check(len(carriers) > 1, "%s: carried by more than one skill (%d)" % (label, len(carriers)))
     for p in carriers:
         name = os.path.relpath(p, ROOT)
-        check(canonical in io.open(p, encoding='utf-8').read(),
-              "%s: %s is the canonical wording" % (name, label))
+        text = io.open(p, encoding='utf-8').read()
+        # Once per carrier, not once per file: a file holding three grill points with one
+        # of them reworded still contains the canonical text twice.
+        anchors, copies = len(re.findall(carries, text, re.M)), text.count(canonical)
+        check(copies >= anchors,
+              "%s: %s is the canonical wording (%d of %d)" % (name, label, copies, anchors))
 
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:
