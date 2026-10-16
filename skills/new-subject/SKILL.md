@@ -7,9 +7,11 @@ description: Open a new subject area in a knowledge base — skeleton, defining 
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. It carries the *process* only — the skeleton shape, templates, and naming rules are discovered from the host project at runtime.
 
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3.
+
 ## Steps
 
-1. **Discover the project's conventions** — read the host project's agent instructions file (`AGENTS.md`, or `CLAUDE.md`) and inspect an existing subject: the folder skeleton it uses, its naming rule, which templates exist, and where the index lives. An existing subject is the specification; match it rather than inventing a shape. Then show the user the plan for this run — its steps, the ones that stop for the user, and what this step found or could not find — and wait for the user's go-ahead, or take the dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; name each later step by its number as it starts.
+1. **Discover the project's conventions** — read the host project's agent instructions file (`AGENTS.md`, or `CLAUDE.md`) and inspect an existing subject: the folder skeleton it uses, its naming rule, which templates exist, and where the index lives. An existing subject is the specification; match it rather than inventing a shape. Then show the user the plan for this run — its steps by number with a 🛑 on each one that stops for the user, then one line of what this step found and one of what it could not find, labelled in the user's language — and wait for the user's go-ahead, or take the dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; name each later step by its number as it starts.
 2. **Check the index first** — if the subject is already registered, stop and ask the user whether they meant to extend it instead of creating a duplicate.
 3. **Create the skeleton** — one folder per subject, named by the project's rule (default `<id>-<english-slug>`, no spaces), with the same subfolders the existing subjects use.
 4. **File the defining source document unmodified** — the original goes in the source folder and stays as received; all later work happens in derived files.

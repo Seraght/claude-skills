@@ -33,6 +33,11 @@ RUBRIC_CORE = (
     '- **Levels are distinguishable.** Adjacent levels differ by something a marker can point at; typically 3–5 levels.' + chr(10) +
     "- **Criterion weights sum to the item's marks**, and reflect what the outcome actually values.")
 
+STOP_CLAUSE = ("Whenever a step puts more than one decision to the user, it asks them in the round "
+               "shape the `grill-point` skill gives in its step 3")
+APPROVAL_EXCEPTION = (", except that an approval of items is asked in the approval table the "
+                      "`assessment-layout` skill gives.")
+
 IDENTICAL = [
     ("discovery clause",
      r"^\d+\. \*\*Discover the project's conventions\*\*",
@@ -43,14 +48,26 @@ IDENTICAL = [
     ("rubric core",
      r"^## Rubrics$",
      RUBRIC_CORE),
-    # The user sees the run before it starts, and which steps will stop for them (ADR 0016).
+    # The user sees the run before it starts, and which steps will stop for them (ADR 0016),
+    # in a shape they can read at a glance (ADR 0019).
     ("plan clause",
      r"^\d+\. \*\*(Discover the project's conventions|Identify the roll-up and its sources|"
      r"Confirm the target is a greenfield)\*\*",
-     "Then show the user the plan for this run — its steps, the ones that stop for the user, "
-     "and what this step found or could not find — and wait for the user's go-ahead, or take the "
+     "Then show the user the plan for this run — its steps by number with a 🛑 on each one "
+     "that stops for the user, then one line of what this step found and one of what it "
+     "could not find, labelled in the user's language — and wait for the user's go-ahead, or take the "
      "dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; "
      "name each later step by its number as it starts."),
+    # Every stop takes a shape from one place, so a question the run invents mid-step is
+    # laid out like the ones the skill planned for (ADR 0019).
+    ("stop shape clause",
+     r"^This skill is an ordered checklist",
+     STOP_CLAUSE),
+    # Only the checklists that approve items carry the exception, so a skill copied alone
+    # does not point at a reference it never uses (ADR 0019).
+    ("approval exception",
+     r"except that an approval of items",
+     APPROVAL_EXCEPTION),
     # A step that stops to grill the user names the primitive the same way everywhere, so
     # one search finds every grill point in the set (ADR 0016).
     ("grill clause",
@@ -152,6 +169,21 @@ for label, carries, canonical in IDENTICAL:
         anchors, copies = len(re.findall(carries, text, re.M)), text.count(canonical)
         check(copies >= anchors,
               "%s: %s is the canonical wording (%d of %d)" % (name, label, copies, anchors))
+
+# The stop-shape clause follows the opening paragraph rather than sitting anywhere: it
+# governs every step, the ones nobody planned as stops included (ADR 0019).
+# It ends either at its full stop or with the approval exception, and only the checklists
+# that approve items carry the exception, so neither half grows a tail nobody checks.
+APPROVERS = {'critique-mcq', 'make-exam'}
+for p in SKILLS:
+    text = io.open(p, encoding='utf-8').read()
+    if re.search(r"^This skill is an ordered checklist", text, re.M):
+        name = os.path.basename(os.path.dirname(p))
+        ending = re.escape(APPROVAL_EXCEPTION) if name in APPROVERS else r"\."
+        check(re.search(r"^This skill is an ordered checklist[^\n]*\n\n" + re.escape(STOP_CLAUSE)
+                        + ending + r"\n", text, re.M) is not None,
+              "%s: stop shape clause follows the opening paragraph and ends as %s"
+              % (os.path.relpath(p, ROOT), "the approval exception" if name in APPROVERS else "a full stop"))
 
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:
