@@ -35,6 +35,8 @@ RUBRIC_CORE = (
 
 STOP_CLAUSE = ("Whenever a step puts more than one decision to the user, it asks them in the round "
                "shape the `grill-point` skill gives in its step 3")
+APPROVAL_EXCEPTION = (", except that an approval of items is asked in the approval table the "
+                      "`assessment-layout` skill gives.")
 
 IDENTICAL = [
     ("discovery clause",
@@ -65,8 +67,7 @@ IDENTICAL = [
     # does not point at a reference it never uses (ADR 0019).
     ("approval exception",
      r"except that an approval of items",
-     ", except that an approval of items is asked in the approval table the "
-     "`assessment-layout` skill gives."),
+     APPROVAL_EXCEPTION),
     # A step that stops to grill the user names the primitive the same way everywhere, so
     # one search finds every grill point in the set (ADR 0016).
     ("grill clause",
@@ -171,12 +172,18 @@ for label, carries, canonical in IDENTICAL:
 
 # The stop-shape clause follows the opening paragraph rather than sitting anywhere: it
 # governs every step, the ones nobody planned as stops included (ADR 0019).
+# It ends either at its full stop or with the approval exception, and only the checklists
+# that approve items carry the exception, so neither half grows a tail nobody checks.
+APPROVERS = {'critique-mcq', 'make-exam'}
 for p in SKILLS:
     text = io.open(p, encoding='utf-8').read()
     if re.search(r"^This skill is an ordered checklist", text, re.M):
-        check(re.search(r"^This skill is an ordered checklist[^\n]*\n\n" + re.escape(STOP_CLAUSE),
-                        text, re.M) is not None,
-              "%s: stop shape clause follows the opening paragraph" % os.path.relpath(p, ROOT))
+        name = os.path.basename(os.path.dirname(p))
+        ending = re.escape(APPROVAL_EXCEPTION) if name in APPROVERS else r"\."
+        check(re.search(r"^This skill is an ordered checklist[^\n]*\n\n" + re.escape(STOP_CLAUSE)
+                        + ending + r"\n", text, re.M) is not None,
+              "%s: stop shape clause follows the opening paragraph and ends as %s"
+              % (os.path.relpath(p, ROOT), "the approval exception" if name in APPROVERS else "a full stop"))
 
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:

@@ -74,7 +74,7 @@
 **agent ตัวอื่น หรืออยากได้ทีละตัว** — คัดลอกโฟลเดอร์ที่ต้องการจาก `skills/` ไปไว้ที่
 `<โปรเจกต์>/.claude/skills/<ชื่อ>/` (หรือที่ที่ agent ของคุณอ่าน skill) แล้วใช้ได้เลย ไม่ต้องแก้ path
 
-ข้อยกเว้นคือ skill ที่อ่าน reference skill ต้องพาตัวที่มันอ่านไปด้วย —
+ทุก checklist ต้องพาตัวที่มันอ่านไปด้วย —
 `init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy` และ `grill-point` (องค์ประกอบที่ 12 ใช้รูปแบบ decision record ของมัน)
 `make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
 `critique-mcq` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `grill-point`

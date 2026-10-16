@@ -15,7 +15,7 @@ The component reference is the `brain-anatomy` skill — read it before step 2.
 ## Steps
 
 1. **Confirm the target is a greenfield** — inspect the target directory. Effectively empty (no agent instructions file — `AGENTS.md` or `CLAUDE.md` — and no content trees) is what this skill builds on. Existing content belongs to `audit-brain`; say so and stop. Then show the user the plan for this run — its steps by number with a 🛑 on each one that stops for the user, then one line of what this step found and one of what it could not find, labelled in the user's language — and wait for the user's go-ahead, or take the dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; name each later step by its number as it starts.
-2. **Interview the variable parts only** — the anatomy carries opinionated defaults; ask only what varies per vault, in one round, with the default as each question's recommendation, and let the user override any of them:
+2. **Interview the variable parts only** — the anatomy carries opinionated defaults; ask only what varies per vault, in one round, with the default as each question's recommendation — except the roles, which have none and are asked as a choice between layouts — and let the user override any of them:
    - Which roles/areas of work need their own tree? No default: a vault's roles are the user's own,
      so offer two or three layouts with what each leads to — a tree per role (teaching / research /
      admin), or one tree with the subjects at its top — the way `grill-point` turns "I don't know" into a choice.
