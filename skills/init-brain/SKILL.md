@@ -8,12 +8,14 @@ disable-model-invocation: true
 
 This skill is an ordered checklist: each step opens when the one before it has produced its result. It is the setup-time counterpart of the other skills in this set — they *discover* a vault's conventions at runtime, and this skill *creates* the conventions they discover. Scoring a vault that already has content is `audit-brain`, not this skill.
 
+Whenever a step puts more than one decision to the user, it asks them in the round shape the `grill-point` skill gives in its step 3; an approval of items is asked in the approval table the `assessment-layout` skill gives.
+
 The component reference is the `brain-anatomy` skill — read it before step 2.
 
 ## Steps
 
-1. **Confirm the target is a greenfield** — inspect the target directory. Effectively empty (no agent instructions file — `AGENTS.md` or `CLAUDE.md` — and no content trees) is what this skill builds on. Existing content belongs to `audit-brain`; say so and stop. Then show the user the plan for this run — its steps, the ones that stop for the user, and what this step found or could not find — and wait for the user's go-ahead, or take the dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; name each later step by its number as it starts.
-2. **Interview the variable parts only** — the anatomy carries opinionated defaults; ask only what varies per vault, present the default alongside each question, and let the user override any of them:
+1. **Confirm the target is a greenfield** — inspect the target directory. Effectively empty (no agent instructions file — `AGENTS.md` or `CLAUDE.md` — and no content trees) is what this skill builds on. Existing content belongs to `audit-brain`; say so and stop. Then show the user the plan for this run — its steps by number with a 🛑 on each one that stops for the user, then one line of what this step found and one of what it could not find, labelled in the user's language — and wait for the user's go-ahead, or take the dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; name each later step by its number as it starts.
+2. **Interview the variable parts only** — the anatomy carries opinionated defaults; ask only what varies per vault, in one round, with the default as each question's recommendation, and let the user override any of them:
    - Which roles/areas of work need their own tree? (e.g. teaching / research / admin)
    - Where each kind of file lands *inside* a tree — are imported source files and their digests
      separate folders (default: `sources/` and `digests/` per subject) or filed together? The other

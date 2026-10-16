@@ -79,6 +79,19 @@ A stimulus set is one stimulus — a table, a query, a log, a diagram, a form �
 
 In the bank the stimulus is a file of its own under `stimuli/`, named by an id, and each of its items names that id. A stimulus outlives every paper that uses it: a table set this year carries new items next year.
 
+## Approval table
+
+Where a step puts items to the user to approve — rewrites, a calibration batch, the selection for a paper, sketches to keep or drop — it shows them as one table, one row per item:
+
+| Item | Proposed | Measured | Your answer |
+|---|---|---|---|
+| 12 | rewrite of option C | longest option 41 characters, key B | |
+
+- The two middle columns are the calling step's to fill: what it proposes for the item, and the numbers it was judged on. The headers are written in the user's language.
+- The user may answer row by row or the whole table at once. Each row carries the numbers it is judged on, so an answer to the table is still an answer about evidence on the page — unlike a grill round, where a "yes" answers only its own question.
+- A question the table raises that is not about one item — a notation for the whole paper, a slide that contradicts a key — is not a row. It is asked after the table, in the round shape the `grill-point` skill gives.
+- Where the items already sit in a file built as rows, such as the sketches file, that file is the table, and the conversation points to it rather than repeating it.
+
 ## What binds to what
 
 - **The blueprint binds to the assembled paper**, not to the pool of items written. Writing a surplus to choose from is the practice; the reconciliation happens at assembly.

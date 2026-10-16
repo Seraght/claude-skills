@@ -43,14 +43,23 @@ IDENTICAL = [
     ("rubric core",
      r"^## Rubrics$",
      RUBRIC_CORE),
-    # The user sees the run before it starts, and which steps will stop for them (ADR 0016).
+    # The user sees the run before it starts, and which steps will stop for them (ADR 0016),
+    # in a shape they can read at a glance (ADR 0019).
     ("plan clause",
      r"^\d+\. \*\*(Discover the project's conventions|Identify the roll-up and its sources|"
      r"Confirm the target is a greenfield)\*\*",
-     "Then show the user the plan for this run — its steps, the ones that stop for the user, "
-     "and what this step found or could not find — and wait for the user's go-ahead, or take the "
+     "Then show the user the plan for this run — its steps by number with a 🛑 on each one "
+     "that stops for the user, then one line of what this step found and one of what it "
+     "could not find, labelled in the user's language — and wait for the user's go-ahead, or take the "
      "dispatch as the go-ahead when this run was sent to work without the user, as a sub-agent; "
      "name each later step by its number as it starts."),
+    # Every stop takes a shape from one place, so a question the run invents mid-step is
+    # laid out like the ones the skill planned for (ADR 0019).
+    ("stop shape clause",
+     r"^This skill is an ordered checklist",
+     "Whenever a step puts more than one decision to the user, it asks them in the round "
+     "shape the `grill-point` skill gives in its step 3; an approval of items is asked in the "
+     "approval table the `assessment-layout` skill gives."),
     # A step that stops to grill the user names the primitive the same way everywhere, so
     # one search finds every grill point in the set (ADR 0016).
     ("grill clause",
