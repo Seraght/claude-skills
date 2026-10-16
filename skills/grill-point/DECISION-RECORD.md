@@ -41,7 +41,7 @@ supersedes: 0003          # only when it replaces an earlier record
 
 <At most three lines: the question, what was chosen, and why.>
 
-**Rests on:**
+**Rests on:**              <!-- this heading and the next in the vault's language -->
 - <a syllabus line, programme outcome, teaching constraint, or record it was checked against>
 
 **Turned down:**
@@ -51,9 +51,9 @@ supersedes: 0003          # only when it replaces an earlier record
 A record is read by someone deciding whether to reopen it, so it stays short enough to read whole:
 
 - The title is one phrase, with no dash joining a second clause to it.
-- The body is at most three lines. Lines are counted rather than sentences, because a language that does not mark where its sentences end gives a sentence limit nothing to count.
+- The body is at most three lines, each a line as it reads on screen rather than a paragraph run together onto one. Lines are counted rather than sentences, because a language that does not mark where its sentences end gives a sentence limit nothing to count.
 - Each entry under the two headings is one line.
-- Nothing else goes in. Work the decision leaves to do — revising an outcome at the next curriculum review — is an open item in the artifact the grill shaped, where the calling skill's closing check finds it; written into the record it is a paragraph nobody checks.
+- Nothing else goes in. Work the decision leaves to do — revising an outcome at the next curriculum review — is an open item in the artifact the grill shaped, carrying the vault's gap marker, where it stays visible as work; written into the record it is a paragraph nobody checks.
 
 The second heading, what was turned down, is required: a record exists only where there was a real alternative, and writing the alternative down with its cost is what lets a later reader see the decision was a trade-off rather than a default.
 
