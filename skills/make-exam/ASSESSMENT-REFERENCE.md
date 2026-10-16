@@ -26,8 +26,18 @@ The blueprint is fixed *before* any item is written. Its shape — what the axes
 - **The stem carries the question.** A reader should know what is being asked before reaching the options.
 - **Options are homogeneous and plausible.** Same grammatical form, similar length; every distractor represents a real misconception, so a knowledgeable examinee rejects it for a reason rather than on sight.
 - **Keep cueing out.** Grammatical agreement, a conspicuously longer correct option, absolutes ("always", "never") in distractors, and overlapping options all leak the answer — the two sections below are how that is prevented and then checked.
-- **One item, one point.** Items stay independent — answering item 7 never depends on getting item 6 right.
+- **One item, one point.** Items stay independent — answering item 7 never depends on getting item 6 right. Items in a stimulus set share their material, never their answers.
+- **Write to the papers this user has set.** A paper the user has already set and kept is the best specification of how they want items written — how long a stem runs, how long an option, whether options carry explanations, how much of the paper rides on shared stimuli. Those numbers, read from that subject's past papers or the nearest subject's, are the style budget each item is written against, and they differ by subject: a query-writing course runs shorter stems than a networking one. An item outside the budget is rewritten when it is written, not found later.
 - **Constructed-response items state the expected scope** — length, format, and what a complete answer covers — so the rubric can be applied consistently.
+
+## Stimulus sets
+
+A stimulus set asks several items of one stimulus, so the reading is paid once and the items can look at the same material from different angles — find where a value sits, choose the operation, predict the consequence.
+
+- **The stimulus is material to work on, not a story.** A table, a query, a log, a record, a diagram, a form. A narrative adds reading load without adding anything to measure; the situation the learner needs is what the material shows.
+- **Each item asks a different thing of it**, and the stems are short because the stimulus carries the context.
+- **Each item stands on the stimulus alone** — no item needs another item's answer.
+- **A set has at least two items.** A stimulus serving one item is that item's stem.
 
 ## Distractor construction
 

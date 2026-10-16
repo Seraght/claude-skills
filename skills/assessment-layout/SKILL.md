@@ -26,7 +26,7 @@ The leading number is the **lifecycle stage**, not a position in a sequence:
 
 | Stage | Meaning | Default files |
 |---|---|---|
-| `0x` | Authoring — before the paper exists | `00-research.md`, `01-blueprint.md`, `02-items.md`, `03-paper.md`, `04-answer-key.md`, `05-rubric.md`, `06-measurements.md` |
+| `0x` | Authoring — before the paper exists | `00-research.md`, `01-blueprint.md`, `02-items.md`, `03-paper.md`, `04-answer-key.md`, `05-rubric.md`, `06-measurements.md`, `07-sketches.md` |
 | `1x` | Review — after the paper is assembled, before it is used | `10-critique.md`, `11-critique-independent.md` |
 | `2x` | After administration | `20-item-analysis.md` |
 
@@ -73,10 +73,17 @@ A paper that does not fit its own duration measures reading speed, and it does s
 
 **The vault's own blueprint form wins.** Where an institution fixes the shape — a mandated form with its own columns — that shape governs, and the three things above are recorded wherever it has room for them.
 
+## Stimulus sets
+
+A stimulus set is one stimulus — a table, a query, a log, a diagram, a form — and every item answered from it. In the items file it is one block: a heading naming the set and the items it serves (`Set S1 · items 28–33`), the stimulus once, then the items, each tagged with its own cell, since one set routinely spans several levels. The stems do not retell the stimulus.
+
+In the bank the stimulus is a file of its own under `stimuli/`, named by an id, and each of its items names that id. A stimulus outlives every paper that uses it: a table set this year carries new items next year.
+
 ## What binds to what
 
 - **The blueprint binds to the assembled paper**, not to the pool of items written. Writing a surplus to choose from is the practice; the reconciliation happens at assembly.
-- **Statistics attach to an item *version*** — one specific wording and option order — not to the item. A value carried across an edit measures something other than what it claims to.
+- **Statistics attach to an item *version*** — one specific wording and option order, and the stimulus it is answered from — not to the item. A value carried across an edit measures something other than what it claims to, so editing a stimulus after it was sat gives every item in its set a new version.
+- **A version begins when the item is first sat.** Before that there are no statistics to protect, so the items file holds only the current text of each item: an edit replaces the old wording, an item the user drops is deleted, and an item kept but not chosen for the paper moves to the bank at assembly, carrying its key and its distractor rationales. A trail of earlier drafts in the file is what makes it unreadable, and it protects nothing.
 - **Per-person data stays out of the vault.** Names, identifiers, and individual scores do not enter; item-level statistics do.
 
 The reasoning behind each of these is in [ADR 0004](../../docs/adr/0004-stage-the-assessment-set-and-version-its-items.md).
