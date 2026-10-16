@@ -15,7 +15,21 @@ This skill is a primitive. It runs from inside a step of another skill, it carri
 
 1. **Read what is already decided** — the decision records at every scope the step reaches, and, where the step belongs to a subject, the teaching constraints in its overview: equipment, expertise, staff, and the learners — their programme, their background, what can realistically be expected of that cohort. Open the first round by listing the records that bind this step, one line each ("0003 still applies: CLO3 is assessed by a project"), so the user sees which past decisions are shaping this run. These are settled, so they are listed rather than asked; the user may reopen one, and a reopened decision becomes a new record that supersedes the old.
 2. **Map the open decisions** — what this step must settle before its artifact can be written, less what step 1 settled and what the documents answer. A decision whose answer depends on another still open waits for a later round.
-3. **Ask the frontier, one round at a time** — every ready decision in one round, numbered, each with a recommended answer. Every recommendation carries three things:
+3. **Ask the frontier, one round at a time** — every ready decision in one round, numbered, each with a recommended answer, in the shape below. The first round opens with the records step 1 lists; after them, a round holds questions and nothing else. An assumption the agent would otherwise make goes in as a question whose "yes" accepts it, and a fact the agent checked for itself goes into the artifact rather than the round, because every line set in front of the questions is one the user reads before reaching what they are asked. Each question:
+
+   ```
+   ❓ **Q1** - **<the decision, as a title>**: <the question, with its options where there are several>
+
+   ➡️ <the recommended answer, in one line>
+      Rests on: <the fit>
+      Reason: <the reason>
+      Alternatives: <option> — <what it would cost>, one line per option it beat
+      Feasible?: <the feasibility question>
+
+   ---
+   ```
+
+   The labels are written in the user's language. Word each question, its feasibility line included, so that "yes" accepts the recommendation and says it can be carried out: one word then answers both, and anything else the user writes is their own answer. Ask the round as text in the conversation, never through a multiple-choice question tool: such a tool holds only a few questions a round and gives each option a single line, so the parts below run together into one sentence nobody can take apart. Every recommendation carries three things:
    - **Fit** — what it rests on, quoted or cited: the syllabus line or programme outcome for a course artifact, the anatomy component for a vault's layout, the statistics and the blueprint for an item decision.
    - **Reason** — the mechanism that makes it the better choice, and the options it beat with what each would cost.
    - **Feasibility** — a question to the user: can the people who will carry this out actually do it? For anything taught or assessed, that is this course's equipment, expertise, staff, and learners. Where the teaching constraints bear on it, cite them and ask whether they still hold and whether they settle it; write new answers back to them.
