@@ -38,6 +38,10 @@ STOP_CLAUSE = ("Whenever a step puts more than one decision to the user, it asks
 APPROVAL_EXCEPTION = (", except that an approval of items is asked in the approval table the "
                       "`assessment-layout` skill gives.")
 
+HANDOFF_CLAUSE = "A run of this skill can outlast one session's context, so every step the plan marks 🛑 writes `HANDOFF.md` into the run's folder, once that folder exists, before it stops: the step to resume at and where inside it, the questions waiting on the user, what the run has learned that none of its files records, and the files to read first. A decision already written into a file is pointed to rather than copied, because two copies of one answer drift apart; one settled but not yet written anywhere goes into the handoff, or it is lost with the session. The file is rewritten whole at each stop, and the stop ends with one line, in the user's language, saying that the session can be closed here and giving the line, naming the folder, that resumes the run in a new one. The last step deletes it."
+RESUME_CLAUSE = "Where the folder this run writes into already holds a `HANDOFF.md`, the run is resuming: read it before the run's other files, read first the files it lists, and take the step it names, checked against the files that exist, since a session can end between stops after its last handoff was written. Where that folder holds this skill's files but no handoff, infer the step from the files that exist. Where the step was inferred, or the handoff and the files disagree, say so in the line of what could not be found. Either way the plan marks the finished steps ✓. Then show the user the plan for this run"
+DELETE_CLAUSE = "Last, delete the run's `HANDOFF.md`, once anything still open in it is written into the run's own files: a handoff left behind makes the next run on this folder resume one that is finished."
+
 IDENTICAL = [
     ("discovery clause",
      r"^\d+\. \*\*Discover the project's conventions\*\*",
@@ -127,7 +131,7 @@ PAIRED = [
      "the span rule without the row rule still permits one row spanning the whole paper, "
      "which is where the field case hid a wrong value for fifteen items at once"),
     ("binding review runs", "unticked item",
-     "a handoff that exists only as a sentence in the session leaves no evidence, which "
+     "a review passed on only as a sentence in the session leaves no evidence, which "
      "is the failure ADR 0008 is about; it is written into the exam set instead"),
 ]
 
@@ -184,6 +188,32 @@ for p in SKILLS:
                         + ending + r"\n", text, re.M) is not None,
               "%s: stop shape clause follows the opening paragraph and ends as %s"
               % (os.path.relpath(p, ROOT), "the approval exception" if name in APPROVERS else "a full stop"))
+
+# The checklists whose runs outlast a session write a handoff at every planned stop and
+# resume from it in step 1 (ADR 0020). The clause follows the stop-shape clause, and the
+# resume sentence sits in the discovery step just before the plan is shown, and the
+# deletion closes the verify step, where it is acted on. Only these carry them: a run that
+# always ends in one session would carry a rule it never uses. Any file may still name
+# the handoff; what stays out is the clauses, in SKILL.md and sibling references alike.
+RESUMABLE = {'make-exam', 'make-practical', 'design-course'}
+for p in DOCS:
+    name = os.path.basename(os.path.dirname(p))
+    text = io.open(p, encoding='utf-8').read()
+    if name in RESUMABLE and os.path.basename(p) == 'SKILL.md':
+        check(re.search(re.escape(STOP_CLAUSE) + r"[^\n]*\n\n" + re.escape(HANDOFF_CLAUSE) + r"\n",
+                        text) is not None,
+              "%s: handoff clause follows the stop shape clause" % os.path.relpath(p, ROOT))
+        check(re.search(r"^\d+\. \*\*Discover the project's conventions\*\*[^\n]*"
+                        + re.escape(RESUME_CLAUSE), text, re.M) is not None,
+              "%s: resume clause leads into the plan in the discovery step" % os.path.relpath(p, ROOT))
+        check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*" + re.escape(DELETE_CLAUSE) + r"\n",
+                        text, re.M) is not None,
+              "%s: delete clause closes the verify step" % os.path.relpath(p, ROOT))
+    else:
+        stray = [label for label, clause in (("handoff", HANDOFF_CLAUSE), ("resume", RESUME_CLAUSE),
+                                             ("delete", DELETE_CLAUSE)) if clause in text]
+        check(not stray, "%s: carries no handoff clauses%s"
+              % (os.path.relpath(p, ROOT), (" [found %s]" % ", ".join(stray)) if stray else ""))
 
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:

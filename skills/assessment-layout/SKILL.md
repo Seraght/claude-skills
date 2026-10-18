@@ -34,6 +34,8 @@ Every stage has a skill that fills it: `make-exam` or `make-practical` for `0x`,
 
 The review stage carries two files rather than one. The second is an independent pass that measures the paper again from scratch rather than reading the first pass's table, because a critique built on a measurement it inherited certifies that measurement rather than checking it. Numbers are left unused inside each stage, so an artifact can be inserted without renumbering across stages. A missing stage reads as a stage that did not happen, rather than as a gap to be filled by the next number in the folder — which is why a review artifact takes the next free `1x` and never the number after the last authoring file.
 
+`HANDOFF.md` carries no number, because it belongs to no stage: it records where an unfinished run stopped, so that a new session can resume it, and the run that wrote it deletes it when it finishes. A set folder holding one is a set still being written. What goes into it is set out by the skills that write it.
+
 ## What a blueprint holds
 
 Rows are topics. Columns are cognitive levels. Each cell holds three things, not two:

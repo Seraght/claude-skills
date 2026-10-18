@@ -130,6 +130,9 @@ skill จะถามหาข้อมูลที่จำเป็นระ�
    และรายงานจำนวนของทุกกลุ่มรวมกลุ่มที่ไม่เจออะไรเลย ([ADR 0008](docs/adr/0008-a-check-that-leaves-no-evidence-did-not-run.md))
    — และเกณฑ์ตัวเลขของขั้นตรวจต้องมาจาก skill เอง เกณฑ์ที่ skill ไม่ให้ไว้คือเกณฑ์ที่ agent จะตั้งเองแบบหลวม ๆ
    ([ADR 0018](docs/adr/0018-a-threshold-the-skill-does-not-give-is-one-the-agent-invents.md))
+   — checklist สายยาว (`make-exam`, `make-practical`, `design-course`) จบใน session เดียวไม่ได้เสมอไป
+   ทุกจุด 🛑 จึงเขียน `HANDOFF.md` ไว้ในชุดงาน และขั้นแรกรับงานต่อจากมัน แทนการพึ่งให้ผู้ใช้สังเกตเองว่า context ใกล้เต็ม
+   ([ADR 0020](docs/adr/0020-a-run-that-outlasts-a-session-leaves-a-handoff.md))
 10. **กฎที่ตรวจไม่ได้คือกฎที่จะเพี้ยน** — `python _scripts/check.py` คือขั้นตรวจของเรปโปนี้เอง
    ทุกกฎในนั้นมีอยู่เพราะของจริงเคยเพี้ยนมาแล้วหนึ่งครั้ง ADR ฉบับใหม่ที่บังคับอะไรกับไฟล์ skill
    ควรเพิ่มกฎลงไปด้วย
