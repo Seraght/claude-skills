@@ -39,6 +39,7 @@
 | [`assessment-layout/`](skills/assessment-layout/) | ที่อยู่ของชุดสอบ ความหมายของเลขหน้าไฟล์ รูปร่างของ blueprint และตารางอนุมัติข้อสอบ | `make-exam`, `critique-mcq` |
 | [`item-defects/`](skills/item-defects/) | ข้อบกพร่องของข้อสอบ แยกไฟล์ตามชนิดข้อสอบ พร้อมวิธีแก้ของแต่ละข้อ | `make-exam`, `critique-mcq`, `analyze-results` |
 | [`learning-outcomes/`](skills/learning-outcomes/) | อะไรทำให้ผลลัพธ์การเรียนรู้วัดได้ และตรวจ alignment สองทิศทางอย่างไร | `design-course`, `make-exam` |
+| [`thai-office-files/`](skills/thai-office-files/) | สิ่งที่ไฟล์ Word, PowerPoint, Excel ที่มีข้อความภาษาไทยต้องมี แยกไฟล์ตามนามสกุล และ rendered check ที่ตัดสินว่าไฟล์เสร็จ | `make-exam`, `make-practical` และงานใดก็ตามที่ส่งไฟล์ Office ภาษาไทย |
 
 และอีกหนึ่งโฟลเดอร์เป็น **primitive** — มีลำดับขั้นของตัวเอง แต่ถูกเรียกจาก*กลาง*ขั้นของ checklist ตัวอื่น
 ทำงานจนจบแล้วคืนการควบคุมให้ขั้นนั้น ไม่มีขั้นสำรวจหรือขั้นตรวจปิดท้ายของตัวเอง
@@ -76,7 +77,7 @@
 
 ทุก checklist ต้องพาตัวที่มันอ่านไปด้วย —
 `init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy` และ `grill-point` (องค์ประกอบที่ 12 ใช้รูปแบบ decision record ของมัน)
-`make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
+`make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes`, `grill-point` และ `thai-office-files`
 `critique-mcq` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `grill-point`
 `analyze-results` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
 `design-course` ต้องไปพร้อม `learning-outcomes` และ `grill-point`
