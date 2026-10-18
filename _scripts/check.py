@@ -120,6 +120,11 @@ OUTCOME_LITERALS = [r"[Cc]onstructive alignment", r"Mager", r"Unobservable\.", r
 # later reveal; they do not carry the thresholds for reading one.
 STATS_LITERALS = [r"Ebel", r"Kuder", r"Sijtsma", r"standard error of measurement"]
 
+# The markup Thai text needs in an Office file belongs to the thai-office-files
+# skill and nowhere else (ADR 0021). A checklist that copied the Word rule would
+# carry the half of it that was remembered.
+THAI_OFFICE_LITERALS = [r"compatibilityMode", r"thaiDistribute", r"<w:cs/>"]
+
 # Instructions that are wrong on their own. Each pair is one field test: the first
 # phrase turned up without the second, and the run went wrong in exactly the way
 # the second prevents.
@@ -252,6 +257,12 @@ for pattern in STATS_LITERALS:
                    if os.path.basename(os.path.dirname(p)) != 'analyze-results'
                    and re.search(pattern, io.open(p, encoding='utf-8').read())})
     check(not hits, "%s appears only in analyze-results%s" % (pattern, (" [also in %s]" % ", ".join(hits)) if hits else ""))
+
+for pattern in THAI_OFFICE_LITERALS:
+    hits = sorted({os.path.basename(os.path.dirname(p)) for p in DOCS
+                   if os.path.basename(os.path.dirname(p)) != 'thai-office-files'
+                   and re.search(pattern, io.open(p, encoding='utf-8').read())})
+    check(not hits, "%s appears only in thai-office-files%s" % (pattern, (" [also in %s]" % ", ".join(hits)) if hits else ""))
 
 print("\nskills reached by name exist\n")
 for path in DOCS:
