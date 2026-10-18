@@ -4,7 +4,7 @@
 
 None yet. A file is finished on its rendered check alone.
 
-**Tested, and needing nothing:** a cell from openpyxl's default package, wrap text on, TH Sarabun New 16 pt, broke Thai between words in Excel with no added markup (2026-10-18, Microsoft 365 on Windows 11). Word's line-breaking rule does not carry over — this is recorded so that it is not copied here by analogy.
+**Tested, and needing nothing:** a cell from openpyxl's default package, wrap text on, TH Sarabun New 16 pt, broke Thai between words in Excel with no added markup (2026-10-18, Microsoft 365 on Windows 11).
 
 ## Rendering
 
@@ -18,6 +18,7 @@ The workbook opens read-only; `0` is PDF.
 
 ## Untested
 
-- Thai problems have been met in Office files other than Word before, with no record of which format or what they were. The first one seen again goes here, with the file it was seen in.
+- Thai problems have been met in Office files other than Word before, with no record of which format or what they were.
+- Whether Excel has conditions like Word's that the default package happened to meet.
 - Row heights that auto-fit too short, clipping the marks above and below a Thai line.
 - Wrapping in merged cells.
