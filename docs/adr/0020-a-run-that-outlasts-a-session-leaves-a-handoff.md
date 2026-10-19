@@ -1,6 +1,6 @@
 # A run that outlasts a session leaves a handoff
 
-> Superseded in part by [ADR 0022](0022-a-contributed-pool-is-adopted-then-critiqued.md): `critique-mcq` now carries the handoff clauses, since a critique run was seen to outlast a session.
+> Superseded in part by [ADR 0022](0022-a-contributed-pool-is-adopted-then-critiqued.md): `critique-mcq` now carries the handoff clauses, and a handoff is named for the skill that wrote it, `HANDOFF-<skill>.md`.
 
 The 2569 final of a mathematics course was built with `make-exam` in one session. The session reached steps 7 and 8 at 473K tokens of context and stopped at 680K, with the answer key, the paper, and the review still to do; the user asked for a handoff, and the run invented one, `HANDOFF.md`, in the exam set folder. Nothing in the skill told it to, or told the next session to read it.
 
