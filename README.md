@@ -47,7 +47,7 @@
 
 | primitive | ทำอะไร | ใครเรียก |
 |---|---|---|
-| [`grill-point/`](skills/grill-point/) | หยุดซักผู้ใช้ทีละรอบจนเข้าใจตรงกันก่อนเขียนเอกสารต้นทาง แล้วบันทึกการตัดสินใจที่ใช้ต่อได้เป็น decision record และเก็บหน้าตาของรอบคำถาม | grill point เต็มรูปแบบ: `design-course`, `make-exam`, `make-practical`, `analyze-results`, `audit-brain` · หน้าตาของรอบคำถาม: ทุก checklist, `adopt-pool` |
+| [`grill-point/`](skills/grill-point/) | หยุดซักผู้ใช้ทีละรอบจนเข้าใจตรงกันก่อนเขียนเอกสารต้นทาง แล้วบันทึกการตัดสินใจที่ใช้ต่อได้เป็น decision record และเก็บหน้าตาของรอบคำถาม | grill point เต็มรูปแบบ: `adopt-pool`, `design-course`, `make-exam`, `make-practical`, `analyze-results`, `audit-brain` · หน้าตาของรอบคำถาม: ทุก checklist |
 
 เริ่มจากศูนย์ให้พิมพ์เรียก `init-brain` ก่อน — มันสร้าง `AGENTS.md`, index, templates และสคริปต์ตรวจ
 ซึ่งเป็น "สิ่งที่ skill ตัวอื่นไปอ่านตอนรัน"
