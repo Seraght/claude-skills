@@ -38,9 +38,13 @@ STOP_CLAUSE = ("Whenever a step puts more than one decision to the user, it asks
 APPROVAL_EXCEPTION = (", except that an approval of items is asked in the approval table the "
                       "`assessment-layout` skill gives.")
 
-HANDOFF_CLAUSE = "A run of this skill can outlast one session's context, so every step the plan marks 🛑 writes `HANDOFF.md` into the run's folder, once that folder exists, before it stops: the step to resume at and where inside it, the questions waiting on the user, what the run has learned that none of its files records, and the files to read first. A decision already written into a file is pointed to rather than copied, because two copies of one answer drift apart; one settled but not yet written anywhere goes into the handoff, or it is lost with the session. The file is rewritten whole at each stop, and the stop ends with one line, in the user's language, saying that the session can be closed here and giving the line, naming the folder, that resumes the run in a new one. The last step deletes it."
-RESUME_CLAUSE = "Where the folder this run writes into already holds a `HANDOFF.md`, the run is resuming: read it before the run's other files, read first the files it lists, and take the step it names, checked against the files that exist, since a session can end between stops after its last handoff was written. Where that folder holds this skill's files but no handoff, infer the step from the files that exist. Where the step was inferred, or the handoff and the files disagree, say so in the line of what could not be found. Either way the plan marks the finished steps ✓. Then show the user the plan for this run"
-DELETE_CLAUSE = "Last, delete the run's `HANDOFF.md`, once anything still open in it is written into the run's own files: a handoff left behind makes the next run on this folder resume one that is finished."
+HANDOFF_CLAUSE = "A run of this skill can outlast one session's context, so every step the plan marks 🛑 writes a handoff named for this skill, `HANDOFF-<skill>.md`, into the run's folder, once that folder exists, before it stops: the step to resume at and where inside it, the questions waiting on the user, what the run has learned that none of its files records, and the files to read first. A decision already written into a file is pointed to rather than copied, because two copies of one answer drift apart; one settled but not yet written anywhere goes into the handoff, or it is lost with the session. The file is rewritten whole at each stop, and the stop ends with one line, in the user's language, saying that the session can be closed here and giving the line, naming the skill and the folder, that resumes the run in a new one. The last step deletes it."
+RESUME_CLAUSE = "Where the folder this run writes into already holds this skill's handoff, the run is resuming: read it before the run's other files, read first the files it lists, and take the step it names, checked against the files that exist, since a session can end between stops after its last handoff was written. Another skill's handoff in that folder belongs to that skill's run and is left as it is. Where that folder holds an unfinished run of this skill — one whose last step has not yet written into the folder — but no handoff, infer the step from the files that exist; a finished run's files are read as the steps below direct, not resumed. Where the step was inferred, or the handoff and the files disagree, say so in the line of what could not be found. Either way the plan marks the finished steps ✓. Then show the user the plan for this run"
+DELETE_CLAUSE = "Last, delete this skill's handoff from the run's folder, once anything still open in it is written into the run's own files: a handoff left behind makes the next run on this folder resume one that is finished."
+
+# A script a run writes into its session's scratch space is written again by the next
+# run, carrying the paper's Thai text each time (ADR 0022).
+SCRIPT_CLAUSE = "Where the vault keeps a script for a count or a build this run needs, run it rather than writing another; a script written here is saved where the vault keeps its scripts, not in a session's scratch space, so the next run finds it. An item's text is changed where it lives, in the items file, rather than through a script that regenerates the file: such a script carries the paper's text a second time and is lost with the session."
 
 IDENTICAL = [
     ("discovery clause",
@@ -77,6 +81,9 @@ IDENTICAL = [
     ("grill clause",
      r"\*\*This step is a grill point\*\*",
      "**This step is a grill point**: run the `grill-point` skill, and build nothing on a decision the grill has not settled."),
+    ("script clause",
+     r"^Where the vault keeps a script",
+     SCRIPT_CLAUSE),
 ]
 
 # Wordings that lost an argument. Each is a real regression, not a style note.
@@ -183,7 +190,7 @@ for label, carries, canonical in IDENTICAL:
 # governs every step, the ones nobody planned as stops included (ADR 0019).
 # It ends either at its full stop or with the approval exception, and only the checklists
 # that approve items carry the exception, so neither half grows a tail nobody checks.
-APPROVERS = {'critique-mcq', 'make-exam'}
+APPROVERS = {'adopt-pool', 'critique-mcq', 'make-exam'}
 for p in SKILLS:
     text = io.open(p, encoding='utf-8').read()
     if re.search(r"^This skill is an ordered checklist", text, re.M):
@@ -200,7 +207,8 @@ for p in SKILLS:
 # deletion closes the verify step, where it is acted on. Only these carry them: a run that
 # always ends in one session would carry a rule it never uses. Any file may still name
 # the handoff; what stays out is the clauses, in SKILL.md and sibling references alike.
-RESUMABLE = {'make-exam', 'make-practical', 'design-course'}
+# critique-mcq joined once a critique was seen to outlast a session (ADR 0022).
+RESUMABLE = {'adopt-pool', 'critique-mcq', 'make-exam', 'make-practical', 'design-course'}
 for p in DOCS:
     name = os.path.basename(os.path.dirname(p))
     text = io.open(p, encoding='utf-8').read()
@@ -219,6 +227,14 @@ for p in DOCS:
                                              ("delete", DELETE_CLAUSE)) if clause in text]
         check(not stray, "%s: carries no handoff clauses%s"
               % (os.path.relpath(p, ROOT), (" [found %s]" % ", ".join(stray)) if stray else ""))
+
+# The checklists that measure or write items carry the script clause, each by name: the
+# identical-text rule alone stays green while any two copies survive (ADR 0022).
+SCRIPT_CARRIERS = {'adopt-pool', 'critique-mcq', 'make-exam'}
+for name in sorted(SCRIPT_CARRIERS):
+    p = os.path.join(ROOT, 'skills', name, 'SKILL.md')
+    check(SCRIPT_CLAUSE in io.open(p, encoding='utf-8').read(),
+          "%s: carries the script clause" % os.path.relpath(p, ROOT))
 
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:

@@ -1,5 +1,7 @@
 # A run that outlasts a session leaves a handoff
 
+> Superseded in part by [ADR 0022](0022-a-contributed-pool-is-adopted-then-critiqued.md): `critique-mcq` now carries the handoff clauses, and a handoff is named for the skill that wrote it, `HANDOFF-<skill>.md`.
+
 The 2569 final of a mathematics course was built with `make-exam` in one session. The session reached steps 7 and 8 at 473K tokens of context and stopped at 680K, with the answer key, the paper, and the review still to do; the user asked for a handoff, and the run invented one, `HANDOFF.md`, in the exam set folder. Nothing in the skill told it to, or told the next session to read it.
 
 The growth was not waste that a tighter skill could remove. Of the 680K, 369K was the model's own output — thinking, and the text it wrote into files — and all of it stays in context for every later turn: the turn that wrote the sixty items produced 47,389 output tokens, and the next request's context grew by 47,553. Thai costs several times more tokens per character than English, and the run writes four files of 17K–23K characters each. Steps 1–6 alone took about 250K; writing sixty items with their rationales takes 150K or more. A complete written exam does not fit reliably in one session, whatever the skill says.

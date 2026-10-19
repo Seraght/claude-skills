@@ -26,15 +26,17 @@ The leading number is the **lifecycle stage**, not a position in a sequence:
 
 | Stage | Meaning | Default files |
 |---|---|---|
-| `0x` | Authoring — before the paper exists | `00-research.md`, `01-blueprint.md`, `02-items.md`, `03-paper.md`, `04-answer-key.md`, `05-rubric.md`, `06-measurements.md`, `07-sketches.md` |
+| `0x` | Authoring — before the paper exists | `00-research.md`, `01-blueprint.md`, `02-items.md`, `03-paper.md`, `04-answer-key.md`, `05-rubric.md`, `06-measurements.md`, `07-sketches.md`, `08-contributed.md` |
 | `1x` | Review — after the paper is assembled, before it is used | `10-critique.md`, `11-critique-independent.md` |
 | `2x` | After administration | `20-item-analysis.md` |
 
-Every stage has a skill that fills it: `make-exam` or `make-practical` for `0x`, `critique-mcq` for `1x`, `analyze-results` for `2x`. A stage the layout declares and nothing performs is a gap that reads as a completed step.
+Every stage has a skill that fills it: `make-exam`, `make-practical`, or — where the items came from another author — `adopt-pool` for `0x`, `critique-mcq` for `1x`, `analyze-results` for `2x`. A stage the layout declares and nothing performs is a gap that reads as a completed step.
+
+`08-contributed.md` holds a contributed pool exactly as it arrived — every item numbered as its author numbered it, with its key, and any rubric, as given, under the path of the file it came from — and is never edited after. It sits in the authoring stage because the set is built from it, and it is what a critique matches each item back to when it establishes provenance.
 
 The review stage carries two files rather than one. The second is an independent pass that measures the paper again from scratch rather than reading the first pass's table, because a critique built on a measurement it inherited certifies that measurement rather than checking it. Numbers are left unused inside each stage, so an artifact can be inserted without renumbering across stages. A missing stage reads as a stage that did not happen, rather than as a gap to be filled by the next number in the folder — which is why a review artifact takes the next free `1x` and never the number after the last authoring file.
 
-`HANDOFF.md` carries no number, because it belongs to no stage: it records where an unfinished run stopped, so that a new session can resume it, and the run that wrote it deletes it when it finishes. A set folder holding one is a set still being written. What goes into it is set out by the skills that write it.
+A handoff, `HANDOFF-<skill>.md`, carries no number, because it belongs to no stage: it records where an unfinished run of the skill it is named for stopped, so that a new session can resume it, and that run deletes it when it finishes. It is named for its skill because one folder can hold two unfinished runs at once — an exam set's own, and the review sent on from it. A set folder holding one has a run still open. What goes into it is set out by the skills that write it.
 
 ## What a blueprint holds
 
