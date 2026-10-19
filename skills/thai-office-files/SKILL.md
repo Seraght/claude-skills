@@ -17,6 +17,8 @@ What Thai text needs from an Office file, and the check that decides when such a
 
 Some breaks are inside a word by their characters alone: a line that ends on a leading vowel (`เ แ โ ใ ไ`) or on `ั`, and a next line that starts with a following vowel, a tone mark, or `ๆ`. Every other break is read — `สื่|อสาร` and `เด็|ดขาด` pass the character test and are still split.
 
+**Where the agent can start a sub-agent with a fresh context, the render and the reading run there.** It writes the page images and the evidence table beside the file and reports back only the breaks inside a word, each with its page. Page images read in the run that builds the file stay in that run's context for every turn after; the evidence on disk is what shows the check ran.
+
 **Extracted text can misreport `ำ`.** PyMuPDF, reading a PDF that Word exported, gives `ค าชี้แจง` for `คำชี้แจง`. That space is the extractor's, not the page's: judge a suspect break from the page image.
 
 **Where the machine has no Office program, the check has not run.** Record it as an unticked item in the run's own closing check, naming this skill, and tell the user what to look at once the file is open in the program: line ends of long paragraphs, for a word broken in two; and any line of a Thai-distributed paragraph — often the first — whose letters are stretched far apart. A rendering from another program — LibreOffice, Google Docs, a browser preview — lays Thai out with its own engine, so it says nothing about what the reader's program will show.

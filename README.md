@@ -27,7 +27,8 @@
 | [`design-course/`](skills/design-course/) | ออกแบบรายวิชาย้อนจากผลลัพธ์ — ตรวจว่าวิชาติดหนี้หลักสูตรข้อไหน → เขียน CLO → ตัดสินวิธีวัดของแต่ละข้อ → จึงค่อยวางตารางสอน |
 | [`make-exam/`](skills/make-exam/) | ออกข้อสอบตามลำดับที่ห้ามสลับ — ตรวจผลลัพธ์การเรียนรู้ก่อน → ซักผู้ใช้จนได้ blueprint → ร่างแนวคิดรายข้อให้ผู้ใช้เลือก → ชุดปรับจูน → เขียนทีละข้อตามงบรูปแบบ → วัดข้อบกพร่องเป็นตัวเลข → answer key → rubric → ส่งวิพากษ์ในบริบทใหม่ |
 | [`make-practical/`](skills/make-practical/) | ออกข้อสอบปฏิบัติ — ตาราง alignment ของภารกิจ → ภารกิจพร้อมเงื่อนไข → checklist หรือ rating scale → เกณฑ์ผ่าน → คู่มือผู้ตรวจ |
-| [`critique-mcq/`](skills/critique-mcq/) | วิพากษ์ข้อสอบปรนัยก่อนนำไปใช้ — วัดตัวเลือกก่อน แล้วรายงานทั้งรายข้อและทั้งฉบับ พร้อมฉบับแก้ รออนุมัติก่อนแตะไฟล์ |
+| [`adopt-pool/`](skills/adopt-pool/) | รับข้อสอบที่อาจารย์ท่านอื่นเขียนเข้าชุดสอบ — เก็บต้นฉบับไว้ไม่แตะ → blueprint จากน้ำหนัก CLO ก่อนดูข้อสอบ → วางข้อลงช่องให้ผู้ใช้เลือก → เขียนข้อเติมช่องที่ว่าง → ปรับถ้อยคำตามแบบของคลังโดยไม่เปลี่ยนสิ่งที่วัด → ส่งวิพากษ์ใน session ใหม่ |
+| [`critique-mcq/`](skills/critique-mcq/) | วิพากษ์ข้อสอบปรนัยก่อนนำไปใช้ — วัดตัวเลือกก่อน แล้วรายงานทั้งรายข้อและทั้งฉบับ พร้อมฉบับแก้ รออนุมัติก่อนแตะไฟล์ — รับคำวิพากษ์จากผู้วิพากษ์ภายนอกเข้าตารางเดียวกันได้ |
 | [`analyze-results/`](skills/analyze-results/) | วิเคราะห์ข้อสอบหลังสอบ — ผ่านด่านข้อมูลส่วนบุคคล → ความยาก → อำนาจจำแนก → ตัวลวง → ความเชื่อมั่น → ตีความตามขนาดกลุ่ม → เก็บสถิติเข้าคลังข้อสอบ |
 
 อีกห้าโฟลเดอร์ไม่ใช่ checklist แต่เป็น **reference skill** — ไม่มีขั้นตอนของตัวเอง มีไว้ให้ตัวอื่นเรียกด้วยชื่อ
@@ -79,6 +80,7 @@
 `init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy` และ `grill-point` (องค์ประกอบที่ 12 ใช้รูปแบบ decision record ของมัน)
 `make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes`, `grill-point` และ `thai-office-files`
 `critique-mcq` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `grill-point`
+`adopt-pool` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
 `analyze-results` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
 `design-course` ต้องไปพร้อม `learning-outcomes` และ `grill-point`
 ส่วน `digest`, `new-subject` และ `update-portfolio` ต้องไปพร้อม `grill-point` — ถ้าไม่พาไปก็ยังรันได้
@@ -131,9 +133,9 @@ skill จะถามหาข้อมูลที่จำเป็นระ�
    และรายงานจำนวนของทุกกลุ่มรวมกลุ่มที่ไม่เจออะไรเลย ([ADR 0008](docs/adr/0008-a-check-that-leaves-no-evidence-did-not-run.md))
    — และเกณฑ์ตัวเลขของขั้นตรวจต้องมาจาก skill เอง เกณฑ์ที่ skill ไม่ให้ไว้คือเกณฑ์ที่ agent จะตั้งเองแบบหลวม ๆ
    ([ADR 0018](docs/adr/0018-a-threshold-the-skill-does-not-give-is-one-the-agent-invents.md))
-   — checklist สายยาว (`make-exam`, `make-practical`, `design-course`) จบใน session เดียวไม่ได้เสมอไป
+   — checklist สายยาว (`make-exam`, `make-practical`, `design-course`, `adopt-pool`, `critique-mcq`) จบใน session เดียวไม่ได้เสมอไป
    ทุกจุด 🛑 จึงเขียน `HANDOFF.md` ไว้ในชุดงาน และขั้นแรกรับงานต่อจากมัน แทนการพึ่งให้ผู้ใช้สังเกตเองว่า context ใกล้เต็ม
-   ([ADR 0020](docs/adr/0020-a-run-that-outlasts-a-session-leaves-a-handoff.md))
+   ([ADR 0020](docs/adr/0020-a-run-that-outlasts-a-session-leaves-a-handoff.md), [ADR 0022](docs/adr/0022-a-contributed-pool-is-adopted-then-critiqued.md))
 10. **กฎที่ตรวจไม่ได้คือกฎที่จะเพี้ยน** — `python _scripts/check.py` คือขั้นตรวจของเรปโปนี้เอง
    ทุกกฎในนั้นมีอยู่เพราะของจริงเคยเพี้ยนมาแล้วหนึ่งครั้ง ADR ฉบับใหม่ที่บังคับอะไรกับไฟล์ skill
    ควรเพิ่มกฎลงไปด้วย

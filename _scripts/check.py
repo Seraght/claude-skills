@@ -42,6 +42,10 @@ HANDOFF_CLAUSE = "A run of this skill can outlast one session's context, so ever
 RESUME_CLAUSE = "Where the folder this run writes into already holds a `HANDOFF.md`, the run is resuming: read it before the run's other files, read first the files it lists, and take the step it names, checked against the files that exist, since a session can end between stops after its last handoff was written. Where that folder holds this skill's files but no handoff, infer the step from the files that exist. Where the step was inferred, or the handoff and the files disagree, say so in the line of what could not be found. Either way the plan marks the finished steps ✓. Then show the user the plan for this run"
 DELETE_CLAUSE = "Last, delete the run's `HANDOFF.md`, once anything still open in it is written into the run's own files: a handoff left behind makes the next run on this folder resume one that is finished."
 
+# A script a run writes into its session's scratch space is written again by the next
+# run, carrying the paper's Thai text each time (ADR 0022).
+SCRIPT_CLAUSE = "Where the vault keeps a script for a count or a build this run needs, run it rather than writing another; a script written here is saved where the vault keeps its scripts, not in a session's scratch space, so the next run finds it. An item's text is changed where it lives, in the items file, rather than through a script that regenerates the file: such a script carries the paper's text a second time and is lost with the session."
+
 IDENTICAL = [
     ("discovery clause",
      r"^\d+\. \*\*Discover the project's conventions\*\*",
@@ -77,6 +81,9 @@ IDENTICAL = [
     ("grill clause",
      r"\*\*This step is a grill point\*\*",
      "**This step is a grill point**: run the `grill-point` skill, and build nothing on a decision the grill has not settled."),
+    ("script clause",
+     r"^Where the vault keeps a script",
+     SCRIPT_CLAUSE),
 ]
 
 # Wordings that lost an argument. Each is a real regression, not a style note.
@@ -183,7 +190,7 @@ for label, carries, canonical in IDENTICAL:
 # governs every step, the ones nobody planned as stops included (ADR 0019).
 # It ends either at its full stop or with the approval exception, and only the checklists
 # that approve items carry the exception, so neither half grows a tail nobody checks.
-APPROVERS = {'critique-mcq', 'make-exam'}
+APPROVERS = {'adopt-pool', 'critique-mcq', 'make-exam'}
 for p in SKILLS:
     text = io.open(p, encoding='utf-8').read()
     if re.search(r"^This skill is an ordered checklist", text, re.M):
@@ -200,7 +207,8 @@ for p in SKILLS:
 # deletion closes the verify step, where it is acted on. Only these carry them: a run that
 # always ends in one session would carry a rule it never uses. Any file may still name
 # the handoff; what stays out is the clauses, in SKILL.md and sibling references alike.
-RESUMABLE = {'make-exam', 'make-practical', 'design-course'}
+# critique-mcq joined once a critique was seen to outlast a session (ADR 0022).
+RESUMABLE = {'adopt-pool', 'critique-mcq', 'make-exam', 'make-practical', 'design-course'}
 for p in DOCS:
     name = os.path.basename(os.path.dirname(p))
     text = io.open(p, encoding='utf-8').read()
