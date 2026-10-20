@@ -110,7 +110,7 @@ BANNED = [
 # Structure that belongs to the assessment-layout skill and nowhere else (ADR 0007).
 LAYOUT_LITERALS = [r"<subject>/assessment", r"assessment/<year>", r"assessment/bank",
                    r"[Rr]ows are topics", r"[Cc]olumns are cognitive levels",
-                   r"teaching hours ÷", r"`stimuli/`"]
+                   r"teaching hours ÷", r"`stimuli/`", r"two per line"]
 
 # The flaw taxonomy belongs to the item-defects skill and nowhere else (ADR 0008).
 # It had drifted into two copies at two levels of detail, and the weaker copy is

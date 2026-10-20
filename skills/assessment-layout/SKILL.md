@@ -1,11 +1,11 @@
 ---
 name: assessment-layout
-description: Where a vault's exam sets, item bank, and review paperwork live, and what the file numbers mean. Use when reading or writing an exam set, or when another skill needs the assessment layout.
+description: Where a vault's exam sets, item bank, and review paperwork live, what the file numbers mean, and how printed options are laid out. Use when reading or writing an exam set, or when another skill needs the assessment layout.
 ---
 
 # Assessment Layout
 
-The shape every assessment skill in this set reads and writes, and the table those skills put items to the user in. It is reference only — it carries no steps of its own.
+The shape every assessment skill in this set reads and writes, the table those skills put items to the user in, and how a printed paper sets out its options. It is reference only — it carries no steps of its own.
 
 **The vault's `AGENTS.md` is the authority.** What follows is the skill default, used only where the vault says nothing. A vault that states its own layout overrides the files and folders below, and an artifact is not misfiled for obeying the vault.
 
@@ -82,6 +82,16 @@ A paper that does not fit its own duration measures reading speed, and it does s
 A stimulus set is one stimulus — a table, a query, a log, a diagram, a form — and every item answered from it. In the items file it is one block: a heading naming the set and the items it serves (`Set S1 · items 28–33`), the stimulus once, then the items, each tagged with its own cell, since one set routinely spans several levels. The stems do not retell the stimulus.
 
 In the bank the stimulus is a file of its own under `stimuli/`, named by an id, and each of its items names that id. A stimulus outlives every paper that uses it: a table set this year carries new items next year.
+
+## Options on the printed paper
+
+A selected-response item puts the most options on each line that still give every option, with its letter, one line inside its own column — four options go on one line, two per line, or one per line. The columns divide the line equally from the point where the options are indented, and an option fits its column when its **rendered width** — in the paper's font and size — leaves the column's gap before the next one begins. Width is never a character count: Thai marks above and below a letter are counted as characters and take no width, so a count sets options on more lines than they need.
+
+- **The paper is built by one script the vault keeps for every subject**, in its scripts folder (`_scripts/` by default), because a build written per paper sets its own widths and each paper is then corrected again. The script holds the column widths and the gap, measured from the vault's paper form. A run that finds no script writes it there; where the vault has no form, the widths are put to the user first.
+- **The rendered page confirms the layout, in both directions.** An option that wraps inside its column fails, and so does an item set on more lines than its options need. It is read in the same pass as the rendered check the `thai-office-files` skill gives, so the page images are opened once, or on its own where that check does not run.
+- An institution's form that fixes how options are set out governs over this.
+
+Why: [ADR 0023](../../docs/adr/0023-options-are-laid-out-by-rendered-width.md).
 
 ## Approval table
 
