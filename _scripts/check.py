@@ -145,6 +145,9 @@ PAIRED = [
     ("binding review runs", "unticked item",
      "a review passed on only as a sentence in the session leaves no evidence, which "
      "is the failure ADR 0008 is about; it is written into the exam set instead"),
+    ("would mark unconfirmed", "this run lacks",
+     "a step that permits the mark without asking what it waits for let a digest close "
+     "on marks one fetch would have settled, one of them a wrong figure (ADR 0024)"),
 ]
 
 DESCRIPTION_BUDGET = 40
