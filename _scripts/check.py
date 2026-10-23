@@ -145,6 +145,9 @@ PAIRED = [
     ("binding review runs", "unticked item",
      "a review passed on only as a sentence in the session leaves no evidence, which "
      "is the failure ADR 0008 is about; it is written into the exam set instead"),
+    ("unchecked mark", "the source tried and what stopped it",
+     "a step that permits the mark without naming the source tried let a digest close "
+     "on marks one fetch would have settled, beside a wrong figure (ADR 0024)"),
 ]
 
 DESCRIPTION_BUDGET = 40
@@ -235,6 +238,18 @@ for name in sorted(SCRIPT_CARRIERS):
     p = os.path.join(ROOT, 'skills', name, 'SKILL.md')
     check(SCRIPT_CLAUSE in io.open(p, encoding='utf-8').read(),
           "%s: carries the script clause" % os.path.relpath(p, ROOT))
+
+# digest opens the primary source before it writes an unchecked mark, and its verify step
+# confirms each remaining mark names the source tried (ADR 0024). Checked by name: the
+# pairing above stays green once its trigger is reworded away.
+p = os.path.join(ROOT, 'skills', 'digest', 'SKILL.md')
+text = io.open(p, encoding='utf-8').read()
+check("open the primary source the claim rests on, not the document being digested" in text,
+      "%s: opens the primary source before writing an unchecked mark" % os.path.relpath(p, ROOT))
+check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*every unchecked mark[^\n]*"
+                r"naming the source tried and what stopped it", text, re.M) is not None,
+      "%s: verify step confirms each unchecked mark names the source tried"
+      % os.path.relpath(p, ROOT))
 
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:
