@@ -19,7 +19,7 @@ We decided three things.
 - **Check every claim in the digest** — rejected. A lecture digest carries hundreds of claims, most restating the source faithfully. The AlexNet figure shows the cost of the bound chosen: a claim wrongly recorded as checked is reached only when a mark nearby leads to the same source. Re-checking every claim in every file a run touches would reach it directly, at a cost of every import re-verifying the vault around it.
 - **Put the rule in the host vault's constitution** — rejected. It would load on every turn of every task to serve one step of one skill, and a vault adopting this skill would not inherit it.
 - **Report the marks to the user and let them choose** — rejected. That is what happened; the user's answer was to ask the agent to do it, and the second run showed the agent could.
-- **Name a vault's label (`[ต้องยืนยัน]`) in the step** — rejected by [ADR 0013](0013-true-everywhere-or-true-here.md): labels are the host project's. "Whatever label the host project gives a claim not yet checked against its source" reaches any of them, and a run cannot dodge the step by choosing another label for the same state.
+- **Name a vault's label (`[ต้องยืนยัน]`) in the step** — rejected by [ADR 0013](0013-true-everywhere-or-true-here.md): labels are the host project's. "Whatever label the host project gives a claim not yet checked against the source it rests on" reaches any of them, and a run cannot dodge the step by choosing another label for the same state.
 
 ## Consequences
 
