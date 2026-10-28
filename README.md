@@ -29,6 +29,7 @@
 | [`make-practical/`](skills/make-practical/) | ออกข้อสอบปฏิบัติ — ตาราง alignment ของภารกิจ → ภารกิจพร้อมเงื่อนไข → checklist หรือ rating scale → เกณฑ์ผ่าน → คู่มือผู้ตรวจ |
 | [`adopt-pool/`](skills/adopt-pool/) | รับข้อสอบที่อาจารย์ท่านอื่นเขียนเข้าชุดสอบ — เก็บต้นฉบับไว้ไม่แตะ → blueprint จากน้ำหนัก CLO ก่อนวางข้อสอบลงช่อง → วางข้อลงช่องให้ผู้ใช้เลือก → เขียนข้อเติมช่องที่ว่าง → ปรับถ้อยคำตามแบบของคลังโดยไม่เปลี่ยนสิ่งที่วัด → ส่งวิพากษ์ใน session ใหม่ |
 | [`critique-mcq/`](skills/critique-mcq/) | วิพากษ์ข้อสอบปรนัยก่อนนำไปใช้ — วัดตัวเลือกก่อน แล้วรายงานทั้งรายข้อและทั้งฉบับ พร้อมฉบับแก้ รออนุมัติก่อนแตะไฟล์ — รับคำวิพากษ์จากผู้วิพากษ์ภายนอกเข้าตารางเดียวกันได้ |
+| [`critique-thesis/`](skills/critique-thesis/) | วิพากษ์ปริญญานิพนธ์ก่อนสอบ หรือตรวจฉบับแก้หลังสอบ — อ่านเป็นข้อความทีละหน้า → คำนวณตัวเลขในเล่มซ้ำและตรวจอ้างอิงกับแหล่งจริง ทิ้งตารางหลักฐานไว้ → สรุปในแชทให้ผู้ใช้ตัดสินก่อน → เขียนเป็น Markdown แล้ว render เป็น Word — ไม่นำเล่มเข้าคลัง |
 | [`analyze-results/`](skills/analyze-results/) | วิเคราะห์ข้อสอบหลังสอบ — ผ่านด่านข้อมูลส่วนบุคคล → ความยาก → อำนาจจำแนก → ตัวลวง → ความเชื่อมั่น → ตีความตามขนาดกลุ่ม → เก็บสถิติเข้าคลังข้อสอบ |
 
 อีกห้าโฟลเดอร์ไม่ใช่ checklist แต่เป็น **reference skill** — ไม่มีขั้นตอนของตัวเอง มีไว้ให้ตัวอื่นเรียกด้วยชื่อ
@@ -40,7 +41,7 @@
 | [`assessment-layout/`](skills/assessment-layout/) | ที่อยู่ของชุดสอบ ความหมายของเลขหน้าไฟล์ รูปร่างของ blueprint และตารางอนุมัติข้อสอบ | `make-exam`, `critique-mcq`, `adopt-pool` |
 | [`item-defects/`](skills/item-defects/) | ข้อบกพร่องของข้อสอบ แยกไฟล์ตามชนิดข้อสอบ พร้อมวิธีแก้ของแต่ละข้อ | `make-exam`, `critique-mcq`, `analyze-results`, `adopt-pool` |
 | [`learning-outcomes/`](skills/learning-outcomes/) | อะไรทำให้ผลลัพธ์การเรียนรู้วัดได้ และตรวจ alignment สองทิศทางอย่างไร | `design-course`, `make-exam`, `adopt-pool` |
-| [`thai-office-files/`](skills/thai-office-files/) | สิ่งที่ไฟล์ Word, PowerPoint, Excel ที่มีข้อความภาษาไทยต้องมี แยกไฟล์ตามนามสกุล และ rendered check ที่ตัดสินว่าไฟล์เสร็จ | `make-exam`, `make-practical` และงานใดก็ตามที่ส่งไฟล์ Office ภาษาไทย |
+| [`thai-office-files/`](skills/thai-office-files/) | สิ่งที่ไฟล์ Word, PowerPoint, Excel ที่มีข้อความภาษาไทยต้องมี แยกไฟล์ตามนามสกุล และ rendered check ที่ตัดสินว่าไฟล์เสร็จ | `make-exam`, `make-practical`, `critique-thesis` และงานใดก็ตามที่ส่งไฟล์ Office ภาษาไทย |
 
 และอีกหนึ่งโฟลเดอร์เป็น **primitive** — มีลำดับขั้นของตัวเอง แต่ถูกเรียกจาก*กลาง*ขั้นของ checklist ตัวอื่น
 ทำงานจนจบแล้วคืนการควบคุมให้ขั้นนั้น ไม่มีขั้นสำรวจหรือขั้นตรวจปิดท้ายของตัวเอง
@@ -80,6 +81,7 @@
 `init-brain` กับ `audit-brain` ต้องไปพร้อม `brain-anatomy` และ `grill-point` (องค์ประกอบที่ 12 ใช้รูปแบบ decision record ของมัน)
 `make-exam` กับ `make-practical` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes`, `grill-point` และ `thai-office-files`
 `critique-mcq` ต้องไปพร้อม `assessment-layout`, `item-defects` และ `grill-point`
+`critique-thesis` ต้องไปพร้อม `grill-point` และ `thai-office-files`
 `adopt-pool` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
 `analyze-results` ต้องไปพร้อม `assessment-layout`, `item-defects`, `learning-outcomes` และ `grill-point`
 `design-course` ต้องไปพร้อม `learning-outcomes` และ `grill-point`
