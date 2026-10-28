@@ -251,6 +251,13 @@ check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*every unchecked mark[^\
       "%s: verify step confirms each unchecked mark names the source tried"
       % os.path.relpath(p, ROOT))
 
+# critique-thesis keeps the critique's text in Markdown and renders the Word file from it,
+# rather than in a builder script that carries the text and is lost with the session (ADR 0025).
+p = os.path.join(ROOT, 'skills', 'critique-thesis', 'SKILL.md')
+check("The critique's text lives in a Markdown file beside the Word file, and the Word file is rendered from it"
+      in io.open(p, encoding='utf-8').read(),
+      "%s: keeps the critique's text in Markdown and renders from it" % os.path.relpath(p, ROOT))
+
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:
     hits = [os.path.relpath(p, ROOT) for p in DOCS
