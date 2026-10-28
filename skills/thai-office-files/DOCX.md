@@ -21,6 +21,7 @@ With either missing, Word reads a stretch of Thai with no spaces as one long wor
 |---|---|---|---|
 | Word itself | written on each run | mode 15 | between words |
 | python-docx | absent | mode 14 | inside words — add `<w:cs/>` to the document defaults |
+| docx-js 9.15 | absent | mode 15 | inside words — add `<w:cs/>` to the document defaults; docx-js has no option for it, so patch `styles.xml` after packing |
 | Hand-written OOXML | whatever was written | whatever was written | between words only with both |
 
 **Evidence** (2026-10-18; Microsoft 365 Word on Windows 11; TH Sarabun New 16 pt; one long paragraph; breaks read from the exported PDF):
@@ -30,6 +31,7 @@ With either missing, Word reads a stretch of Thai with no spaces as one long wor
 - From a document Word made itself, each of its 14 `settings.xml` elements was removed in turn: only removing `<w:compat>` broke inside words. Keeping one child of `<w:compat>` at a time: `compatibilityMode` alone and `applyBreakingRules` alone each sufficed; none of the other five did.
 - `<w:cs/>` in `docDefaults`, or in the `Normal` style, with bare runs, broke between words like `<w:cs/>` on each run.
 - python-docx's default package (mode 14): inside words without `<w:cs/>`, between words with it.
+- docx-js 9.15 (2026-10-28), one unspaced paragraph, default font set to TH Sarabun New, which docx-js writes into the complex-script slot too: as packed, seven of nine line ends fell inside a word (`โดยใ|ช้`, `อาจา|รย์`, `ศึ|กษา`); with only `<w:cs/>` appended to the `docDefaults` run properties, all nine fell between words (`โดย|ใช้`, `กับ|อาจารย์`).
 
 Why this is checked on the page rather than in the markup: [ADR 0021](../../docs/adr/0021-a-thai-file-is-checked-on-the-page.md).
 
@@ -48,5 +50,4 @@ finally { $w.Quit() }
 - The Thai font has to sit in the complex-script slot, `<w:rFonts w:cs="…"/>` — python-docx's `font.name` sets only `ascii` and `hAnsi`.
 - Bold and size need their complex-script twins, `<w:bCs/>` and `<w:szCs/>`, to reach Thai text.
 - Exact line spacing clips the marks above and below a Thai line.
-- What docx-js — the library Anthropic's docx skill builds with — writes by default.
 - Word for Mac, and Word versions other than the one above.
