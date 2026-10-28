@@ -14,7 +14,9 @@ We decided four things.
 
 **The critique's text is a Markdown file, and the Word file is rendered from it.** A script that carries the text is the failure [ADR 0022](0022-a-contributed-pool-is-adopted-then-critiqued.md) named for exam items: the text is lost with the session, and a correction means another script. The renderer is the host's, since the layout is one institution's form; the skill says where the text lives and that the Word file is rendered from it.
 
-**The summary in the chat is an approval stop, not a grill point.** The user can judge a finding with its page and evidence on its own, which is what [ADR 0016](0016-agreement-is-not-understanding.md) reserves approval for; nothing is built on the summary that a rejected finding would invalidate except the file itself.
+**The summary in the chat is an approval stop, not a grill point.** The user can judge a finding with its page and evidence on its own, which is what [ADR 0016](0016-agreement-is-not-understanding.md) reserves approval for; nothing is built on the summary that a rejected finding would invalidate except the file itself. So the summary is a table with one row per finding — section, page, evidence, proposed change — answered row by row or whole, as the approval table is for items; a round would put sixty findings to the user as sixty question blocks ([ADR 0019](0019-every-stop-takes-its-shape-from-one-place.md)). The table's shape stays in this skill until a second skill approves findings that are not items, which is when [ADR 0007](0007-shape-is-shared-process-is-copied.md) gives it a home.
+
+**The thesis's text does not outlive the run.** The session's scratch space is not deleted when the session ends — 259 of this vault's session folders were still on disk — so the run deletes the extracted text and its copy of the thesis, and step 9 confirms it. The evidence table is kept beside the critique, so it records personal data by page and kind, never by value.
 
 ## Considered Options
 
@@ -22,6 +24,8 @@ We decided four things.
 - **A paragraph in the vault's constitution holding the whole process** — rejected: it would load on every session in the vault for a task a few sessions do, and the checks are not the vault's to keep.
 - **Fold it into `critique-mcq`** — rejected: that skill measures items against a defect taxonomy; a thesis has no items and its checks are of a different kind.
 - **Keep the template and splice its lines** — rejected for the reasons above, and because the splice points moved whenever the template did.
+- **A handoff at the summary stop, as the long checklists write ([ADR 0020](0020-a-run-that-outlasts-a-session-leaves-a-handoff.md))** — rejected for now: each of the six runs finished in one session. The evidence table is written to its file from step 4, so a run that does stop leaves its checks on disk rather than only in context. A run seen to outlast a session is the evidence for joining the resumable set.
+- **Leave recomputing scripts in the scratch space** — rejected for the half of [ADR 0022](0022-a-contributed-pool-is-adopted-then-critiqued.md) this skill shares: a script that back-solves n or pages through Crossref is saved beside the host's renderer, so the next run finds it.
 - **Read a scanned page as an image when the text layer is missing** — rejected: the user stopped an image-by-image read for misreading a surname, and a page with no text is usually a certificate the user can check faster than the agent can.
 
 ## Consequences

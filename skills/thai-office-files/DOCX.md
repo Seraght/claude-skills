@@ -51,3 +51,4 @@ finally { $w.Quit() }
 - Bold and size need their complex-script twins, `<w:bCs/>` and `<w:szCs/>`, to reach Thai text.
 - Exact line spacing clips the marks above and below a Thai line.
 - Word for Mac, and Word versions other than the one above.
+- A long unspaced Thai cell in a fixed-width table pushes the table past the margin — seen in a docx-js file without `<w:cs/>`; not tested with it.
