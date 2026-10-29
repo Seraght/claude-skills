@@ -35,6 +35,12 @@ With either missing, Word reads a stretch of Thai with no spaces as one long wor
 
 Why this is checked on the page rather than in the markup: [ADR 0021](../../docs/adr/0021-a-thai-file-is-checked-on-the-page.md).
 
+### Word's own word list splits some words; U+200D inside the word holds it whole
+
+With both conditions above met, Word still breaks where its Thai word list puts a boundary inside a word: names and Pali–Sanskrit compounds (`กาญจนา|ภิเษก`, `ทุติย|ภูมิ`), and compounds at the seam of their parts (`ความพึง|พอใจ`, `แต่|ละ`, `หัว|เรื่อง`). Every other line end in the same file falls between words, so this is the word list, not the file's settings. Put U+200D (zero width joiner) between the parts of each word that split — in the source the file is rendered from, at every occurrence of that word — and render again, since a line end moved off one word can land on another.
+
+**Evidence** (2026-10-29; Microsoft 365 Word on Windows 11; TH Sarabun New; a nine-page docx-js file with `<w:cs/>` in the document defaults and mode 15; breaks read from the exported PDF): 41 line ends read, 5 inside a word, all at a word-list seam in the words above. With U+200D in those five words (14 occurrences), 41 line ends all fell between words; each of the five moved whole to the next line, and at 200 dpi the joiner showed no glyph, box, or gap.
+
 ## Rendering
 
 ```powershell
@@ -51,4 +57,5 @@ finally { $w.Quit() }
 - Bold and size need their complex-script twins, `<w:bCs/>` and `<w:szCs/>`, to reach Thai text.
 - Exact line spacing clips the marks above and below a Thai line.
 - Word for Mac, and Word versions other than the one above.
+- Word's Find matches a word that carries U+200D when the search is typed without it.
 - A long unspaced Thai cell in a fixed-width table pushes the table past the margin — seen in a docx-js file without `<w:cs/>`; not tested with it.
