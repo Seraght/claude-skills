@@ -27,11 +27,24 @@ DOCS = sorted(glob.glob(os.path.join(ROOT, 'skills', '*', '*.md')))
 # because a skill must run when its folder is copied alone (ADR 0005).
 # Each entry: label, a regex matching the *step* that must carry the text
 # (a mention elsewhere is not a carrier), and the canonical wording.
+# The last two rubric rules come from issue #17; their grounds are in
+# docs/research/thesis-critique-and-rubric-standards.md, section 3: an undescribed
+# score is a rating scale (Brookhart 2018), and totals without the rule that produces
+# them keep the scoring strategy secret (Dawson 2017).
 RUBRIC_CORE = (
     '- **Analytic** (separate criteria, each scored) for diagnostic feedback and multi-marker consistency; **holistic** (one overall judgement) for speed on short responses. Analytic is the default when more than one person marks.' + chr(10) +
     '- **Criteria are observable.** Each level descriptor names what is present or absent in the work, not how good it felt.' + chr(10) +
     '- **Levels are distinguishable.** Adjacent levels differ by something a marker can point at; typically 3–5 levels.' + chr(10) +
-    "- **Criterion weights sum to the item's marks**, and reflect what the outcome actually values.")
+    "- **Criterion weights sum to the item's marks**, and reflect what the outcome actually values." + chr(10) +
+    '- **Every score a criterion can award is traceable.** Each score is a described level, or is computed by a stated rule from described parts: a sum of sub-parts that each have a descriptor, or a weight times a described level. A criterion worth 8 whose scores 1–7 have no source is a rating scale labelled a rubric, and two markers will not agree on a 7.' + chr(10) +
+    '- **The examinee sees where the marks come from.** A criteria summary in any document the examinee receives gives at least one line per criterion on how its marks are reached (e.g. "C2 = 4 prompt elements × 1 + revision rounds 0/2/4"), or points to a document the examinee actually receives. Totals alone keep the scoring strategy secret, and a path inside the vault points at a file the examinee cannot open.')
+
+# The two rubric rules are also defects, named alike in the two defect files that
+# carry rubrics, so a critique of a written item and of a practical task reports the
+# same failure under the same name (issue #17).
+RUBRIC_DEFECTS = ["**A score with no source.**", "**The examinee's copy hides how marks are reached.**"]
+RUBRIC_DEFECT_FILES = ["skills/item-defects/CONSTRUCTED-RESPONSE-DEFECTS.md",
+                       "skills/item-defects/PRACTICAL-DEFECTS.md"]
 
 STOP_CLAUSE = ("Whenever a step puts more than one decision to the user, it asks them in the round "
                "shape the `grill-point` skill gives in its step 3")
@@ -188,6 +201,11 @@ for label, carries, canonical in IDENTICAL:
         anchors, copies = len(re.findall(carries, text, re.M)), text.count(canonical)
         check(copies >= anchors,
               "%s: %s is the canonical wording (%d of %d)" % (name, label, copies, anchors))
+
+for rel in RUBRIC_DEFECT_FILES:
+    text = io.open(os.path.join(ROOT, rel), encoding='utf-8').read()
+    for defect in RUBRIC_DEFECTS:
+        check(defect in text, "%s: carries the rubric defect %s" % (rel, defect))
 
 # The stop-shape clause follows the opening paragraph rather than sitting anywhere: it
 # governs every step, the ones nobody planned as stops included (ADR 0019).
