@@ -258,6 +258,27 @@ check("The critique's text lives in a Markdown file beside the Word file, and th
       in io.open(p, encoding='utf-8').read(),
       "%s: keeps the critique's text in Markdown and renders from it" % os.path.relpath(p, ROOT))
 
+# A proposal is critiqued by the same checklist as a branch, as a revision is: step 2
+# names it, and group F holds the design checks a proposal's critique found (ADR 0026).
+text = io.open(p, encoding='utf-8').read()
+check(re.search(r"^2\. \*\*[^*]*\*\*[^\n]*\*\*proposal run\*\*", text, re.M) is not None,
+      "%s: step 2 tells a proposal run apart" % os.path.relpath(p, ROOT))
+q = os.path.join(ROOT, 'skills', 'critique-thesis', 'THESIS-CHECKS.md')
+checks_text = io.open(q, encoding='utf-8').read()
+check(re.search(r"^## F\. ", checks_text, re.M) is not None,
+      "%s: carries group F, a proposal's design" % os.path.relpath(q, ROOT))
+# The students act on a table of changes, and a finding without the change it asks for is
+# the vague comment a committee discards (ADR 0026). Checked inside Reporting, in order.
+reporting = checks_text.split("\n## Reporting", 1)[-1] if "\n## Reporting" in checks_text else ""
+summary_at = reporting.find("1. **Summary**")
+table_at = reporting.find("2. **What to change**")
+check(0 <= summary_at < table_at,
+      "%s: Reporting puts the table of what to change right after the summary"
+      % os.path.relpath(q, ROOT))
+check(all(s in reporting for s in ("*evidence*", "*effect*", "*change to*")),
+      "%s: Reporting gives each finding the sub-heads evidence, effect, change to"
+      % os.path.relpath(q, ROOT))
+
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:
     hits = [os.path.relpath(p, ROOT) for p in DOCS

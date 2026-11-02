@@ -1,6 +1,6 @@
 # Thesis Checks
 
-The checks a thesis critique runs, and the shape its report takes. Every check here once found a real defect in a submitted thesis; none is a style preference. A check is run by recomputing or looking something up, never by reading the book and judging that it seems fine, and it is recorded in the evidence table whether or not it finds anything.
+The checks a thesis critique runs, and the shape its report takes. Every check here once found a real defect in a submitted thesis or proposal; none is a style preference. A check is run by recomputing or looking something up, never by reading the book and judging that it seems fine, and it is recorded in the evidence table whether or not it finds anything.
 
 When the host project carries its own thesis regulations, format guide, or interpretation criteria, those govern and this file fills the gaps they leave.
 
@@ -55,22 +55,37 @@ A finding cites the page it is on. A finding of absence — no ethics number, an
 - **An entry with too little to find** — a surname alone, no title — is a finding of its own, not a reference that passed.
 - **An annual report's or ranking's title year** may be the year it was released, the year its data covers, or the year after release, depending on the publisher. Find the edition the figure came from before calling it wrong.
 
+## F. The design a proposal commits to
+
+A proposal is judged on its design, since it has no results to check; a finished thesis is held to the same checks against its methods chapter.
+
+- **The sample has not already learned what the intervention teaches.** Compare the sample's description — year, courses passed, training received — with the intervention's content. A sample that has already studied it measures review, not learning, and leaves the effect little room to show.
+- **The sample size comes from a method that can be recomputed**: the Krejcie–Morgan table, Yamane's `n = N / (1 + Ne²)`, or a power analysis (G*Power) stating its test, effect size, α, and power. Recompute it from the stated inputs; a size with no method, or one its inputs do not give, is a finding. Reporting standards ask for the same: APA JARS on sample size, power, and precision; STROBE item 10.
+- **The instrument's item count agrees with its interpretation bands.** With `k` items scored `min` to `max`, a total runs from `k × min` to `k × max`; the bands cover that range with no gap and no overlap. Bands built for another item count — copied from the source instrument before items were added or dropped — are a finding.
+- **Each hypothesis can be tested on the stated sample.** A comparison needs the groups it compares, measured as the design says; a hypothesis against a control group in a one-group design, or a test the sample's size and level of measurement cannot carry, is a finding.
+- **Each objective has its analysis method**: the analysis plan names the statistic that answers it.
+- **Objective, hypothesis, framework, variable, instrument, and analysis plan hang together.** Trace every objective along that chain, one evidence-table row per objective; a variable in the framework that no instrument measures, an instrument part no objective uses, or a hypothesis about a variable outside the framework is a break, and each break is a finding.
+
+## A proposal
+
+On a proposal, run groups B to F; group A, and each check elsewhere that reads a results chapter, gets one row, *cannot apply: no results yet*. A check that a proposal states as a plan — instrument quality, ethics approval — is checked as a plan: what will be done, with what, and against which criterion.
+
 ## A revised thesis
 
-When the thesis comes back after an earlier critique, build a **status table** for each section of it: one row per earlier finding, its location in the revised book, and its status — *fixed*, *partly fixed*, *not fixed*, or *worse* — with the evidence. Then run every check above on the whole revised book: reading only what changed misses what the revision broke elsewhere, such as scope trimmed while the items testing it stayed, or a specific safeguard replaced by vaguer wording. New text added in the revision, references above all, is checked as if it were a first submission.
+When the thesis comes back after an earlier critique, or the full thesis arrives after its proposal's, build a **status table** for each section of it: one row per earlier finding, its location in the revised book, and its status — *fixed*, *partly fixed*, *not fixed*, or *worse* — with the evidence. Then run every check above on the whole revised book: reading only what changed misses what the revision broke elsewhere, such as scope trimmed while the items testing it stayed, or a specific safeguard replaced by vaguer wording. New text added in the revision, references above all, is checked as if it were a first submission.
 
 ## Reporting
 
 The critique is written in the host project's language, in this order:
 
-1. **Summary**: title, the version checked, the date, an overall verdict, and the few findings that decide it.
-2. **Critical — must be fixed before the exam**: each finding with *evidence* (page, and the quoted text or the recomputed number), *effect* (what it does to the thesis's conclusions), and *what to change*.
-3. **Methodology — should be fixed**: the same three parts.
-4. **Formatting and typing**: a table of page, what was found, and what it should be.
-5. **Strengths**: what the thesis does well, specific enough to keep through revision.
-6. **What to submit before the exam**: the list the students act on, most important first.
+1. **Summary**: title, the version checked — proposal, thesis, or revision — the date, the overall verdict in the host institution's own outcome words with its rationale in two or three sentences, and the few findings that decide it.
+2. **What to change**: one table the students act on, one row per finding — its code (the section's letter and the finding's number, as ก.1), its page, what to change, and whether it *must* be fixed before the exam or *should* be.
+3. **Critical — must be fixed before the exam**: each finding under its code, with the fixed sub-heads *evidence* (page, and the quoted text or the recomputed number), *effect* (what it does to the thesis's conclusions), and *change to* (what the text, table, or design becomes).
+4. **Methodology — should be fixed**: the same sub-heads.
+5. **Formatting and typing**: a table of page, what was found, and what it should be, after the substance. Where they are many, the summary says so, since enough of them together count against the book.
+6. **Strengths**: what the thesis does well, specific enough to keep through revision.
 7. **Sources used to check**: every external source a finding rests on, with its link.
 
-A revised thesis's critique leads each section with its status table.
+A revision run's critique leads each section with its status table.
 
 A finding without its page and its evidence is dropped, however sure it feels. People are named by role — advisor, committee, the student group — never by name or ID.
