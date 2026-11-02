@@ -27,22 +27,34 @@ DOCS = sorted(glob.glob(os.path.join(ROOT, 'skills', '*', '*.md')))
 # because a skill must run when its folder is copied alone (ADR 0005).
 # Each entry: label, a regex matching the *step* that must carry the text
 # (a mention elsewhere is not a carrier), and the canonical wording.
-# The last two rubric rules come from issue #17; their grounds are in
-# docs/research/thesis-critique-and-rubric-standards.md, section 3: an undescribed
-# score is a rating scale (Brookhart 2018), and totals without the rule that produces
-# them keep the scoring strategy secret (Dawson 2017).
+# The last two rubric rules, and the rating scale named as a deliberate choice, are
+# ADR 0027: an undescribed score is a rating scale (Brookhart 2018), and totals without
+# the rule that produces them keep the scoring strategy secret (Dawson 2017).
 RUBRIC_CORE = (
     '- **Analytic** (separate criteria, each scored) for diagnostic feedback and multi-marker consistency; **holistic** (one overall judgement) for speed on short responses. Analytic is the default when more than one person marks.' + chr(10) +
     '- **Criteria are observable.** Each level descriptor names what is present or absent in the work, not how good it felt.' + chr(10) +
     '- **Levels are distinguishable.** Adjacent levels differ by something a marker can point at; typically 3–5 levels.' + chr(10) +
     "- **Criterion weights sum to the item's marks**, and reflect what the outcome actually values." + chr(10) +
-    '- **Every score a criterion can award is traceable.** Each score is a described level, or is computed by a stated rule from described parts: a sum of sub-parts that each have a descriptor, or a weight times a described level. A criterion worth 8 whose scores 1–7 have no source is a rating scale labelled a rubric, and two markers will not agree on a 7.' + chr(10) +
+    '- **Every score a criterion can award is traceable.** Each score is a described level, or is computed by a stated rule from described parts: a sum of sub-parts that each have a descriptor, or a weight times a described level. A criterion presented as a rubric whose scores 1–7 out of 8 have no source is a rating scale labelled a rubric, and two markers will not agree on a 7. Where a rating scale is the deliberate choice, call it one and anchor its points.' + chr(10) +
     '- **The examinee sees where the marks come from.** A criteria summary in any document the examinee receives gives at least one line per criterion on how its marks are reached (e.g. "C2 = 4 prompt elements × 1 + revision rounds 0/2/4"), or points to a document the examinee actually receives. Totals alone keep the scoring strategy secret, and a path inside the vault points at a file the examinee cannot open.')
 
-# The two rubric rules are also defects, named alike in the two defect files that
+# The two rubric rules are also defects, worded alike in the two defect files that
 # carry rubrics, so a critique of a written item and of a practical task reports the
-# same failure under the same name (issue #17).
-RUBRIC_DEFECTS = ["**A score with no source.**", "**The examinee's copy hides how marks are reached.**"]
+# same failure under the same name and fixes it the same way (ADR 0027). The whole
+# entry is held identical, not only its name: the bodies drifted apart once, and only
+# one of them kept the rating scale as a deliberate choice.
+RUBRIC_DEFECTS = [
+    '- **A score with no source.** A criterion presented as a rubric awards scores that no descriptor reaches: worth 8, with descriptors at 8, 4, and 0 and nothing for the scores between, or a bare "out of 10" with no levels at all. Each unsourced score is the marker\'s impression, so the criterion is a rating scale labelled a rubric, and two markers will not agree on a 7. *Fix:* give every score its own descriptor, or make it the result of a stated rule over described parts — a sum of sub-parts that each have a descriptor, or a weight times a described level — and cut the scores neither can reach. Where a rating scale is the deliberate choice, call it one and anchor its points.',
+    '- **The examinee\'s copy hides how marks are reached.** The examinee\'s copy, or any criteria summary they receive, shows a total per criterion ("C1 … 8") and nothing on what earns it, or sends the reader to a file they cannot open, such as a path inside the vault. The scoring strategy is then secret, and the examinee cannot aim at what the criterion rewards. *Fix:* give at least one line per criterion on how its marks are reached ("C2 = 4 prompt elements × 1 + revision rounds 0/2/4"), or point to a rubric the examinee actually receives.',
+]
+# The authoring step that builds the rubric names both rules, as it names the older ones,
+# so a run that reads only the step still applies them (ADR 0027).
+RUBRIC_STEPS = {
+    'make-exam': r"^\d+\. \*\*Write the rubric\*\*",
+    'make-practical': r"^\d+\. \*\*Build the scoring instrument\*\*",
+}
+RUBRIC_STEP_RULES = ["every score traceable to a described level or a stated rule",
+                     "the examinee's copy shows how each criterion's marks are reached"]
 RUBRIC_DEFECT_FILES = ["skills/item-defects/CONSTRUCTED-RESPONSE-DEFECTS.md",
                        "skills/item-defects/PRACTICAL-DEFECTS.md"]
 
@@ -118,6 +130,9 @@ BANNED = [
     (r"วทก|KMPHT|รู้-จำ",
      "one institution's scale or paperwork is true where it was written and nowhere else; "
      "it belongs to the host project (ADR 0013)"),
+    (r"group A whole|the section's letter|as ก\.1",
+     "a finding code in one script, and one row for a group of checks, read as rules the "
+     "critique did not mean (ADR 0013, ADR 0026)"),
 ]
 
 # Structure that belongs to the assessment-layout skill and nowhere else (ADR 0007).
@@ -205,7 +220,14 @@ for label, carries, canonical in IDENTICAL:
 for rel in RUBRIC_DEFECT_FILES:
     text = io.open(os.path.join(ROOT, rel), encoding='utf-8').read()
     for defect in RUBRIC_DEFECTS:
-        check(defect in text, "%s: carries the rubric defect %s" % (rel, defect))
+        check(defect in text, "%s: carries the rubric defect %s in its canonical wording"
+              % (rel, defect.split('**')[1]))
+for name, step in sorted(RUBRIC_STEPS.items()):
+    p = os.path.join(ROOT, 'skills', name, 'SKILL.md')
+    m = re.search(step + r"[^\n]*", io.open(p, encoding='utf-8').read(), re.M)
+    for rule in RUBRIC_STEP_RULES:
+        check(bool(m) and rule in m.group(0),
+              "%s: the rubric step names %r" % (os.path.relpath(p, ROOT), rule))
 
 # The stop-shape clause follows the opening paragraph rather than sitting anywhere: it
 # governs every step, the ones nobody planned as stops included (ADR 0019).
@@ -272,13 +294,14 @@ check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*every unchecked mark[^\
 # critique-thesis keeps the critique's text in Markdown and renders the Word file from it,
 # rather than in a builder script that carries the text and is lost with the session (ADR 0025).
 p = os.path.join(ROOT, 'skills', 'critique-thesis', 'SKILL.md')
+thesis_skill = io.open(p, encoding='utf-8').read()
 check("The critique's text lives in a Markdown file beside the Word file, and the Word file is rendered from it"
-      in io.open(p, encoding='utf-8').read(),
+      in thesis_skill,
       "%s: keeps the critique's text in Markdown and renders from it" % os.path.relpath(p, ROOT))
 
 # A proposal is critiqued by the same checklist as a branch, as a revision is: step 2
 # names it, and group F holds the design checks a proposal's critique found (ADR 0026).
-text = io.open(p, encoding='utf-8').read()
+text = thesis_skill
 check(re.search(r"^2\. \*\*[^*]*\*\*[^\n]*\*\*proposal run\*\*", text, re.M) is not None,
       "%s: step 2 tells a proposal run apart" % os.path.relpath(p, ROOT))
 q = os.path.join(ROOT, 'skills', 'critique-thesis', 'THESIS-CHECKS.md')
@@ -296,6 +319,19 @@ check(0 <= summary_at < table_at,
 check(all(s in reporting for s in ("*evidence*", "*effect*", "*change to*")),
       "%s: Reporting gives each finding the sub-heads evidence, effect, change to"
       % os.path.relpath(q, ROOT))
+# On a proposal, each check in group A keeps its own row, as every other check does
+# (ADR 0008, ADR 0026); the rule is stated once, in THESIS-CHECKS.md, and step 4 points to it.
+check("each check in group A gets its own row" in checks_text,
+      "%s: on a proposal, each check in group A gets its own row" % os.path.relpath(q, ROOT))
+# Formatting and typing stay out of the table of what to change, in their own table
+# (ADR 0026), and the verify step asks a row only of the findings that table takes.
+check("Formatting and typing findings have no row in it" in reporting,
+      "%s: Reporting keeps formatting and typing out of the table of what to change"
+      % os.path.relpath(q, ROOT))
+check(re.search(r"^\d+\. \*\*Verify\*\*[^\n]*every finding outside formatting and typing has its row",
+                thesis_skill, re.M) is not None,
+      "%s: verify step asks a row only of the findings outside formatting and typing"
+      % os.path.relpath(p, ROOT))
 
 print("\nwordings that lost an argument\n")
 for pattern, why in BANNED:
@@ -340,6 +376,14 @@ for pattern in THAI_OFFICE_LITERALS:
                    if os.path.basename(os.path.dirname(p)) != 'thai-office-files'
                    and re.search(pattern, io.open(p, encoding='utf-8').read())})
     check(not hits, "%s appears only in thai-office-files%s" % (pattern, (" [also in %s]" % ", ".join(hits)) if hits else ""))
+
+print("\nADRs cited exist\n")
+# A rule's reason is the ADR it cites; a citation of an ADR that was never written is a
+# rule with no recorded reason.
+own = io.open(os.path.abspath(__file__), encoding='utf-8').read()
+for n in sorted(set(re.findall(r"ADR (\d{4})", own))):
+    check(bool(glob.glob(os.path.join(ROOT, 'docs', 'adr', n + '-*.md'))),
+          "ADR %s, cited here, exists in docs/adr" % n)
 
 print("\nskills reached by name exist\n")
 for path in DOCS:
