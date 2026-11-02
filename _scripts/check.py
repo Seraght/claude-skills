@@ -63,9 +63,16 @@ STOP_CLAUSE = ("Whenever a step puts more than one decision to the user, it asks
 APPROVAL_EXCEPTION = (", except that an approval of items is asked in the approval table the "
                       "`assessment-layout` skill gives.")
 
-HANDOFF_CLAUSE = "A run of this skill can outlast one session's context, so every step the plan marks 🛑 writes a handoff named for this skill, `HANDOFF-<skill>.md`, into the run's folder, once that folder exists, before it stops: the step to resume at and where inside it, the questions waiting on the user, what the run has learned that none of its files records, and the files to read first. A decision already written into a file is pointed to rather than copied, because two copies of one answer drift apart; one settled but not yet written anywhere goes into the handoff, or it is lost with the session. The file is rewritten whole at each stop, and the stop ends with one line, in the user's language, saying that the session can be closed here and giving the line, naming the skill and the folder, that resumes the run in a new one. The last step deletes it."
+HANDOFF_CLAUSE = "A run of this skill can outlast one session's context, so every step the plan marks 🛑 writes a handoff named for this skill, `HANDOFF-<skill>.md`, into the run's folder, once that folder exists, before it stops: the step to resume at and where inside it, the questions waiting on the user, what the run has learned that none of its files records, and the files to read first. A decision already written into a file is pointed to rather than copied, because two copies of one answer drift apart, and every answer a grill settled is already in this skill's grill log, `GRILL-LOG-<skill>.md`, where the run has one; a decision settled outside a grill and not yet written anywhere goes into the handoff, or it is lost with the session. The file is rewritten whole at each stop, and the stop ends with one line, in the user's language, saying that the session can be closed here and giving the line, naming the skill and the folder, that resumes the run in a new one. The last step deletes it."
 RESUME_CLAUSE = "Where the folder this run writes into already holds this skill's handoff, the run is resuming: read it before the run's other files, read first the files it lists, and take the step it names, checked against the files that exist, since a session can end between stops after its last handoff was written. Another skill's handoff in that folder belongs to that skill's run and is left as it is. Where that folder holds an unfinished run of this skill — one whose last step has not yet written into the folder — but no handoff, infer the step from the files that exist; a finished run's files are read as the steps below direct, not resumed. Where the step was inferred, or the handoff and the files disagree, say so in the line of what could not be found. Either way the plan marks the finished steps ✓. Then show the user the plan for this run"
 DELETE_CLAUSE = "Last, delete this skill's handoff from the run's folder, once anything still open in it is written into the run's own files: a handoff left behind makes the next run on this folder resume one that is finished."
+
+# Every skill with a grill point deletes the run's grill log in its last step (ADR 0028):
+# a skill that also writes a handoff in the same sentence that deletes the handoff, every
+# other caller in a sentence of its own.
+DELETE_WITH_LOG_CLAUSE = "Last, delete this skill's handoff and its grill log, `GRILL-LOG-<skill>.md`, from the run's folder, once anything still open in them is written into the run's own files: a handoff left behind makes the next run on this folder resume one that is finished, and a grill log left behind is a second copy of answers that drifts from the artifact, against which the next run would check its drafts."
+LOG_DELETE_CLAUSE = "Last, delete this skill's grill log, `GRILL-LOG-<skill>.md`, from the run's folder: a grill log left behind is a second copy of answers that drifts from the artifact, against which the next run would check its drafts."
+GRILL_ANCHOR = r"\*\*This step is a grill point\*\*"
 
 # A script a run writes into its session's scratch space is written again by the next
 # run, carrying the paper's Thai text each time (ADR 0022).
@@ -252,24 +259,53 @@ for p in SKILLS:
 # the handoff; what stays out is the clauses, in SKILL.md and sibling references alike.
 # critique-mcq joined once a critique was seen to outlast a session (ADR 0022).
 RESUMABLE = {'adopt-pool', 'critique-mcq', 'make-exam', 'make-practical', 'design-course'}
+# The callers are found, not listed, so a skill that gains a grill point and no deletion fails.
+GRILL_CALLERS = {os.path.basename(os.path.dirname(p)) for p in SKILLS
+                 if re.search(GRILL_ANCHOR, io.open(p, encoding='utf-8').read())}
+check(len(GRILL_CALLERS) > 1, "grill point: carried by more than one skill (%d)" % len(GRILL_CALLERS))
 for p in DOCS:
     name = os.path.basename(os.path.dirname(p))
     text = io.open(p, encoding='utf-8').read()
-    if name in RESUMABLE and os.path.basename(p) == 'SKILL.md':
+    is_skill = os.path.basename(p) == 'SKILL.md'
+    delete = DELETE_WITH_LOG_CLAUSE if name in GRILL_CALLERS else DELETE_CLAUSE
+    if name in RESUMABLE and is_skill:
         check(re.search(re.escape(STOP_CLAUSE) + r"[^\n]*\n\n" + re.escape(HANDOFF_CLAUSE) + r"\n",
                         text) is not None,
               "%s: handoff clause follows the stop shape clause" % os.path.relpath(p, ROOT))
         check(re.search(r"^\d+\. \*\*Discover the project's conventions\*\*[^\n]*"
                         + re.escape(RESUME_CLAUSE), text, re.M) is not None,
               "%s: resume clause leads into the plan in the discovery step" % os.path.relpath(p, ROOT))
-        check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*" + re.escape(DELETE_CLAUSE) + r"\n",
+        check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*" + re.escape(delete) + r"\n",
                         text, re.M) is not None,
-              "%s: delete clause closes the verify step" % os.path.relpath(p, ROOT))
+              "%s: %s closes the verify step" % (os.path.relpath(p, ROOT),
+              "delete clause, grill log included," if name in GRILL_CALLERS else "delete clause"))
     else:
         stray = [label for label, clause in (("handoff", HANDOFF_CLAUSE), ("resume", RESUME_CLAUSE),
-                                             ("delete", DELETE_CLAUSE)) if clause in text]
+                                             ("delete", DELETE_CLAUSE),
+                                             ("delete with log", DELETE_WITH_LOG_CLAUSE)) if clause in text]
         check(not stray, "%s: carries no handoff clauses%s"
               % (os.path.relpath(p, ROOT), (" [found %s]" % ", ".join(stray)) if stray else ""))
+    if name in GRILL_CALLERS and name not in RESUMABLE and is_skill:
+        check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*" + re.escape(LOG_DELETE_CLAUSE) + r"\n",
+                        text, re.M) is not None,
+              "%s: grill log delete clause closes the verify step" % os.path.relpath(p, ROOT))
+    elif LOG_DELETE_CLAUSE in text:
+        check(False, "%s: carries the grill log delete clause, which belongs only to a grill "
+              "point's caller that writes no handoff" % os.path.relpath(p, ROOT))
+
+# The check a draft owes the grill log is stated once, in grill-point, and no caller carries
+# a copy (ADR 0028): every caller reaches grill-point by name, so the rule is in context.
+LOG_CHECK = "checked N logged decisions, fixed M"
+p = os.path.join(ROOT, 'skills', 'grill-point', 'SKILL.md')
+grill_text = io.open(p, encoding='utf-8').read()
+check(all(s in grill_text for s in ("GRILL-LOG-<skill>.md", "**Not:**", "Last checked", LOG_CHECK)),
+      "%s: names the grill log, its exclusions, its last-checked column, and the line a "
+      "presented draft carries" % os.path.relpath(p, ROOT))
+hits = [os.path.relpath(q, ROOT) for q in DOCS
+        if os.path.basename(os.path.dirname(q)) != 'grill-point'
+        and LOG_CHECK in io.open(q, encoding='utf-8').read()]
+check(not hits, "the grill log check is stated only in grill-point%s"
+      % ((" [also in %s]" % ", ".join(hits)) if hits else ""))
 
 # The checklists that measure or write items carry the script clause, each by name: the
 # identical-text rule alone stays green while any two copies survive (ADR 0022).

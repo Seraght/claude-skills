@@ -38,6 +38,8 @@ The review stage carries two files rather than one. The second is an independent
 
 A handoff, `HANDOFF-<skill>.md`, carries no number, because it belongs to no stage: it records where an unfinished run of the skill it is named for stopped, so that a new session can resume it, and that run deletes it when it finishes. It is named for its skill because one folder can hold two unfinished runs at once — an exam set's own, and the review sent on from it. A set folder holding one has a run still open. What goes into it is set out by the skills that write it.
 
+A grill log, `GRILL-LOG-<skill>.md`, sits beside the handoff and is unnumbered for the same reason: one run's grills can settle the blueprint at one stage and still bind a file written at the next. It holds every answer the run's grills settled, and the run that wrote it deletes it when it finishes. Its shape, and the check every draft owes it, are in the `grill-point` skill.
+
 ## What a blueprint holds
 
 Rows are topics. Columns are cognitive levels. Each cell holds three things, not two:
