@@ -70,9 +70,18 @@ DELETE_CLAUSE = "Last, delete this skill's handoff from the run's folder, once a
 # Every skill with a grill point deletes the run's grill log in its last step (ADR 0028):
 # a skill that also writes a handoff in the same sentence that deletes the handoff, every
 # other caller in a sentence of its own.
-DELETE_WITH_LOG_CLAUSE = "Last, delete this skill's handoff and its grill log, `GRILL-LOG-<skill>.md`, from the run's folder, once anything still open in them is written into the run's own files: a handoff left behind makes the next run on this folder resume one that is finished, and a grill log left behind is a second copy of answers that drifts from the artifact, against which the next run would check its drafts."
-LOG_DELETE_CLAUSE = "Last, delete this skill's grill log, `GRILL-LOG-<skill>.md`, from the run's folder: a grill log left behind is a second copy of answers that drifts from the artifact, against which the next run would check its drafts."
-GRILL_ANCHOR = r"\*\*This step is a grill point\*\*"
+LOG_LEFT_BEHIND = ("a grill log left behind is a second copy of answers that drifts from the artifact, "
+                   "against which the next run would check its drafts.")
+HANDOFF_AND_LOG_DELETE_CLAUSE = ("Last, delete this skill's handoff and its grill log, `GRILL-LOG-<skill>.md`, "
+                                 "from the run's folder, once anything still open in them is written into the "
+                                 "run's own files: a handoff left behind makes the next run on this folder "
+                                 "resume one that is finished, and " + LOG_LEFT_BEHIND)
+LOG_ONLY_DELETE_CLAUSE = ("Last, delete this skill's grill log, `GRILL-LOG-<skill>.md`, from the run's "
+                          "folder: " + LOG_LEFT_BEHIND)
+# A skill runs a grill at a step that is a grill point, or mid-step, where a finding asks for
+# a rule over the whole paper. Borrowing the round shape of step 3 is not running a grill.
+GRILL_CALLER = r"\*\*This step is a grill point\*\*|through the `grill-point` skill"
+VERIFY_STEP = r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*"
 
 # A script a run writes into its session's scratch space is written again by the next
 # run, carrying the paper's Thai text each time (ADR 0022).
@@ -261,13 +270,15 @@ for p in SKILLS:
 RESUMABLE = {'adopt-pool', 'critique-mcq', 'make-exam', 'make-practical', 'design-course'}
 # The callers are found, not listed, so a skill that gains a grill point and no deletion fails.
 GRILL_CALLERS = {os.path.basename(os.path.dirname(p)) for p in SKILLS
-                 if re.search(GRILL_ANCHOR, io.open(p, encoding='utf-8').read())}
-check(len(GRILL_CALLERS) > 1, "grill point: carried by more than one skill (%d)" % len(GRILL_CALLERS))
+                 if re.search(GRILL_CALLER, io.open(p, encoding='utf-8').read())}
+check(len(GRILL_CALLERS) > 1, "the pattern that finds grill-point's callers still finds them (%d)"
+      % len(GRILL_CALLERS))
 for p in DOCS:
     name = os.path.basename(os.path.dirname(p))
     text = io.open(p, encoding='utf-8').read()
     is_skill = os.path.basename(p) == 'SKILL.md'
-    delete = DELETE_WITH_LOG_CLAUSE if name in GRILL_CALLERS else DELETE_CLAUSE
+    delete, other = ((HANDOFF_AND_LOG_DELETE_CLAUSE, DELETE_CLAUSE) if name in GRILL_CALLERS
+                     else (DELETE_CLAUSE, HANDOFF_AND_LOG_DELETE_CLAUSE))
     if name in RESUMABLE and is_skill:
         check(re.search(re.escape(STOP_CLAUSE) + r"[^\n]*\n\n" + re.escape(HANDOFF_CLAUSE) + r"\n",
                         text) is not None,
@@ -275,23 +286,23 @@ for p in DOCS:
         check(re.search(r"^\d+\. \*\*Discover the project's conventions\*\*[^\n]*"
                         + re.escape(RESUME_CLAUSE), text, re.M) is not None,
               "%s: resume clause leads into the plan in the discovery step" % os.path.relpath(p, ROOT))
-        check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*" + re.escape(delete) + r"\n",
-                        text, re.M) is not None,
-              "%s: %s closes the verify step" % (os.path.relpath(p, ROOT),
-              "delete clause, grill log included," if name in GRILL_CALLERS else "delete clause"))
+        check(re.search(VERIFY_STEP + re.escape(delete) + r"\n", text, re.M) is not None
+              and other not in text,
+              "%s: %s closes the verify step, and is the only delete clause"
+              % (os.path.relpath(p, ROOT),
+                 "delete clause, grill log included," if name in GRILL_CALLERS else "delete clause"))
     else:
         stray = [label for label, clause in (("handoff", HANDOFF_CLAUSE), ("resume", RESUME_CLAUSE),
                                              ("delete", DELETE_CLAUSE),
-                                             ("delete with log", DELETE_WITH_LOG_CLAUSE)) if clause in text]
+                                             ("delete with log", HANDOFF_AND_LOG_DELETE_CLAUSE)) if clause in text]
         check(not stray, "%s: carries no handoff clauses%s"
               % (os.path.relpath(p, ROOT), (" [found %s]" % ", ".join(stray)) if stray else ""))
     if name in GRILL_CALLERS and name not in RESUMABLE and is_skill:
-        check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*" + re.escape(LOG_DELETE_CLAUSE) + r"\n",
-                        text, re.M) is not None,
+        check(re.search(VERIFY_STEP + re.escape(LOG_ONLY_DELETE_CLAUSE) + r"\n", text, re.M) is not None,
               "%s: grill log delete clause closes the verify step" % os.path.relpath(p, ROOT))
-    elif LOG_DELETE_CLAUSE in text:
-        check(False, "%s: carries the grill log delete clause, which belongs only to a grill "
-              "point's caller that writes no handoff" % os.path.relpath(p, ROOT))
+    else:
+        check(LOG_ONLY_DELETE_CLAUSE not in text,
+              "%s: carries no grill log delete clause of its own" % os.path.relpath(p, ROOT))
 
 # The check a draft owes the grill log is stated once, in grill-point, and no caller carries
 # a copy (ADR 0028): every caller reaches grill-point by name, so the rule is in context.
@@ -322,7 +333,7 @@ p = os.path.join(ROOT, 'skills', 'digest', 'SKILL.md')
 text = io.open(p, encoding='utf-8').read()
 check("open the primary source the claim rests on, not the document being digested" in text,
       "%s: opens the primary source before writing an unchecked mark" % os.path.relpath(p, ROOT))
-check(re.search(r"^\d+\. \*\*[^*]*[Vv]erif[^*]*\*\*[^\n]*every unchecked mark[^\n]*"
+check(re.search(VERIFY_STEP + r"every unchecked mark[^\n]*"
                 r"naming the source tried and what stopped it", text, re.M) is not None,
       "%s: verify step confirms each unchecked mark names the source tried"
       % os.path.relpath(p, ROOT))

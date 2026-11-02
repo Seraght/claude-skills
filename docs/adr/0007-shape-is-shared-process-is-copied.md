@@ -1,5 +1,7 @@
 # Shape is shared, process is copied — and checked
 
+> One exception, by [ADR 0028](0028-a-settled-answer-is-written-down-before-the-next-draft.md): the check a draft owes the grill log is stated once, in `grill-point`, and no caller carries a copy, because every caller reaches `grill-point` by name where the grill runs.
+
 [ADR 0005](0005-duplication-buys-portability.md) said duplicate; [ADR 0006](0006-how-a-skill-is-reached-and-when-it-is-split.md) said share. Neither said which, so every recurrence was argued from scratch — and the argument was lost twice before anyone noticed, in the discovery clause and again in the closing check. The rule that decides it:
 
 **Process is copied. Shape is shared.**

@@ -43,7 +43,7 @@ This skill is a primitive. It runs from inside a step of another skill, it carri
 
 Between the round that settles an answer and the step that writes it into the artifact, the conversation is the only copy, and a long run with several rounds, edits, and rebuilds loses it: a rubric row the user struck out survived into a rebuilt form, because the build edited an existing script and nothing compared the result with what was agreed. The grill log is the copy that holds it for the rest of the run.
 
-It is `GRILL-LOG-<skill>.md`, named for the calling skill, in the calling step's work folder — the folder that step writes its artifact into, where a handoff and an unanswered grill's questions file also go. One log serves every grill point of the run, so a later grill appends to the log an earlier one started. As each round closes, append one row per settled answer:
+It is `GRILL-LOG-<skill>.md`, named for the calling skill, in the run's folder — the folder the calling skill writes its artifacts into, where a handoff and an unanswered grill's questions file also go: for an exam set its set folder, for a course design the course's folder, for an audit the folder its scorecard goes in. One log serves every grill point of the run, so a later grill appends to the log an earlier one started, even where its step writes nothing until later. As each round closes, append one row per settled answer:
 
 ```
 | Ref | Decision | The user's words | Last checked |
@@ -53,9 +53,9 @@ It is `GRILL-LOG-<skill>.md`, named for the calling skill, in the calling step's
 
 - **Ref** — the calling step, the round, and the question number.
 - **Decision** — what the draft must do, in one line. An exclusion opens with **Not:** and names what must be absent, logged as explicitly as an addition, because a removal leaves nothing in the draft to remind anyone of it; an answer that changes an existing value names both, old and new.
-- **The user's words** — quoted, in their language, so a later check reads what was said rather than a paraphrase of it. A "yes" to a recommendation quotes the "yes" and the Decision carries the recommendation.
+- **The user's words** — quoted, in their language, so a later check reads what was said rather than a paraphrase of it, leaving out anything the calling skill keeps out of the vault, such as a person's name or score. A "yes" to a recommendation quotes the "yes" and the Decision carries the recommendation.
 
-Every answer the round settled goes in: those that shape only this artifact, those that will also become decision records, and the provisional values of step 4. A decision from a record step 1 listed needs no row unless the user reopened it.
+Every answer the round settled goes in: those that shape only this artifact, those that will also become decision records, and the provisional values of step 4. A decision from a record step 1 listed needs no row unless the user reopened it. A skill that only borrows the round shape of step 3 for its own questions runs no grill and keeps no log.
 
 **The check is owed by the calling step, and by every later step that drafts on the grill.** Before presenting any draft built on what a grill settled — the artifact itself, a file written from it later in the run, a form or script that renders it — and again after every rebuild or edit of an existing file, go through the log row by row against the draft: each exclusion absent and each inclusion present, found by searching the draft's own text, not recalled. A file edited rather than written fresh is checked as closely as a new one, since what it carried before the grill is still in it unless something took it out. A row the draft fails is fixed in the draft before the user sees it. Each check rewrites the **Last checked** cell of every row it covered — the date, the file, and `holds` or `fixed` — and the message that presents the draft carries one line: "checked N logged decisions, fixed M". A check that leaves no evidence did not run. This check is written here and nowhere else: every caller reaches this skill by name, so the rule is in context wherever a grill ran.
 
