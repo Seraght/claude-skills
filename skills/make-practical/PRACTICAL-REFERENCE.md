@@ -43,6 +43,8 @@ A checklist scored as steps-completed rewards doing everything badly over doing 
 - **Criteria are observable.** Each level descriptor names what is present or absent in the work, not how good it felt.
 - **Levels are distinguishable.** Adjacent levels differ by something a marker can point at; typically 3–5 levels.
 - **Criterion weights sum to the item's marks**, and reflect what the outcome actually values.
+- **Every score a criterion can award is traceable.** Each score is a described level, or is computed by a stated rule from described parts: a sum of sub-parts that each have a descriptor, or a weight times a described level. A criterion worth 8 whose scores 1–7 have no source is a rating scale labelled a rubric, and two markers will not agree on a 7.
+- **The examinee sees where the marks come from.** A criteria summary in any document the examinee receives gives at least one line per criterion on how its marks are reached (e.g. "C2 = 4 prompt elements × 1 + revision rounds 0/2/4"), or points to a document the examinee actually receives. Totals alone keep the scoring strategy secret, and a path inside the vault points at a file the examinee cannot open.
 
 ## The pass standard
 
