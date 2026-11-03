@@ -1,0 +1,22 @@
+name: check
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  # Branch protection on main requires this check by its job name, "check.py".
+  # Renaming the job breaks the gate silently: protection waits for a check
+  # that never reports, so every PR stalls. Rename it in protection too (#21).
+  check:
+    name: check.py
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python -X utf8 _scripts/check.py
